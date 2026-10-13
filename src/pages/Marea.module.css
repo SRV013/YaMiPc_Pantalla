@@ -1,0 +1,136 @@
+.panel {
+  display: grid;
+  grid-template-columns: 270px 1fr 300px;
+  align-items: stretch;
+  gap: 24px;
+  padding: 18px 24px;
+}
+
+.side {
+  display: grid;
+  align-content: space-between;
+}
+
+.wind {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgb(255 255 255 / 0.1);
+  border-radius: 10px;
+}
+
+.arrow {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  fill: #7dd3fc;
+}
+
+.heading {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.windSpeed {
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.unit {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.note {
+  font-size: 14px;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+.tide {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 8px;
+  min-width: 0;
+}
+
+.tideHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.tideState {
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.chart {
+  align-self: center;
+  width: 100%;
+}
+
+.area {
+  fill: rgb(125 211 252 / 0.25);
+}
+
+.line {
+  fill: none;
+  stroke: #7dd3fc;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.dot {
+  fill: #fff;
+}
+
+.nowDot {
+  fill: #fbbf24;
+}
+
+.tick {
+  font-size: 13px;
+  font-weight: 600;
+  fill: #fff;
+}
+
+.events {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.event {
+  display: grid;
+  justify-items: center;
+  padding: 6px 4px;
+  background: rgb(255 255 255 / 0.1);
+  border-radius: 10px;
+}
+
+.eventType,
+.eventLevel {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.eventTime {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}

@@ -1,44 +1,8 @@
-.screen {
-  min-height: 100svh;
-  background: #000;
-}
-
 .panel {
-  width: 1152px;
-  height: 384px;
-  overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   padding: 0 56px;
-  color: #fff;
-  background: linear-gradient(120deg, #0b1f3a, #14508a);
-}
-
-.clock p,
-.weather p {
-  margin: 0;
-}
-
-.city {
-  font-size: 30px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.8;
-}
-
-.time {
-  font-size: 168px;
-  font-weight: 700;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-
-.date {
-  margin-top: 8px;
-  font-size: 36px;
-  text-transform: capitalize;
 }
 
 .weather {

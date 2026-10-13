@@ -1,0 +1,20 @@
+.stat {
+  display: grid;
+  align-content: center;
+  padding: 6px 10px;
+  background: rgb(255 255 255 / 0.1);
+  border-radius: 10px;
+}
+
+.label {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.value {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}

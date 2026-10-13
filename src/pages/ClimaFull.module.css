@@ -1,25 +1,8 @@
-.screen {
-  min-height: 100svh;
-  background: #000;
-}
-
 .panel {
-  width: 1152px;
-  height: 384px;
-  overflow: hidden;
   display: grid;
   grid-template-rows: 1fr auto;
   gap: 14px;
   padding: 18px 24px;
-  color: #fff;
-  background: linear-gradient(120deg, #0b1f3a, #14508a);
-}
-
-.panel p,
-.panel ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 .top {
@@ -27,26 +10,6 @@
   grid-template-columns: auto 1fr 372px;
   align-items: center;
   gap: 24px;
-}
-
-.city {
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.8;
-}
-
-.time {
-  font-size: 112px;
-  font-weight: 700;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-
-.date {
-  font-size: 24px;
-  text-transform: capitalize;
 }
 
 .now {
@@ -88,28 +51,16 @@
   gap: 8px;
 }
 
-.stat,
-.day {
-  background: rgb(255 255 255 / 0.1);
-  border-radius: 10px;
-}
-
-.stat {
-  display: grid;
-  padding: 6px 10px;
-}
-
-.label {
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-.value {
+.dayRange {
   font-size: 20px;
   font-weight: 600;
   line-height: 1.25;
-  white-space: nowrap;
   font-variant-numeric: tabular-nums;
+}
+
+.dayRain {
+  font-size: 14px;
+  opacity: 0.8;
 }
 
 .min {
@@ -125,6 +76,8 @@
 
 .day {
   display: grid;
+  background: rgb(255 255 255 / 0.1);
+  border-radius: 10px;
   grid-template-columns: auto 1fr;
   align-items: center;
   column-gap: 12px;

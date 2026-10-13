@@ -1,0 +1,18 @@
+.city {
+  font-size: 0.18em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.time {
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.date {
+  font-size: 0.215em;
+  text-transform: capitalize;
+}

@@ -30,6 +30,12 @@ const sections: Section[] = [
         description: '1152×384 px · más datos y próximos días',
         path: '/climafull',
       },
+      {
+        icon: '🌊',
+        name: 'Marea',
+        description: '1152×384 px · marea, viento y olas',
+        path: '/marea',
+      },
     ],
   },
 ]

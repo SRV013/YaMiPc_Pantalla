@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
+import { fetchJson, usePolled } from './usePolled.ts'
 
 export const CITY = 'Mar del Plata'
-const TIME_ZONE = 'America/Argentina/Buenos_Aires'
-const REFRESH_MS = 10 * 60 * 1000
+export const TIME_ZONE = 'America/Argentina/Buenos_Aires'
+export const LOCATION_QUERY =
+  `latitude=-38.0055&longitude=-57.5426&timezone=${encodeURIComponent(TIME_ZONE)}`
 const WEATHER_URL =
-  'https://api.open-meteo.com/v1/forecast' +
-  '?latitude=-38.0055&longitude=-57.5426' +
+  `https://api.open-meteo.com/v1/forecast?${LOCATION_QUERY}` +
   '&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,is_day' +
   ',wind_speed_10m,wind_direction_10m,wind_gusts_10m,pressure_msl,cloud_cover' +
   '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max' +
-  ',sunrise,sunset,uv_index_max&forecast_days=7' +
-  `&timezone=${encodeURIComponent(TIME_ZONE)}`
+  ',sunrise,sunset,uv_index_max&forecast_days=7'
 
 export type Day = {
   date: string
@@ -82,53 +82,32 @@ export function useNow() {
   return now
 }
 
+async function loadWeather(): Promise<Weather> {
+  const { current, daily } = await fetchJson(WEATHER_URL)
+  return {
+    temperature: current.temperature_2m,
+    feelsLike: current.apparent_temperature,
+    humidity: current.relative_humidity_2m,
+    wind: current.wind_speed_10m,
+    windDirection: current.wind_direction_10m,
+    gusts: current.wind_gusts_10m,
+    pressure: current.pressure_msl,
+    clouds: current.cloud_cover,
+    code: current.weather_code,
+    isDay: current.is_day === 1,
+    days: daily.time.map((date: string, i: number) => ({
+      date,
+      code: daily.weather_code[i],
+      max: daily.temperature_2m_max[i],
+      min: daily.temperature_2m_min[i],
+      rainChance: daily.precipitation_probability_max[i] ?? 0,
+      sunrise: daily.sunrise[i].slice(11, 16),
+      sunset: daily.sunset[i].slice(11, 16),
+      uv: daily.uv_index_max[i],
+    })),
+  }
+}
+
 export function useWeather() {
-  const [weather, setWeather] = useState<Weather | null>(null)
-
-  useEffect(() => {
-    let cancelled = false
-
-    async function load() {
-      try {
-        const response = await fetch(WEATHER_URL)
-        if (!response.ok) throw new Error(`HTTP ${response.status}`)
-        const { current, daily } = await response.json()
-        if (cancelled) return
-        setWeather({
-          temperature: current.temperature_2m,
-          feelsLike: current.apparent_temperature,
-          humidity: current.relative_humidity_2m,
-          wind: current.wind_speed_10m,
-          windDirection: current.wind_direction_10m,
-          gusts: current.wind_gusts_10m,
-          pressure: current.pressure_msl,
-          clouds: current.cloud_cover,
-          code: current.weather_code,
-          isDay: current.is_day === 1,
-          days: daily.time.map((date: string, i: number) => ({
-            date,
-            code: daily.weather_code[i],
-            max: daily.temperature_2m_max[i],
-            min: daily.temperature_2m_min[i],
-            rainChance: daily.precipitation_probability_max[i] ?? 0,
-            sunrise: daily.sunrise[i].slice(11, 16),
-            sunset: daily.sunset[i].slice(11, 16),
-            uv: daily.uv_index_max[i],
-          })),
-        })
-      } catch (error) {
-        // Si falla, se mantiene el último dato y se reintenta en el próximo ciclo.
-        console.error('No se pudo actualizar el clima', error)
-      }
-    }
-
-    load()
-    const id = setInterval(load, REFRESH_MS)
-    return () => {
-      cancelled = true
-      clearInterval(id)
-    }
-  }, [])
-
-  return weather
+  return usePolled(loadWeather)
 }
