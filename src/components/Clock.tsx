@@ -1,14 +1,15 @@
-import { CITY, dateFormat, timeFormat, useNow } from '../weather.ts'
+import { CITY, dateFormat, timeFormat, timeWithSecondsFormat, useNow } from '../weather.ts'
 import styles from './Clock.module.css'
 
 /** Ciudad, hora y día. `size` es el alto en px de la hora; el resto escala en proporción. */
-function Clock({ size }: { size: number }) {
+function Clock({ size, seconds = false }: { size: number; seconds?: boolean }) {
   const now = useNow()
+  const format = seconds ? timeWithSecondsFormat : timeFormat
 
   return (
     <section className={styles.clock} style={{ fontSize: size }}>
       <p className={styles.city}>{CITY}</p>
-      <p className={styles.time}>{timeFormat.format(now)}</p>
+      <p className={styles.time}>{format.format(now)}</p>
       <p className={styles.date}>{dateFormat.format(now)}</p>
     </section>
   )

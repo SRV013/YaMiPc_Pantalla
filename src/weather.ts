@@ -64,6 +64,14 @@ export const timeFormat = new Intl.DateTimeFormat('es-AR', {
   hour12: false,
 })
 
+export const timeWithSecondsFormat = new Intl.DateTimeFormat('es-AR', {
+  timeZone: TIME_ZONE,
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false,
+})
+
 export const dateFormat = new Intl.DateTimeFormat('es-AR', {
   timeZone: TIME_ZONE,
   weekday: 'long',

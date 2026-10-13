@@ -36,6 +36,24 @@ const sections: Section[] = [
         description: '1152×384 px · marea, viento y olas',
         path: '/marea',
       },
+      {
+        icon: '🕒',
+        name: 'Reloj',
+        description: '1152×384 px · hora y fecha en grande',
+        path: '/reloj',
+      },
+      {
+        icon: '🍃',
+        name: 'Calidad del aire',
+        description: '1152×384 px · índice y contaminantes',
+        path: '/calidadaire',
+      },
+      {
+        icon: '💵',
+        name: 'Dólar',
+        description: '1152×384 px · cotizaciones del día',
+        path: '/dolar',
+      },
     ],
   },
 ]

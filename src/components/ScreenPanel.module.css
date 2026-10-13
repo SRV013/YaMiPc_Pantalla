@@ -8,7 +8,8 @@
   height: 384px;
   overflow: hidden;
   color: #fff;
-  background: linear-gradient(120deg, #0b1f3a, #14508a);
+  /* Cada widget puede cambiar el fondo definiendo --panel-bg en su clase. */
+  background: var(--panel-bg, linear-gradient(120deg, #0b1f3a, #14508a));
 }
 
 .panel p,

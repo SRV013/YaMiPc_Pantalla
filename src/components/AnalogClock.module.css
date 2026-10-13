@@ -1,0 +1,46 @@
+.clock {
+  flex: none;
+}
+
+.face {
+  fill: rgb(255 255 255 / 0.08);
+  stroke: rgb(255 255 255 / 0.85);
+  stroke-width: 4;
+}
+
+.tick,
+.mainTick,
+.hourHand,
+.minuteHand,
+.secondHand {
+  stroke-linecap: round;
+}
+
+.tick {
+  stroke: rgb(255 255 255 / 0.6);
+  stroke-width: 3;
+}
+
+.mainTick {
+  stroke: #fff;
+  stroke-width: 5;
+}
+
+.hourHand {
+  stroke: #fff;
+  stroke-width: 8;
+}
+
+.minuteHand {
+  stroke: #fff;
+  stroke-width: 5;
+}
+
+.secondHand {
+  stroke: #fbbf24;
+  stroke-width: 2.5;
+}
+
+.pin {
+  fill: #fbbf24;
+}

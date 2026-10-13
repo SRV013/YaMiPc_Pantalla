@@ -1,0 +1,12 @@
+.panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 44px;
+}
+
+/* La línea separa los dos relojes y sirve de margen para alinear los textos a la izquierda. */
+.digital {
+  padding-left: 44px;
+  border-left: 2px solid rgb(255 255 255 / 0.25);
+}
