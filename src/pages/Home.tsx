@@ -54,6 +54,12 @@ const sections: Section[] = [
         description: '1152×384 px · cotizaciones del día',
         path: '/dolar',
       },
+      {
+        icon: '📰',
+        name: 'Resumen general',
+        description: '1152×384 px · feriado, efemérides e indicadores',
+        path: '/resumen',
+      },
     ],
   },
 ]

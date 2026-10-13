@@ -1,0 +1,389 @@
+.panel {
+  --glass: rgb(255 255 255 / 0.12);
+  --glass-border: rgb(255 255 255 / 0.22);
+  --highlight: #ffd166;
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 14px;
+  padding: 18px 24px 22px;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.backdrop > * {
+  position: absolute;
+}
+
+/* Atardecer sobre el mar: cielo en degradé, sol y olas en movimiento. */
+.atardecer {
+  --panel-bg: linear-gradient(180deg, #2b1055 0%, #7b2d6b 42%, #f0683c 76%, #ffb347 100%);
+  --glass: rgb(30 12 50 / 0.38);
+}
+
+.sun {
+  right: 150px;
+  bottom: 10px;
+  width: 210px;
+  height: 210px;
+  background: radial-gradient(circle, #fff7c2 0%, #ffd166 55%, #ffb347 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 90px 40px rgb(255 190 90 / 0.55);
+}
+
+.waveBack,
+.waveFront {
+  left: 0;
+  animation: slide 16s linear infinite;
+}
+
+.waveBack {
+  bottom: 22px;
+  fill: #3b1d6e;
+  opacity: 0.85;
+  animation-duration: 26s;
+}
+
+.waveFront {
+  bottom: -18px;
+  fill: #1c1242;
+}
+
+@keyframes slide {
+  to {
+    transform: translateX(-1152px);
+  }
+}
+
+/* Noche: cielo oscuro con estrellas que titilan y luna. */
+.noche {
+  --panel-bg: radial-gradient(ellipse at 80% 0%, #3a1c71 0%, #150b33 45%, #05030f 100%);
+  --glass: rgb(255 255 255 / 0.09);
+}
+
+.stars,
+.starsAlt {
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  animation: twinkle 3.5s ease-in-out infinite alternate;
+}
+
+.stars {
+  box-shadow:
+    663px 77px 0 1px #fff,
+    98px 37px 0 0px #fff,
+    748px 298px 0 0px #fff,
+    1039px 109px 0 0px #fff,
+    176px 222px 0 1px #fff,
+    143px 123px 0 0px #fff,
+    1128px 217px 0 0px #fff,
+    253px 114px 0 0px #fff,
+    812px 25px 0 0px #fff,
+    95px 285px 0 0px #fff,
+    593px 214px 0 0px #fff,
+    1107px 60px 0 0px #fff,
+    1147px 349px 0 0px #fff,
+    211px 297px 0 0px #fff,
+    762px 49px 0 0px #fff,
+    122px 316px 0 0px #fff,
+    1016px 348px 0 1px #fff,
+    643px 238px 0 1px #fff,
+    740px 153px 0 0px #fff,
+    368px 357px 0 0px #fff,
+    167px 294px 0 0px #fff,
+    1075px 253px 0 0px #fff,
+    919px 147px 0 0px #fff,
+    241px 262px 0 1px #fff,
+    337px 175px 0 0px #fff,
+    1001px 215px 0 0px #fff,
+    158px 285px 0 0px #fff,
+    696px 355px 0 0px #fff,
+    1017px 296px 0 1px #fff,
+    140px 47px 0 0px #fff,
+    970px 356px 0 0px #fff,
+    124px 374px 0 0px #fff,
+    912px 145px 0 1px #fff,
+    710px 11px 0 1px #fff,
+    727px 86px 0 0px #fff,
+    1011px 30px 0 0px #fff,
+    588px 66px 0 0px #fff,
+    814px 200px 0 1px #fff,
+    165px 85px 0 1px #fff,
+    822px 281px 0 0px #fff,
+    280px 220px 0 0px #fff,
+    850px 183px 0 1px #fff,
+    472px 77px 0 0px #fff,
+    360px 77px 0 0px #fff,
+    477px 6px 0 1px #fff;
+}
+
+.starsAlt {
+  animation-delay: -1.75s;
+  box-shadow:
+    373px 134px 0 0px #fff,
+    8px 74px 0 1px #fff,
+    1094px 189px 0 0px #fff,
+    257px 353px 0 0px #fff,
+    935px 348px 0 1px #fff,
+    815px 204px 0 1px #fff,
+    212px 246px 0 1px #fff,
+    127px 97px 0 0px #fff,
+    427px 225px 0 0px #fff,
+    225px 174px 0 0px #fff,
+    209px 0px 0 0px #fff,
+    1098px 51px 0 0px #fff,
+    52px 36px 0 0px #fff,
+    770px 76px 0 0px #fff,
+    711px 308px 0 0px #fff,
+    971px 62px 0 0px #fff,
+    999px 238px 0 1px #fff,
+    990px 159px 0 0px #fff,
+    295px 52px 0 0px #fff,
+    542px 245px 0 0px #fff,
+    1057px 11px 0 0px #fff,
+    1081px 185px 0 0px #fff,
+    1112px 13px 0 0px #fff,
+    186px 356px 0 0px #fff,
+    1061px 187px 0 0px #fff,
+    728px 114px 0 0px #fff,
+    456px 313px 0 0px #fff,
+    490px 205px 0 0px #fff,
+    409px 265px 0 1px #fff,
+    728px 374px 0 0px #fff,
+    57px 143px 0 1px #fff,
+    530px 99px 0 0px #fff,
+    915px 370px 0 0px #fff,
+    746px 41px 0 0px #fff,
+    209px 116px 0 1px #fff,
+    402px 172px 0 0px #fff,
+    988px 319px 0 0px #fff,
+    981px 334px 0 0px #fff,
+    173px 338px 0 0px #fff,
+    795px 364px 0 0px #fff,
+    979px 91px 0 1px #fff,
+    680px 44px 0 1px #fff,
+    948px 205px 0 0px #fff,
+    325px 87px 0 0px #fff,
+    56px 77px 0 1px #fff;
+}
+
+.moon {
+  top: 26px;
+  right: 70px;
+  width: 92px;
+  height: 92px;
+  background: radial-gradient(circle at 35% 35%, #fffbe6, #f3e6a8);
+  border-radius: 50%;
+  box-shadow: 0 0 60px 18px rgb(255 245 190 / 0.35);
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.25;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Formas: color pleno con figuras geométricas que flotan. */
+.formas {
+  --panel-bg: #ff5a3c;
+  --glass: rgb(20 16 60 / 0.72);
+  --glass-border: rgb(255 255 255 / 0.3);
+}
+
+.circle {
+  top: -150px;
+  left: -90px;
+  width: 420px;
+  height: 420px;
+  background: #ffd23f;
+  border-radius: 50%;
+  animation: float 9s ease-in-out infinite alternate;
+}
+
+.ring {
+  right: 210px;
+  bottom: -210px;
+  width: 380px;
+  height: 380px;
+  border: 46px solid #17c3b2;
+  border-radius: 50%;
+  animation: float 12s ease-in-out infinite alternate-reverse;
+}
+
+.stripes {
+  top: -40px;
+  right: -60px;
+  width: 300px;
+  height: 300px;
+  background: repeating-linear-gradient(45deg, #2d1e6b 0 18px, transparent 18px 36px);
+  border-radius: 50%;
+  animation: spin 40s linear infinite;
+}
+
+.dots {
+  bottom: 14px;
+  left: 300px;
+  width: 260px;
+  height: 120px;
+  background: radial-gradient(#fff 3px, transparent 4px) 0 0 / 22px 22px;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  to {
+    transform: translate(40px, 26px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop *,
+  .history {
+    animation: none;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.title {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.date {
+  font-size: 22px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.date::first-letter,
+.detail::first-letter {
+  text-transform: uppercase;
+}
+
+.loading {
+  align-self: center;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 270px 220px;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  min-height: 0;
+}
+
+.history,
+.holiday,
+.card {
+  display: grid;
+  align-content: center;
+  padding: 10px 18px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  backdrop-filter: blur(12px);
+}
+
+.history,
+.holiday {
+  grid-row: 1 / -1;
+}
+
+.history {
+  grid-template-columns: auto 1fr;
+  column-gap: 22px;
+  align-items: center;
+  padding: 14px 24px;
+  animation: appear 0.6s ease-out;
+}
+
+.history .label {
+  grid-column: 1 / -1;
+  margin-bottom: 6px;
+}
+
+.label {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.year {
+  font-size: 84px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--highlight);
+  font-variant-numeric: tabular-nums;
+}
+
+.text {
+  font-size: 23px;
+  line-height: 1.3;
+  /* Corta el texto si no entra en el alto de la tarjeta. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  overflow: hidden;
+}
+
+.value {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.holiday .value {
+  color: var(--highlight);
+}
+
+.holidayName {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.detail {
+  font-size: 15px;
+  opacity: 0.85;
+}
