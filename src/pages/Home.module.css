@@ -1,0 +1,10 @@
+.home {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 3rem;
+  width: min(100%, 44rem);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}

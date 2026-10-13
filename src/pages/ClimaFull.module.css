@@ -1,0 +1,145 @@
+.screen {
+  min-height: 100svh;
+  background: #000;
+}
+
+.panel {
+  width: 1152px;
+  height: 384px;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 14px;
+  padding: 18px 24px;
+  color: #fff;
+  background: linear-gradient(120deg, #0b1f3a, #14508a);
+}
+
+.panel p,
+.panel ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: auto 1fr 372px;
+  align-items: center;
+  gap: 24px;
+}
+
+.city {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.time {
+  font-size: 112px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.date {
+  font-size: 24px;
+  text-transform: capitalize;
+}
+
+.now {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.current {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  line-height: 1;
+}
+
+.icon {
+  font-size: 72px;
+}
+
+.temperature {
+  font-size: 100px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.condition {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.range {
+  font-size: 18px;
+  opacity: 0.85;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.stat,
+.day {
+  background: rgb(255 255 255 / 0.1);
+  border-radius: 10px;
+}
+
+.stat {
+  display: grid;
+  padding: 6px 10px;
+}
+
+.label {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.value {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.min {
+  font-weight: 400;
+  opacity: 0.65;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.day {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 12px;
+  padding: 8px 12px;
+}
+
+.dayIcon {
+  grid-row: span 3;
+  font-size: 44px;
+  line-height: 1;
+}
+
+.dayName {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: capitalize;
+}

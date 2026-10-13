@@ -1,0 +1,46 @@
+.modal {
+  width: min(calc(100vw - 2rem), 40rem);
+  padding: 0;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 24px 64px rgb(0 0 0 / 0.35);
+}
+
+.modal::backdrop {
+  background: rgb(0 0 0 / 0.55);
+  backdrop-filter: blur(3px);
+}
+
+.body {
+  padding: 1.5rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.close {
+  width: 2.25rem;
+  height: 2.25rem;
+  font: inherit;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
