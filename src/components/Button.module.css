@@ -1,0 +1,29 @@
+.button {
+  padding: 0.65rem 1.25rem;
+  font: inherit;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.primary {
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.primary:hover {
+  filter: brightness(1.08);
+}
+
+.ghost {
+  padding: 0.35rem 0.6rem;
+  color: var(--muted);
+  background: none;
+  border: 1px solid transparent;
+}
+
+.ghost:hover {
+  color: var(--accent);
+  border-color: var(--border);
+}

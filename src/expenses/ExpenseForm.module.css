@@ -1,0 +1,16 @@
+.form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.wide,
+.submit {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 520px) {
+  .form {
+    grid-template-columns: 1fr;
+  }
+}

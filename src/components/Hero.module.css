@@ -18,7 +18,7 @@
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: transparent;
-  background: linear-gradient(120deg, var(--accent), #14b8ff);
+  background: linear-gradient(120deg, var(--accent), #8b5cf6);
   background-clip: text;
 }
 
