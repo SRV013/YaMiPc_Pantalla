@@ -1,4 +1,3 @@
-import Aire from './pages/Aire.tsx'
 import ClimaFull from './pages/ClimaFull.tsx'
 import ClimaSmall from './pages/ClimaSmall.tsx'
 import Dolar from './pages/Dolar.tsx'
@@ -14,7 +13,6 @@ function App() {
   if (path === '/climafull') return <ClimaFull />
   if (path === '/marea') return <Marea />
   if (path === '/reloj') return <Reloj />
-  if (path === '/calidadaire') return <Aire />
   if (path === '/dolar') return <Dolar />
   if (path === '/resumen') return <Resumen />
   return <Home />

@@ -9,10 +9,14 @@
 .time {
   font-weight: 700;
   line-height: 1;
-  font-variant-numeric: tabular-nums;
+  /* font-variant-numeric: tabular-nums; */
 }
 
 .date {
   font-size: 0.215em;
   text-transform: capitalize;
+}
+
+.dateFirst .time {
+  margin-top: 0.25em;
 }

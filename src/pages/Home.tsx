@@ -43,12 +43,6 @@ const sections: Section[] = [
         path: '/reloj',
       },
       {
-        icon: '🍃',
-        name: 'Calidad del aire',
-        description: '1152×384 px · índice y contaminantes',
-        path: '/calidadaire',
-      },
-      {
         icon: '💵',
         name: 'Dólar',
         description: '1152×384 px · cotizaciones del día',

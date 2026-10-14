@@ -32,7 +32,7 @@
 .temperature {
   font-size: 100px;
   font-weight: 700;
-  font-variant-numeric: tabular-nums;
+  /* font-variant-numeric: tabular-nums; */
 }
 
 .condition {
@@ -55,7 +55,7 @@
   font-size: 20px;
   font-weight: 600;
   line-height: 1.25;
-  font-variant-numeric: tabular-nums;
+  /* font-variant-numeric: tabular-nums; */
 }
 
 .dayRain {

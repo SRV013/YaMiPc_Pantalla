@@ -25,7 +25,7 @@
 .temperature {
   font-size: 150px;
   font-weight: 700;
-  font-variant-numeric: tabular-nums;
+  /* font-variant-numeric: tabular-nums; */
 }
 
 .condition {

@@ -16,5 +16,5 @@
   font-weight: 600;
   line-height: 1.25;
   white-space: nowrap;
-  font-variant-numeric: tabular-nums;
+  /* font-variant-numeric: tabular-nums; */
 }

@@ -35,7 +35,7 @@ function Dolar() {
           <p className={styles.subtitle}>Dólar hoy en pesos argentinos</p>
         </header>
 
-        <Clock size={70} />
+        <Clock size={70} dateFirst />
 
         {dollar && (
           <p className={styles.note}>

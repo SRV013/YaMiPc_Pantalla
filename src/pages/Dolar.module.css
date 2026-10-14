@@ -73,13 +73,13 @@
   align-items: center;
   background: rgb(255 255 255 / 0.1);
   border-radius: 12px;
-  font-variant-numeric: tabular-nums;
+  /* font-variant-numeric: tabular-nums; */
 }
 
 .main .rate {
   padding: 10px 22px;
   background: rgb(255 255 255 / 0.14);
-  border-left: 6px solid #86efac;
+  /* border-left: 6px solid #86efac; */
 }
 
 .others .rate {
