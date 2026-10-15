@@ -4,7 +4,7 @@ import { TIME_ZONE } from './weather.ts'
 const DATA_URL = 'https://api.argentinadatos.com/v1'
 const ON_THIS_DAY_URL = 'https://es.wikipedia.org/api/rest_v1/feed/onthisday/events'
 // Los textos más largos no entran en el panel.
-const MAX_EVENT_LENGTH = 160
+const MAX_EVENT_LENGTH = 150
 const DAY_MS = 24 * 60 * 60 * 1000
 
 export type Holiday = {
@@ -20,8 +20,6 @@ export type HistoryEvent = {
 
 export type Summary = {
   holiday: Holiday | null
-  countryRisk: { value: number; date: string }
-  inflation: { value: number; date: string }
   events: HistoryEvent[]
 }
 
@@ -54,18 +52,13 @@ function capitalize(text: string) {
 async function loadSummary(): Promise<Summary> {
   const today = todayFormat.format(new Date())
   const [, month, day] = today.split('-')
-  const [holiday, countryRisk, inflation, history] = await Promise.all([
+  const [holiday, history] = await Promise.all([
     loadNextHoliday(today),
-    fetchJson(`${DATA_URL}/finanzas/indices/riesgo-pais/ultimo`),
-    fetchJson(`${DATA_URL}/finanzas/indices/inflacion`),
     fetchJson(`${ON_THIS_DAY_URL}/${month}/${day}`),
   ])
-  const lastInflation = inflation[inflation.length - 1]
 
   return {
     holiday,
-    countryRisk: { value: countryRisk.valor, date: countryRisk.fecha },
-    inflation: { value: lastInflation.valor, date: lastInflation.fecha },
     events: (history.events as HistoryEvent[])
       .filter((event) => event.text.length <= MAX_EVENT_LENGTH)
       .map((event) => ({ year: event.year, text: capitalize(event.text) })),
