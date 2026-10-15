@@ -43,9 +43,15 @@ const widgets = [
   },
   {
     icon: '📰',
-    name: 'Resumen general',
-    description: '1152×384 px · feriado, efemérides e indicadores',
+    name: 'Efemérides y feriados',
+    description: '1152×384 px · un día como hoy y próximo feriado',
     path: '/resumen',
+  },
+  {
+    icon: '🖥️',
+    name: 'YaMiPc',
+    description: '1152×384 px · publicidad de YaMiPc Computación',
+    path: '/yamipc',
   },
 ]
 

@@ -1,0 +1,202 @@
+.panel {
+  --panel-bg: radial-gradient(ellipse at 20% 50%, #2a1530 0%, #120d18 60%, #0b0910 100%);
+  --magenta: #ec268f;
+  --yellow: #fff212;
+
+  position: relative;
+  isolation: isolate;
+  font-family: 'Exo 2', system-ui, sans-serif;
+  display: grid;
+  grid-template-columns: 435px 1fr;
+  align-items: center;
+  gap: 60px;
+  padding: 0 38px;
+}
+
+/* Cuadrados redondeados girados, como el del logo, que se mueven despacio. */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.backdrop span {
+  position: absolute;
+  border-radius: 40px;
+  transform: rotate(26deg);
+  animation: drift 14s ease-in-out infinite alternate;
+}
+
+.backdrop span:nth-child(1) {
+  right: -120px;
+  bottom: -190px;
+  width: 360px;
+  height: 360px;
+  border: 26px solid rgb(236 38 143 / 0.35);
+}
+
+.backdrop span:nth-child(2) {
+  top: -70px;
+  right: 300px;
+  width: 120px;
+  height: 120px;
+  border: 14px solid rgb(255 242 18 / 0.55);
+  animation-duration: 10s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes drift {
+  to {
+    transform: rotate(34deg) translate(18px, -12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop span {
+    animation: none;
+  }
+}
+
+.brand {
+  position: relative;
+  animation: float 6s ease-in-out infinite alternate;
+}
+
+.logo {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Halo magenta que late detrás del logo. */
+.glow {
+  position: absolute;
+  inset: 8% 14%;
+  background: radial-gradient(circle, rgb(236 38 143 / 0.55), transparent 70%);
+  filter: blur(30px);
+  animation: pulse 4s ease-in-out infinite alternate;
+}
+
+.shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgb(255 255 255 / 0.7) 50%,
+      transparent 60%
+    )
+    -150% 0 / 250% 100% no-repeat;
+  mask: url('/yamipc-dark.svg') center / 100% 100% no-repeat;
+  animation: shine 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(-5px);
+  }
+
+  to {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+/* El brillo cruza en el primer tramo y después espera hasta la próxima pasada. */
+@keyframes shine {
+  0% {
+    background-position: 150% 0;
+  }
+
+  35%,
+  100% {
+    background-position: -150% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand,
+  .glow,
+  .shine {
+    animation: none;
+  }
+}
+
+.panel .list {
+  display: grid;
+  gap: 40px;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+/* En el horario el ícono se alinea con la línea de las horas, no con el bloque entero. */
+.info:first-child {
+  align-items: flex-start;
+}
+
+.info:first-child .icon {
+  margin-top: 10px;
+}
+
+.icon {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  fill: none;
+  stroke: var(--magenta);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.value {
+  display: grid;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.hours {
+  font-size: 58px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.days {
+  margin-top: 6px;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.small .icon {
+  width: 30px;
+  height: 30px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.small .value {
+  font-size: 24px;
+  font-weight: 500;
+  opacity: 0.85;
+}

@@ -77,7 +77,7 @@ function Resumen() {
       </div>
 
       <header className={styles.header}>
-        Resumen del día <span className={styles.date}>· {dateFormat.format(now)}</span>
+        Efemérides y feriados <span className={styles.date}>· {dateFormat.format(now)}</span>
       </header>
 
       {summary ? (

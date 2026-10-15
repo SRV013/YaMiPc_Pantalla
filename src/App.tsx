@@ -5,6 +5,7 @@ import Home from './pages/Home.tsx'
 import Marea from './pages/Marea.tsx'
 import Reloj from './pages/Reloj.tsx'
 import Resumen from './pages/Resumen.tsx'
+import YaMiPc from './pages/YaMiPc.tsx'
 
 function App() {
   const path = window.location.pathname
@@ -15,6 +16,7 @@ function App() {
   if (path === '/reloj') return <Reloj />
   if (path === '/dolar') return <Dolar />
   if (path === '/resumen') return <Resumen />
+  if (path === '/yamipc') return <YaMiPc />
   return <Home />
 }
 
