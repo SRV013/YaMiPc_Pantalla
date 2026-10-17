@@ -1,8 +1,12 @@
+/* Posiciones fijas desde la izquierda: si el ancho de la hora cambia con cada segundo,
+   el reloj de agujas no se mueve; solo varía dónde termina el texto. */
 .panel {
-  display: flex;
+  display: grid;
+  grid-template-columns: 320px auto;
+  justify-content: start;
   align-items: center;
-  justify-content: center;
   gap: 44px;
+  padding-left: 96px;
 }
 
 /* La línea separa los dos relojes y sirve de margen para alinear los textos a la izquierda. */
