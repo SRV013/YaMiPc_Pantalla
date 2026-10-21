@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Oferta impresora HP YaMiPc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../comun/promo.css" />
+<!--
+  Oferta impresora HP 1102 (outlet), 15 s. Misma metodología que la PS5 (spot de Samsung):
+  fondo gris claro, logo fijo arriba a la izquierda, producto quieto, modelo fijo abajo a la derecha
+  con la etiqueta OUTLET, texto en negro, cortes secos y cierre con el logo solo sobre negro.
+  Tipografía: Montserrat (parecida a la de la PS5, con un poco más de cuerpo).
+     0.00 – 2.16   Impresora / láser
+     2.16 – 4.32   Oportunidad / OUTLET
+     4.32 – 6.96   Precio outlet / $149.000        (sin impresora, centrado y más grande)
+     6.96 – 10.00  12 cuotas / $18.000 (el precio con el mismo ancho que "12 cuotas")
+    10.00 – 13.00  Conseguila en / yamipc.com
+    13.00 – 15.00  Logo solo sobre negro
+-->
+<style>
+  .screen { background: #f2f2f2; color: #111; }
+
+  .brand .halo { display: none; }
+  .brand img { filter: none; }
+  .brand .on-dark { position: absolute; inset: 0; opacity: 0; }
+
+  .zone { position: absolute; left: 50px; top: 70px; width: 500px; height: 230px; }
+  .scene { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .t {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    color: #111;
+  }
+  .t.xl { font-size: 80px; font-weight: 800; line-height: 1.05; }
+  .t.xl.s1 { font-size: 58px; font-weight: 700; line-height: 1.12; }
+  .t.lg { font-size: 56px; }
+  .t.md { font-size: 48px; }
+  .t.sm { font-size: 40px; font-weight: 600; }
+  .row { display: flex; align-items: center; gap: 14px; }
+  .row .big { font-size: 132px; font-weight: 800; line-height: 0.9; }
+  .row .stack { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.05; }
+  .row .stack .a { font-size: 40px; font-weight: 600; }
+  .row .stack .b { font-size: 64px; font-weight: 800; }
+
+  /* Etiqueta OUTLET: invertida (blanco sobre negro) para que se destaque sin salir del negro. */
+  .badge {
+    display: inline-block;
+    padding: 0.08em 0.38em 0.1em;
+    border-radius: 0.22em;
+    background: #111;
+    color: #f2f2f2;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+  .t.badge { font-size: 76px; margin-top: 10px; line-height: 1.1; }
+
+  .scene.wide { left: 110px; width: 832px; right: auto; top: -6px; bottom: auto; height: 250px; }
+  .wide .t.sm { font-size: 44px; }
+  .wide .t.xl { font-size: 132px; }
+  .wide .row { gap: 18px; }
+  .wide .row .big { font-size: 190px; }
+  .wide .row .stack .a { font-size: 58px; }
+  .wide .row .stack .b { font-size: 96px; }
+  /* Cuotas en dos líneas: "12 cuotas" arriba y el precio abajo, con el mismo ancho (se calcula al cargar).
+     Tres estilos para elegir con ?cuotas=a | b | c:
+       a  contraste de peso: "12 cuotas" fino y el precio grueso
+       b  etiqueta: "12 CUOTAS" en una franja negra, como la etiqueta OUTLET
+       c  espaciado: "12 CUOTAS DE" chico y espaciado de punta a punta sobre el precio */
+  .wide .t.cu-b { font-size: 128px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
+  .cu-a { line-height: 1.05; }
+  .v-a .cu-a { font-weight: 500; }
+  .v-a .t.cu-b { font-size: 110px; }
+  .v-b .cu-a {
+    font-size: 54px; font-weight: 800; text-transform: uppercase;
+    background: #111; color: #f2f2f2; padding: 10px 0 12px; border-radius: 10px; margin-bottom: 14px;
+  }
+  .v-c .cu-a { font-size: 50px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
+
+  /* Producto quieto, apoyado a la altura del modelo (como el celular de Samsung). */
+  .product { position: absolute; left: 566px; top: 80px; width: 320px; height: 228px; }
+  .product img {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    height: 100%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.18));
+  }
+  .product .shadow {
+    position: absolute;
+    left: 2%;
+    right: 2%;
+    bottom: -8px;
+    height: 20px;
+    background: radial-gradient(closest-side, rgb(0 0 0 / 0.3), transparent);
+  }
+  .model {
+    position: absolute;
+    right: 28px;
+    bottom: 66px;
+    text-align: right;
+    line-height: 1.1;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    color: #111;
+  }
+  .model .badge { font-size: 24px; margin-bottom: 10px; }
+
+  .endcard { position: absolute; inset: 0; background: #000; opacity: 0; z-index: 1; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="bg" aria-hidden="true"></div>
+
+  <div class="product" id="product">
+    <div class="shadow"></div>
+    <img src="impresora.png" alt="Impresora HP LaserJet 1102" />
+  </div>
+  <div class="model"><span class="badge">OUTLET</span><br />HP LaserJet<br />P1102</div>
+
+  <div class="zone">
+    <div class="scene">
+      <div class="t xl s1" data-in="0.1" data-out="2.12" data-fx="typefade" data-speed="0.05" data-exit="fade" data-dout="0.04">Impresora</div>
+      <div class="t xl s1" data-in="0.6" data-out="2.12" data-fx="typefade" data-speed="0.05" data-exit="fade" data-dout="0.04">láser</div>
+    </div>
+    <div class="scene">
+      <div class="t md" data-in="2.16" data-out="4.28" data-fx="typefade" data-speed="0.035" data-exit="fade" data-dout="0.04">Oportunidad</div>
+      <div class="t badge" data-in="2.6" data-out="4.28" data-fx="fade" data-din="0.15" data-exit="fade" data-dout="0.04">OUTLET</div>
+    </div>
+    <div class="scene wide">
+      <div class="t sm" data-in="4.32" data-out="6.92" data-fx="typefade" data-speed="0.03" data-exit="fade" data-dout="0.04">Precio outlet</div>
+      <div class="t xl" data-in="4.6" data-out="6.92" data-fx="typefade" data-speed="0.05" data-exit="fade" data-dout="0.04">$149.000</div>
+    </div>
+    <div class="scene wide">
+      <div class="t cu-a" id="cuotas-top" data-in="6.96" data-out="9.96" data-fx="typefade" data-speed="0.04" data-exit="fade" data-dout="0.04">12 cuotas</div>
+      <div class="t cu-b" id="cuotas-price" data-in="7.3" data-out="9.96" data-fx="typefade" data-speed="0.05" data-exit="fade" data-dout="0.04">$18.000</div>
+    </div>
+    <div class="scene">
+      <div class="t md" data-in="10.0" data-out="12.96" data-fx="typefade" data-speed="0.04" data-exit="fade" data-dout="0.04">Conseguila en</div>
+      <div class="t lg" data-in="10.5" data-out="12.96" data-fx="typefade" data-speed="0.035" data-exit="fade" data-dout="0.04">yamipc.com</div>
+    </div>
+  </div>
+
+  <div class="endcard" id="endcard"></div>
+
+  <div class="brand">
+    <img class="on-light" src="../../public/yamipc.svg" alt="YaMiPc Computación" />
+    <img class="on-dark" src="../../public/yamipc-dark.svg" alt="" />
+    <span class="shine"></span>
+  </div>
+</div>
+
+<script type="module">
+  import { startPromo } from '../comun/promo.js'
+
+  const H = w => (w * 6723.95) / 14776.9
+  const corner = { x: 28, y: 18, w: 150 }
+  const center = { x: 576 - 260, y: 192 - H(520) / 2, w: 520 }
+
+  const endcard = document.getElementById('endcard')
+  const onLight = document.querySelector('.brand .on-light')
+  const onDark = document.querySelector('.brand .on-dark')
+  const product = document.getElementById('product')
+
+  // Escena de cuotas: "12 cuotas" y el precio con el mismo ancho, según el estilo elegido.
+  const v = new URLSearchParams(location.search).get('cuotas') || 'b'
+  document.querySelector('.screen').classList.add(`v-${v}`)
+  for (const w of ['500', '600', '800']) await document.fonts.load(`${w} 100px 'Montserrat'`)
+  const textWidth = el => {
+    const r = document.createRange()
+    r.selectNodeContents(el)
+    return r.getBoundingClientRect().width
+  }
+  const top = document.getElementById('cuotas-top')
+  const price = document.getElementById('cuotas-price')
+  const priceW = textWidth(price)
+  if (v === 'a') {
+    // El renglón de arriba se agranda hasta el ancho del precio.
+    top.style.fontSize = '100px'
+    top.style.fontSize = `${100 * (priceW / textWidth(top))}px`
+  } else {
+    // El renglón de arriba se espacia hasta el ancho del precio.
+    if (v === 'c') top.textContent = '12 cuotas de'
+    const pad = v === 'b' ? 28 : 0
+    const chars = top.textContent.length
+    const ls = (priceW - 2 * pad - textWidth(top)) / (chars - 1)
+    top.style.letterSpacing = `${ls}px`
+    // El espaciado también se suma después de la última letra: se compensa para que quede centrado.
+    top.style.padding = `${v === 'b' ? '10px' : '0'} ${pad - ls}px ${v === 'b' ? '12px' : '0'} ${pad}px`
+  }
+
+  startPromo({
+    duration: 15,
+    fondo: 'liso',
+    logo: [
+      [0, corner],
+      [12.99, corner],
+      [13.0, center],
+    ],
+    shine: [0.6, 7.1, 13.5],
+    onRender(t) {
+      const end = t >= 13
+      endcard.style.opacity = end ? 1 : 0
+      onLight.style.opacity = end ? 0 : 1
+      onDark.style.opacity = end ? 1 : 0
+      // Producto casi quieto; desaparece de golpe en las escenas de precio.
+      product.style.transform = `scale(${1 + t * 0.002})`
+      product.style.opacity = t >= 4.32 && t < 10.0 ? 0 : 1
+    },
+  })
+</script>
+</body>
+</html>

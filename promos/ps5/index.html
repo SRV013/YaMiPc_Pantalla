@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Oferta PS5 YaMiPc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../comun/promo.css" />
+<!--
+  Oferta PlayStation 5, 15 s, con la metodología del spot de Samsung:
+  fondo gris claro, logo fijo arriba a la izquierda, producto quieto a la derecha,
+  "PlayStation 5" fijo abajo a la derecha, todo el texto en negro, un mensaje por bloque con cortes secos (tiempos de Samsung)
+  y cierre con el logo solo sobre negro.
+     0.00 – 2.16   Slim / Digital
+     2.16 – 4.32   825 GB / de almacenamiento
+     4.32 – 6.96   Precio exclusivo / $1.415.000   (sin consola, centrado y más grande)
+     6.96 – 10.00  12 cuotas de $179.000          (sin consola, centrado y más grande)
+    10.00 – 13.00  Conseguila en / www.yamipc.com
+    13.00 – 15.00  Logo solo sobre negro
+-->
+<style>
+  .screen { background: #f2f2f2; color: #111; }
+
+  /* Logo: versión para fondo claro durante el spot, versión para fondo oscuro en el cierre. */
+  .brand .halo { display: none; }
+  .brand img { filter: none; }
+  .brand .on-dark { position: absolute; inset: 0; opacity: 0; }
+
+  /* Zona de mensajes, centro-izquierda, a media altura (medidas tomadas del spot de Samsung). */
+  .zone { position: absolute; left: 70px; top: 70px; width: 520px; height: 230px; }
+  .scene { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .t {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    color: #111;
+  }
+  /* Frases como las de Samsung (~54 px); los números de la oferta, algo más grandes. */
+  .t.xl { font-size: 80px; font-weight: 700; line-height: 1.05; }
+  .t.xl.s1 { font-size: 58px; font-weight: 600; line-height: 1.12; }
+  .t.lg { font-size: 58px; }
+  .t.md { font-size: 50px; }
+  .t.sm { font-size: 42px; font-weight: 500; }
+  .row { display: flex; align-items: center; gap: 14px; }
+  .row .big { font-size: 132px; font-weight: 700; line-height: 0.9; }
+  .row .stack { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.05; }
+  .row .stack .a { font-size: 40px; font-weight: 500; }
+  .row .stack .b { font-size: 64px; font-weight: 700; }
+
+  /* Escenas de precio: sin la consola, centradas en toda la pantalla y más grandes (como el "6 cuotas" de Samsung). */
+  .scene.wide { left: 90px; width: 832px; right: auto; top: -6px; bottom: auto; height: 250px; }
+  .wide .t.sm { font-size: 44px; }
+  .wide .t.xl { font-size: 132px; }
+  .wide .row { gap: 18px; }
+  .wide .row .big { font-size: 190px; }
+  .wide .row .stack .a { font-size: 58px; }
+  .wide .row .stack .b { font-size: 96px; }
+
+  /* Producto quieto, con sombra para despegarlo del fondo claro. */
+  .product { position: absolute; left: 616px; top: 22px; width: 265px; height: 287px; }
+  .product img {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    height: 100%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.18)) drop-shadow(-8px 0 18px rgb(0 0 0 / 0.08));
+  }
+  .product .shadow {
+    position: absolute;
+    left: 4%;
+    right: 2%;
+    bottom: -8px;
+    height: 20px;
+    background: radial-gradient(closest-side, rgb(0 0 0 / 0.28), transparent);
+  }
+  /* Modelo en su propia columna, a la derecha del producto (como "Galaxy A71"). */
+  .model {
+    position: absolute;
+    right: 28px;
+    bottom: 66px;
+    text-align: right;
+    line-height: 1.1;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    color: #111;
+  }
+
+  .endcard { position: absolute; inset: 0; background: #000; opacity: 0; z-index: 1; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="bg" aria-hidden="true"></div>
+
+  <div class="product" id="product">
+    <div class="shadow"></div>
+    <img src="ps5.png" alt="PlayStation 5 con joystick" />
+  </div>
+  <div class="model">PlayStation 5</div>
+
+  <div class="zone">
+    <div class="scene">
+      <div class="t xl s1" data-in="0.1" data-out="2.12" data-fx="typefade" data-speed="0.06" data-exit="fade" data-dout="0.04">Slim</div>
+      <div class="t xl s1" data-in="0.45" data-out="2.12" data-fx="typefade" data-speed="0.05" data-exit="fade" data-dout="0.04">Digital</div>
+    </div>
+    <div class="scene">
+      <div class="t xl" data-in="2.16" data-out="4.28" data-fx="typefade" data-speed="0.05" data-exit="fade" data-dout="0.04">825 GB</div>
+      <div class="t sm" data-in="2.45" data-out="4.28" data-fx="typefade" data-speed="0.03" data-exit="fade" data-dout="0.04">de almacenamiento</div>
+    </div>
+    <div class="scene wide">
+      <div class="t sm" data-in="4.32" data-out="6.92" data-fx="typefade" data-speed="0.03" data-exit="fade" data-dout="0.04">Precio exclusivo</div>
+      <div class="t xl" data-in="4.6" data-out="6.92" data-fx="typefade" data-speed="0.05" data-exit="fade" data-dout="0.04">$1.415.000</div>
+    </div>
+    <div class="scene wide">
+      <div class="t row" data-in="6.96" data-out="9.96" data-fx="typefade" data-speed="0.045" data-exit="fade" data-dout="0.04">
+        <span class="big">12</span>
+        <span class="stack"><span class="a">cuotas de</span><span class="b">$179.000</span></span>
+      </div>
+    </div>
+    <div class="scene">
+      <div class="t md" data-in="10.0" data-out="12.96" data-fx="typefade" data-speed="0.04" data-exit="fade" data-dout="0.04">Conseguila en</div>
+      <div class="t lg" data-in="10.5" data-out="12.96" data-fx="typefade" data-speed="0.035" data-exit="fade" data-dout="0.04">yamipc.com</div>
+    </div>
+  </div>
+
+  <div class="endcard" id="endcard"></div>
+
+  <div class="brand">
+    <img class="on-light" src="../../public/yamipc.svg" alt="YaMiPc Computación" />
+    <img class="on-dark" src="../../public/yamipc-dark.svg" alt="" />
+    <span class="shine"></span>
+  </div>
+</div>
+
+<script type="module">
+  import { startPromo } from '../comun/promo.js'
+
+  const H = w => (w * 6723.95) / 14776.9
+  const corner = { x: 28, y: 18, w: 150 }
+  const center = { x: 576 - 260, y: 192 - H(520) / 2, w: 520 }
+
+  const endcard = document.getElementById('endcard')
+  const onLight = document.querySelector('.brand .on-light')
+  const onDark = document.querySelector('.brand .on-dark')
+  const product = document.getElementById('product')
+
+  startPromo({
+    duration: 15,
+    fondo: 'liso',
+    // Corte seco al cierre: el logo pasa de la esquina al centro de un cuadro al otro.
+    logo: [
+      [0, corner],
+      [12.99, corner],
+      [13.0, center],
+    ],
+    shine: [0.6, 7.1, 13.5],
+    onRender(t) {
+      const end = t >= 13
+      endcard.style.opacity = end ? 1 : 0
+      onLight.style.opacity = end ? 0 : 1
+      onDark.style.opacity = end ? 1 : 0
+      // El producto casi no se mueve (como Samsung): un acercamiento muy lento durante todo el spot.
+      // En las escenas de precio desaparece de golpe, para que los precios sean lo único importante.
+      product.style.transform = `scale(${1 + t * 0.002})`
+      product.style.opacity = t >= 4.32 && t < 10.0 ? 0 : 1
+    },
+  })
+</script>
+</body>
+</html>

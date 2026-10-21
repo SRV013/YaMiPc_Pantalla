@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Plantilla promo YaMiPc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Exo+2:wght@700;800&display=swap" rel="stylesheet" />
+<!--
+  Plantilla base de promo para la pantalla LED de 1152×384.
+  Parámetros de la URL:
+    ?guia=1   muestra las zonas y márgenes encima del diseño
+    ?vacia=1  oculta el contenido de ejemplo (solo fondo + logo)
+    ?t=2.5    congela la animación en ese segundo (para exportar imágenes o cuadros de video)
+-->
+<style>
+  :root {
+    --magenta: #ec268f;
+    --yellow: #fff212;
+    --margin: 24px;
+  }
+
+  html, body { margin: 0; background: #000; }
+
+  .screen {
+    position: relative;
+    width: 1152px;
+    height: 384px;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    isolation: isolate;
+  }
+
+  /* ---------- Fondo: negro + circuitos tenues + pulsos de luz ---------- */
+  .bg { position: absolute; inset: 0; z-index: -2; }
+  .bg .traces path,
+  .bg .traces circle { fill: none; stroke-width: 2.5; }
+  .bg .traces .m { stroke: rgb(236 38 143 / 0.30); }
+  .bg .traces .b { stroke: rgb(70 90 210 / 0.28); }
+
+  /* Un tramo corto y brillante que recorre la pista. */
+  .bg .pulses path {
+    fill: none;
+    stroke: #ff6ac0;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-dasharray: 70 1200;
+    filter: drop-shadow(0 0 6px #ec268f) drop-shadow(0 0 14px #ec268f);
+    animation: pulse-run 3.2s linear infinite;
+  }
+  @keyframes pulse-run {
+    from { stroke-dashoffset: 70; }
+    to { stroke-dashoffset: -1130; }
+  }
+
+  /* Oscurece detrás del texto para que el fondo nunca compita con la lectura. */
+  .vignette {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(ellipse 380px 190px at 475px 230px, rgb(0 0 0 / 0.92) 40%, transparent 100%),
+      radial-gradient(ellipse 230px 120px at 125px 70px, rgb(0 0 0 / 0.85) 30%, transparent 100%);
+  }
+
+  /* ---------- Logo fijo con halo y barrido de luz ---------- */
+  .brand {
+    position: absolute;
+    left: 28px;
+    top: 20px;
+    width: 206px;
+    aspect-ratio: 14776.9 / 6723.95;
+  }
+  .brand img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 6px rgb(236 38 143 / 0.8)) drop-shadow(0 0 18px rgb(236 38 143 / 0.45));
+  }
+  .brand .halo {
+    position: absolute;
+    inset: -10% 0;
+    background: radial-gradient(closest-side, rgb(236 38 143 / 0.45), transparent);
+    filter: blur(14px);
+    animation: halo 2s ease-in-out infinite alternate;
+  }
+  .brand .shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 38%, rgb(255 255 255 / 0.9) 50%, transparent 62%) 150% 0 / 250% 100% no-repeat;
+    mask: url('../../public/yamipc-dark.svg') center / 100% 100% no-repeat;
+    -webkit-mask: url('../../public/yamipc-dark.svg') center / 100% 100% no-repeat;
+    animation: shine 3.5s ease-in-out infinite;
+  }
+  @keyframes halo {
+    from { opacity: 0.55; transform: scale(0.94); }
+    to { opacity: 1; transform: scale(1.06); }
+  }
+  /* Cruza en el primer 30% y espera hasta la próxima pasada. */
+  @keyframes shine {
+    0% { background-position: 150% 0; }
+    30%, 100% { background-position: -150% 0; }
+  }
+
+  /* ---------- Zona de texto ---------- */
+  .copy {
+    position: absolute;
+    left: 170px;
+    top: 112px;
+    width: 610px;
+    height: 244px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .kicker {
+    font: 800 34px/1 'Exo 2', sans-serif;
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .line {
+    font-family: 'Anton', 'Impact', sans-serif;
+    font-size: 96px;
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+  }
+  .line.y { color: var(--yellow); text-shadow: 0 0 22px rgb(255 242 18 / 0.35); }
+  .line.m { color: var(--magenta); text-shadow: 0 0 22px rgb(236 38 143 / 0.45); }
+
+  /* ---------- Zona de producto ---------- */
+  .product {
+    position: absolute;
+    left: 800px;
+    top: 24px;
+    width: 328px;
+    height: 336px;
+    display: grid;
+    place-items: center;
+  }
+  .product .glow {
+    position: absolute;
+    inset: 10% 6%;
+    background: radial-gradient(closest-side, rgb(150 40 200 / 0.55), rgb(236 38 143 / 0.18) 60%, transparent);
+    filter: blur(10px);
+  }
+  /* Cuadrado redondeado girado, igual que el del logo, que enmarca al producto. */
+  .product .frame {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border: 10px solid rgb(236 38 143 / 0.55);
+    border-radius: 36px;
+    transform: rotate(26deg);
+    box-shadow: 0 0 24px rgb(236 38 143 / 0.5), inset 0 0 24px rgb(236 38 143 / 0.35);
+    animation: frame 6s ease-in-out infinite alternate;
+  }
+  @keyframes frame { to { transform: rotate(32deg) scale(1.03); } }
+  .product .floor {
+    position: absolute;
+    bottom: 22px;
+    width: 280px;
+    height: 26px;
+    background: radial-gradient(closest-side, rgb(255 255 255 / 0.35), rgb(236 38 143 / 0.25) 50%, transparent);
+  }
+  .product .item { position: relative; width: 300px; }
+
+  /* ---------- Guía de zonas (?guia=1) ---------- */
+  .guide { display: none; position: absolute; inset: 0; pointer-events: none; font: 700 13px/1 'Exo 2', sans-serif; }
+  .show-guide .guide { display: block; }
+  .guide div { position: absolute; border: 2px dashed; box-sizing: border-box; }
+  .guide span { position: absolute; left: 6px; top: 6px; padding: 3px 6px; background: #000; white-space: nowrap; }
+  .g-safe { inset: var(--margin); border-color: rgb(255 255 255 / 0.45) !important; }
+  .g-safe span { top: auto !important; bottom: 6px; color: rgb(255 255 255 / 0.8); }
+  .g-logo { left: 28px; top: 20px; width: 206px; height: 94px; border-color: #3ee0ff !important; color: #3ee0ff; }
+  .g-logo span { top: auto !important; bottom: -24px; left: -2px !important; }
+  .g-copy span { top: auto !important; bottom: 6px; }
+  .g-copy { left: 170px; top: 112px; width: 610px; height: 244px; border-color: #7dff6a !important; color: #7dff6a; }
+  .g-prod { left: 800px; top: 24px; width: 328px; height: 336px; border-color: #ffb13b !important; color: #ffb13b; }
+
+  .empty .copy, .empty .product .item { visibility: hidden; }
+</style>
+</head>
+<body>
+<div class="screen" id="screen">
+  <svg class="bg" viewBox="0 0 1152 384" aria-hidden="true">
+    <g class="traces" id="traces"></g>
+    <g class="pulses" id="pulses"></g>
+  </svg>
+  <div class="vignette"></div>
+
+  <div class="brand">
+    <span class="halo"></span>
+    <img src="../../public/yamipc-dark.svg" alt="YaMiPc Computación" />
+    <span class="shine"></span>
+  </div>
+
+  <div class="copy">
+    <div class="kicker">Hasta</div>
+    <div class="line y">12 cuotas</div>
+    <div class="line m">sin interés</div>
+  </div>
+
+  <div class="product">
+    <div class="glow"></div>
+    <div class="frame"></div>
+    <div class="floor"></div>
+    <!-- Notebook de ejemplo: se reemplaza por la foto (PNG sin fondo) del producto de cada promo. -->
+    <svg class="item" viewBox="0 0 300 210">
+      <defs>
+        <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3a3a46" /><stop offset="1" stop-color="#18181f" />
+        </linearGradient>
+        <linearGradient id="disp" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#1a0b2e" /><stop offset="0.55" stop-color="#7a1a6e" /><stop offset="1" stop-color="#ec268f" />
+        </linearGradient>
+        <linearGradient id="base" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#b9bcc6" /><stop offset="1" stop-color="#4a4c56" />
+        </linearGradient>
+      </defs>
+      <rect x="45" y="8" width="210" height="150" rx="10" fill="url(#lid)" stroke="#55556a" stroke-width="2" />
+      <rect x="55" y="18" width="190" height="128" rx="3" fill="url(#disp)" />
+      <path d="M55 120 C 110 90, 170 140, 245 96 L245 146 L55 146 Z" fill="#fff212" opacity="0.55" />
+      <path d="M55 132 C 120 110, 180 150, 245 118 L245 146 L55 146 Z" fill="#ec268f" opacity="0.7" />
+      <path d="M150 18 L245 18 L245 70 Z" fill="#fff" opacity="0.08" />
+      <path d="M20 160 L280 160 L296 184 Q298 192 288 192 L12 192 Q2 192 4 184 Z" fill="url(#base)" />
+      <rect x="125" y="163" width="50" height="5" rx="2.5" fill="#2e3038" />
+    </svg>
+  </div>
+
+  <div class="guide">
+    <div class="g-safe"><span>Margen seguro 24 px</span></div>
+    <div class="g-logo"><span>LOGO · fijo todo el video</span></div>
+    <div class="g-copy"><span>TEXTO · 1 idea, máx. 2 líneas grandes (+ 1 corta arriba)</span></div>
+    <div class="g-prod"><span>PRODUCTO · PNG sin fondo</span></div>
+  </div>
+</div>
+
+<script>
+  const params = new URLSearchParams(location.search)
+  const screen = document.getElementById('screen')
+  if (params.has('guia')) screen.classList.add('show-guide')
+  if (params.has('vacia')) screen.classList.add('empty')
+
+  // Pistas de circuito con giros a 45°, siempre iguales (semilla fija).
+  let seed = 7
+  const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646
+  const NS = 'http://www.w3.org/2000/svg'
+  const traces = document.getElementById('traces')
+  const pulses = document.getElementById('pulses')
+  const paths = []
+
+  function trace(x, y, dir) {
+    // dir: 1 baja desde arriba, -1 sube desde abajo
+    const pts = [[x, y]]
+    let cx = x, cy = y
+    const l1 = 30 + rand() * 90
+    cy += dir * l1; pts.push([cx, cy])
+    const side = rand() < 0.5 ? -1 : 1
+    const l2 = 20 + rand() * 60
+    cx += side * l2; cy += dir * l2; pts.push([cx, cy])
+    const l3 = 20 + rand() * 120
+    if (rand() < 0.5) { cx += side * l3 } else { cy += dir * l3 * 0.6 }
+    pts.push([cx, cy])
+    return pts
+  }
+
+  function add(pts, cls) {
+    const d = 'M' + pts.map(p => p.map(n => n.toFixed(1)).join(' ')).join(' L')
+    const p = document.createElementNS(NS, 'path')
+    p.setAttribute('d', d)
+    p.setAttribute('class', cls)
+    traces.appendChild(p)
+    const [ex, ey] = pts[pts.length - 1]
+    const c = document.createElementNS(NS, 'circle')
+    c.setAttribute('cx', ex); c.setAttribute('cy', ey); c.setAttribute('r', 5)
+    c.setAttribute('class', cls)
+    traces.appendChild(c)
+    paths.push(d)
+  }
+
+  for (let i = 0; i < 34; i++) {
+    const fromTop = i % 2 === 0
+    const x = 10 + rand() * 1132
+    add(trace(x, fromTop ? -4 : 388, fromTop ? 1 : -1), rand() < 0.6 ? 'm' : 'b')
+  }
+
+  // Algunas pistas llevan un pulso de luz, cada una con su propio desfase.
+  const lit = [2, 7, 11, 16, 21, 27, 31]
+  lit.forEach((idx, k) => {
+    const p = document.createElementNS(NS, 'path')
+    p.setAttribute('d', paths[idx])
+    p.setAttribute('pathLength', '1000')
+    p.style.animationDelay = `${-k * 0.9}s`
+    p.style.animationDuration = `${2.6 + (k % 3) * 0.5}s`
+    pulses.appendChild(p)
+  })
+
+  // ?t=segundos: congela todas las animaciones en ese instante.
+  if (params.has('t')) {
+    const t = parseFloat(params.get('t')) * 1000
+    const freeze = () => document.getAnimations().forEach(a => { a.pause(); a.currentTime = t })
+    document.fonts.ready.then(() => requestAnimationFrame(freeze))
+  }
+</script>
+</body>
+</html>

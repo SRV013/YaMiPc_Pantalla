@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Servicio técnico YaMiPc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../comun/promo.css" />
+<!--
+  Servicio técnico, 15 s. Misma línea que el institucional (fondo de líneas, logo nuevo, texto letra por letra).
+    0.0 – 2.4   Logo: entra volando, flota con halo y brillo, sale con latigazo
+    2.4 – 5.0   Logo chico arriba + SERVICIO TÉCNICO
+    5.0 – 11.1  REPARACIÓN DE + carrusel: computadoras, notebooks, impresoras, celulares (con ícono)
+   11.1 – 15.0  Cierre: logo + WhatsApp 223 616-9545
+-->
+<style>
+  .s1 { top: 150px; height: 220px; }
+  .s1 .line { font-size: 190px; }
+
+  .head { top: 16px; height: 96px; }
+  .head .line { font-size: 92px; }
+  .dev { top: 124px; height: 246px; }
+  .dev .line { font-size: 200px; gap: 0.12em; }
+
+  .close { top: 200px; height: 166px; }
+  .close .line { font-size: 150px; gap: 0.14em; }
+
+  /* Íconos de línea blanca, como el camión del institucional. */
+  .ico { height: 0.82em; width: auto; flex: none; overflow: visible; }
+  .ico * { fill: none; stroke: #fff; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+  .ico .thin { stroke-width: 5; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="vignette"></div>
+
+  <div class="brand">
+    <img src="../../public/yamipc-dark.svg" alt="YaMiPc Computación" />
+    <span class="shine"></span>
+  </div>
+
+  <!-- Escena 1 -->
+  <div class="fit s1">
+    <div class="line" data-in="2.6" data-out="4.7" data-fx="type">
+      <span class="y">Servicio</span><span class="m">técnico</span>
+    </div>
+  </div>
+
+  <!-- Escena 2: carrusel de equipos -->
+  <div class="fit head">
+    <div class="line" data-in="5.0" data-out="10.95" data-fx="type" data-speed="0.035">
+      <span class="w">Reparación de</span>
+    </div>
+  </div>
+  <div class="fit dev">
+    <div class="line" data-in="5.25" data-out="6.5" data-fx="type" data-speed="0.03" data-dout="0.22">
+      <svg class="ico" viewBox="0 0 160 120">
+        <rect x="20" y="8" width="120" height="80" rx="7" />
+        <path d="M70 88 L64 106 H96 L90 88 M52 110 H108" />
+      </svg>
+      <span class="y">Computadoras</span>
+    </div>
+  </div>
+  <div class="fit dev">
+    <div class="line" data-in="6.75" data-out="8.0" data-fx="type" data-speed="0.03" data-dout="0.22">
+      <svg class="ico" viewBox="0 0 160 120">
+        <rect x="34" y="14" width="92" height="66" rx="6" />
+        <path d="M14 88 H146 L136 104 H24 Z" />
+        <path class="thin" d="M70 96 H90" />
+      </svg>
+      <span class="m">Notebooks</span>
+    </div>
+  </div>
+  <div class="fit dev">
+    <div class="line" data-in="8.25" data-out="9.5" data-fx="type" data-speed="0.03" data-dout="0.22">
+      <svg class="ico" viewBox="0 0 160 120">
+        <path d="M46 40 V8 H114 V40" />
+        <rect x="16" y="40" width="128" height="50" rx="9" />
+        <path d="M44 74 H116 V112 H44 Z" />
+        <path class="thin" d="M58 88 H102 M58 99 H90" />
+        <circle cx="126" cy="56" r="3" />
+      </svg>
+      <span class="y">Impresoras</span>
+    </div>
+  </div>
+  <div class="fit dev">
+    <div class="line" data-in="9.75" data-out="10.95" data-fx="type" data-speed="0.03" data-dout="0.22">
+      <svg class="ico" viewBox="0 0 160 120">
+        <rect x="54" y="4" width="52" height="112" rx="10" />
+        <path class="thin" d="M72 16 H88" />
+        <circle cx="80" cy="102" r="3" />
+      </svg>
+      <span class="m">Celulares</span>
+    </div>
+  </div>
+
+  <!-- Cierre -->
+  <div class="fit close">
+    <div class="line" data-in="12.8" data-fx="type" data-speed="0.045">
+      <svg class="ico" viewBox="0 0 24 24" style="height: 0.7em">
+        <path d="M3.5 20.5l1.2-4.1a8.6 8.6 0 1 1 3.2 3z" style="stroke-width: 1.7" />
+        <path d="M9.2 8.2c.3-.6.9-.6 1.2 0l.6 1.3c.1.3 0 .6-.2.8l-.5.5c.6 1.2 1.6 2.2 2.8 2.8l.5-.5c.2-.2.5-.3.8-.2l1.3.6c.6.3.6.9 0 1.2-.8.5-1.8.6-2.7.2a8 8 0 0 1-4-4c-.4-.9-.3-1.9.2-2.7z" style="stroke-width: 1.5" />
+      </svg>
+      <span class="y">223 616-9545</span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { startPromo } from '../comun/promo.js'
+
+  // Logo (ancho w; el alto sale de la proporción del logo).
+  const H = w => (w * 6723.95) / 14776.9
+  const at = (w, cx, cy, extra = {}) => ({ x: cx - w / 2, y: cy - H(w) / 2, w, ...extra })
+  const center = at(640, 576, 192)
+  const flyIn = at(940, 576, 192, { o: 0, r: -10, b: 40 })
+  const small = at(280, 576, 76)
+  const top = at(380, 576, 100)
+  const away = (k, ease = 'in') => ({ ...k, x: k.x - 760, o: 0, b: 45, ease })
+
+  startPromo({
+    duration: 15,
+    fondo: 'lineas',
+    logo: [
+      [0, flyIn],
+      [0.45, { ...center, ease: 'out' }],
+      [2.05, center],
+      [2.35, away(center)],
+      [2.45, { ...small, o: 0 }],
+      [2.75, small],
+      [4.7, small],
+      [4.98, away(small)],
+      [11.15, flyIn],
+      [11.6, { ...center, ease: 'out' }],
+      [12.3, center],
+      [12.75, top],
+    ],
+    shine: [0.6, 3.0, 11.75, 13.8],
+  })
+</script>
+</body>
+</html>

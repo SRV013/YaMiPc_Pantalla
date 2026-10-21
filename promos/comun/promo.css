@@ -1,0 +1,102 @@
+/* Estilos compartidos por todas las promos de la pantalla (1152×384).
+   Logo nuevo plano con halo y barrido de luz, fondo moderno animado (comun/fondos.js),
+   Bebas Neue en los colores del logo. */
+:root {
+  --magenta: #ec268f;
+  --yellow: #fff212;
+  --bg: #07051a;
+}
+
+html, body { margin: 0; background: #000; }
+
+.screen {
+  position: relative;
+  width: 1152px;
+  height: 384px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 40%, #120c30 0%, var(--bg) 60%, #030210 100%);
+  color: #fff;
+  isolation: isolate;
+}
+
+/* ---------- Fondo animado (lo arma comun/fondos.js) ---------- */
+.bg { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+
+/* Oscurece un poco el centro para que el texto siempre gane. */
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse 620px 210px at 576px 200px, rgb(5 4 15 / 0.72) 35%, transparent 100%);
+}
+
+/* ---------- Logo con brillo 3D ---------- */
+.brand {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 600px;
+  aspect-ratio: 14776.9 / 6723.95;
+  z-index: 2;
+  transform-origin: center;
+  will-change: transform, filter;
+}
+.brand img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 8px rgb(0 0 0 / 0.5)) drop-shadow(0 0 10px rgb(236 38 143 / 0.55));
+}
+.brand .shine {
+  position: absolute;
+  inset: 0;
+  mask: url('../../public/yamipc-dark.svg') center / 100% 100% no-repeat;
+  -webkit-mask: url('../../public/yamipc-dark.svg') center / 100% 100% no-repeat;
+}
+/* Halo de luz magenta detrás del logo. */
+.brand .halo {
+  position: absolute;
+  inset: -12% -4%;
+  background: radial-gradient(closest-side, rgb(236 38 143 / 0.5), rgb(140 60 230 / 0.18) 60%, transparent);
+  filter: blur(18px);
+}
+.brand .shine {
+  background: linear-gradient(105deg, transparent 38%, rgb(255 255 255 / 0.9) 50%, transparent 62%) 150% 0 / 250% 100% no-repeat;
+}
+
+/* ---------- Texto ---------- */
+.fit { position: absolute; left: 36px; right: 36px; }
+.line {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.22em;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-size: 140px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 4px 10px rgb(0 0 0 / 0.65);
+}
+.line .ch { display: inline-block; white-space: pre; }
+.y { color: var(--yellow); }
+.m { color: var(--magenta); }
+.w { color: #fff; }
+
+/* ---------- Cursor de mano ---------- */
+.cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 58px;
+  height: 64px;
+  z-index: 3;
+  filter: drop-shadow(0 3px 4px rgb(0 0 0 / 0.6));
+}
+
+/* Elementos animados: arrancan ocultos hasta que el motor los muestra. */
+[data-in] { opacity: 0; }

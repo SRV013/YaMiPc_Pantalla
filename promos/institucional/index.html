@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Institucional YaMiPc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../comun/promo.css" />
+<!--
+  Video institucional, 15 s. Logo nuevo y fondo moderno (?fondo=formas | aurora | lineas).
+    0.0 – 2.8   Logo: entra volando, flota con halo y brillo, y sale con latigazo
+    2.8 – 5.7   COMPRÁ DESDE TU CASA / WWW.YAMIPC.COM (la web la escribe un cursor)
+    5.8 – 8.4   Logo chico arriba + HASTA 12 CUOTAS SIN INTERÉS
+    8.5 – 11.2  Camión que cruza + ENVÍOS A DOMICILIO
+   11.2 – 15.0  Cierre: logo entra volando, sube y se escribe WWW.YAMIPC.COM
+-->
+<style>
+  .s1a { top: 34px; height: 150px; }
+  .s1a .line { font-size: 150px; }
+  .s1b { top: 200px; height: 140px; }
+  .s1b .line { font-size: 124px; }
+  .s2 { top: 150px; height: 220px; }
+  .s2 .line { font-size: 180px; align-items: baseline; padding-top: 22px; box-sizing: border-box; }
+  .s2 .w { font-size: 0.5em; }
+  .s3 { top: 172px; height: 200px; }
+  .s3 .line { font-size: 160px; }
+  .close { top: 196px; height: 170px; }
+  .close .line { font-size: 140px; }
+
+  .truck {
+    position: absolute;
+    left: 0;
+    top: 22px;
+    width: 280px;
+    height: 153px;
+    overflow: visible;
+  }
+  .truck * { fill: none; stroke: #fff; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+  .truck .wheel circle { fill: var(--bg); }
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="vignette"></div>
+
+  <div class="brand">
+    <img src="../../public/yamipc-dark.svg" alt="YaMiPc Computación" />
+    <span class="shine"></span>
+  </div>
+
+  <!-- Escena 1 -->
+  <div class="fit s1a">
+    <div class="line" data-in="2.85" data-out="5.45" data-fx="type">
+      <span class="y">Comprá</span><span class="y">desde tu casa</span>
+    </div>
+  </div>
+  <div class="fit s1b">
+    <div class="line" id="web1" data-in="3.85" data-out="5.45" data-fx="type" data-speed="0.05">
+      <span class="m">www.yamipc.com</span>
+    </div>
+  </div>
+  <svg class="cursor" id="cursor" viewBox="0 0 24 26" aria-hidden="true">
+    <path d="M8.6 2.2c0-.9.7-1.6 1.6-1.6s1.6.7 1.6 1.6v8.1l.6-.1c.9-.1 1.6.6 1.6 1.4v.3c.4-.7 1.4-.9 2.1-.4.4.3.6.7.6 1.1.6-.6 1.6-.6 2.1 0 .3.3.5.7.5 1.1v4.6c0 1.1-.2 2.1-.7 3.1L17.4 25H9.3l-3.8-5.6-2.7-3.4c-.6-.7-.4-1.7.4-2.2.7-.4 1.5-.3 2 .2l3.4 3.2z"
+          fill="#fff" stroke="#000" stroke-width="1.1" stroke-linejoin="round" />
+  </svg>
+
+  <!-- Escena 2 -->
+  <div class="fit s2">
+    <div class="line" data-in="5.85" data-out="8.15" data-fx="type" data-speed="0.035">
+      <span class="w">Hasta</span><span class="y">12 cuotas</span><span class="m">sin interés</span>
+    </div>
+  </div>
+
+  <!-- Escena 3 -->
+  <svg class="truck" id="truck" viewBox="0 0 220 120" aria-hidden="true">
+    <path d="M6 52 H44 M18 70 H48 M0 88 H40" stroke-opacity="0.8" />
+    <g id="truck-body">
+      <rect x="60" y="14" width="100" height="74" rx="6" />
+      <path d="M90 50 l12 12 l24 -24" />
+      <path d="M160 34 H186 L208 62 V88 H160" />
+      <path d="M168 44 H183 L196 60 H168 Z" stroke-width="5" />
+      <path d="M60 88 H208" />
+    </g>
+    <g class="wheel" data-cx="88" data-cy="96">
+      <circle cx="88" cy="96" r="13" />
+      <path d="M88 87 V105" stroke-width="4" />
+    </g>
+    <g class="wheel" data-cx="182" data-cy="96">
+      <circle cx="182" cy="96" r="13" />
+      <path d="M182 87 V105" stroke-width="4" />
+    </g>
+  </svg>
+  <div class="fit s3">
+    <div class="line" data-in="8.55" data-out="10.95" data-fx="type">
+      <span class="m">Envíos</span><span class="y">a domicilio</span>
+    </div>
+  </div>
+
+  <!-- Cierre -->
+  <div class="fit close">
+    <div class="line" data-in="12.85" data-fx="type" data-speed="0.05">
+      <span class="y">www.yamipc.com</span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { startPromo } from '../comun/promo.js'
+
+  // Logo (ancho w; el alto sale de la proporción del logo).
+  const H = w => (w * 6723.95) / 14776.9
+  const at = (w, cx, cy, extra = {}) => ({ x: cx - w / 2, y: cy - H(w) / 2, w, ...extra })
+  const center = at(640, 576, 192)
+  const flyIn = at(940, 576, 192, { o: 0, r: -10, b: 40 })
+  const ghost = at(280, 576, 76)
+  const top = at(380, 576, 100)
+  const away = (k, ease = 'in') => ({ ...k, x: k.x - 760, o: 0, b: 45, ease })
+
+  const cursor = document.getElementById('cursor')
+  const web1 = document.getElementById('web1')
+  const truck = document.getElementById('truck')
+  const truckBody = document.getElementById('truck-body')
+  const wheels = [...truck.querySelectorAll('.wheel')]
+  const screenBox = () => document.querySelector('.screen').getBoundingClientRect()
+
+  startPromo({
+    duration: 15,
+    logo: [
+      [0, flyIn],
+      [0.45, { ...center, ease: 'out' }],
+      [2.5, center],
+      [2.8, away(center)],
+      [5.95, { ...ghost, o: 0 }],
+      [6.35, ghost],
+      [8.15, ghost],
+      [8.43, away(ghost)],
+      [11.2, flyIn],
+      [11.65, { ...center, ease: 'out' }],
+      [12.4, center],
+      [12.85, top],
+    ],
+    shine: [0.6, 6.4, 11.8, 13.9],
+    fondo: 'lineas',
+    onRender(t, { clamp, easeOut, easeIn }) {
+      // Cursor: llega, sigue a la última letra escrita de la web y hace "clic" al terminar.
+      const chars = [...web1.querySelectorAll('.ch')]
+      const typed = chars.filter(c => parseFloat(c.style.opacity || 0) > 0.5)
+      const box = screenBox()
+      let cx = 0, cy = 0
+      if (typed.length) {
+        const r = typed[typed.length - 1].getBoundingClientRect()
+        cx = r.right - box.left - 6
+        cy = r.top - box.top + r.height * 0.55
+      } else if (chars.length) {
+        const r = chars[0].getBoundingClientRect()
+        cx = r.left - box.left
+        cy = r.top - box.top + r.height * 0.55
+      }
+      const arrive = easeOut(clamp((t - 3.55) / 0.35))
+      const click = t > 4.75 && t < 4.95 ? 0.82 : 1
+      const q = clamp((t - 5.45) / 0.28)
+      cursor.style.opacity = t < 3.55 || q >= 1 ? 0 : arrive * (1 - easeIn(q))
+      cursor.style.transform =
+        `translate(${cx + (1 - arrive) * 120 - easeIn(q) * 900}px, ${cy + (1 - arrive) * 60}px) scale(${click})`
+
+      // Camión: cruza de izquierda a derecha; entra rápido, pasa lento por el centro y sale.
+      const p = clamp((t - 8.45) / 2.7)
+      const f = p + 0.12 * Math.sin(2 * Math.PI * p)
+      const x = -300 + (1152 + 320) * f
+      truck.style.opacity = t > 8.45 && t < 11.15 ? 1 : 0
+      truck.style.transform = `translateX(${x}px)`
+      truckBody.setAttribute('transform', `translate(0 ${Math.sin(t * 24) * 1})`)
+      const deg = (x / 13) * (180 / Math.PI)
+      wheels.forEach(w => w.setAttribute('transform', `rotate(${deg} ${w.dataset.cx} ${w.dataset.cy})`))
+    },
+  })
+</script>
+</body>
+</html>
