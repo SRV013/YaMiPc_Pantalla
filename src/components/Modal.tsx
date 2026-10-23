@@ -10,8 +10,10 @@ type ModalProps = {
 
 function Modal({ open, title, onClose, children }: ModalProps) {
   const ref = useRef<HTMLDialogElement>(null)
+  const openRef = useRef(open)
 
   useEffect(() => {
+    openRef.current = open
     const dialog = ref.current
     if (!dialog) return
     if (open && !dialog.open) dialog.showModal()
@@ -22,7 +24,11 @@ function Modal({ open, title, onClose, children }: ModalProps) {
     <dialog
       ref={ref}
       className={styles.modal}
-      onClose={onClose}
+      // Solo avisa los cierres del usuario (Esc). Si lo cerró el código, por ejemplo para pasar
+      // a otro modal, avisar acá cerraría también el modal nuevo.
+      onClose={() => {
+        if (openRef.current) onClose()
+      }}
       // El dialog no tiene padding, así que un clic directo sobre él es un clic en el fondo.
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose()
