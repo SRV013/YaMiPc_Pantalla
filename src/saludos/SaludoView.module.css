@@ -1,0 +1,106 @@
+.saludo {
+  --acento: #ec268f;
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  width: 1152px;
+  height: 384px;
+  padding: 0 72px;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: #fff;
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  background:
+    radial-gradient(60% 90% at 18% 50%, color-mix(in srgb, var(--acento) 30%, transparent), transparent 70%),
+    #0a0a0f;
+}
+
+.saludo p {
+  margin: 0;
+}
+
+/* Papelitos que caen despacio por detrás del texto. */
+.papelitos {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.papelitos span {
+  position: absolute;
+  top: -20px;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  opacity: 0.7;
+  animation: caer linear infinite;
+}
+
+.tono0 {
+  background: var(--acento);
+}
+
+.tono1 {
+  background: #fff212;
+}
+
+.tono2 {
+  background: #ffffff;
+}
+
+@keyframes caer {
+  to {
+    transform: translateY(420px) rotate(540deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .papelitos {
+    display: none;
+  }
+}
+
+.icono {
+  flex: none;
+  width: 150px;
+  height: 150px;
+  fill: none;
+  stroke: var(--acento);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.texto {
+  min-width: 0;
+}
+
+.frase {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+
+.para {
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.saludo .mensaje {
+  margin-top: 16px;
+  font-size: 46px;
+  font-weight: 500;
+}
+
+.saludo .de {
+  margin-top: 10px;
+  font-size: 30px;
+  color: rgb(255 255 255 / 0.72);
+}

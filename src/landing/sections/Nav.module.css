@@ -1,0 +1,82 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: rgb(10 10 15 / 0.82);
+  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+  backdrop-filter: blur(16px);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 10px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand a {
+  display: flex;
+}
+
+.badge {
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(245 245 247 / 0.66);
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 999px;
+}
+
+.brand img {
+  display: block;
+  height: auto;
+}
+
+.links {
+  display: flex;
+  gap: 28px;
+  font-size: 14px;
+}
+
+.links a {
+  text-decoration: none;
+  color: rgb(245 245 247 / 0.72);
+  transition: color 0.2s;
+}
+
+.links a:hover {
+  color: #fff;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 999px;
+  transition: border-color 0.2s;
+}
+
+.cta:hover {
+  border-color: rgb(255 255 255 / 0.45);
+}
+
+@media (max-width: 720px) {
+  .links {
+    display: none;
+  }
+}

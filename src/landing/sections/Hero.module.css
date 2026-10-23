@@ -1,0 +1,55 @@
+.hero {
+  padding-top: clamp(56px, 7vw, 88px);
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.text {
+  flex: 1 1 520px;
+  min-width: 0;
+}
+
+.title {
+  max-width: 16em;
+  margin: 0;
+  font-size: clamp(28px, 3.2vw, 42px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.soft {
+  color: rgb(245 245 247 / 0.5);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rule {
+  height: 1px;
+  margin-top: clamp(36px, 5vw, 56px);
+  background: rgb(255 255 255 / 0.14);
+}
+
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: clamp(36px, 5vw, 56px);
+}
+
+.strip img {
+  flex: 1 1 280px;
+  min-width: 0;
+  height: clamp(200px, 22vw, 320px);
+  object-fit: cover;
+  display: block;
+}

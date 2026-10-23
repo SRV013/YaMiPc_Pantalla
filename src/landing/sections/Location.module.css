@@ -1,0 +1,52 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.info {
+  flex: 1 1 360px;
+  min-width: 0;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 32px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.details li {
+  display: flex;
+  gap: 16px;
+}
+
+.details li > span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.icon {
+  flex: none;
+  margin-top: 1px;
+  color: rgb(245 245 247 / 0.7);
+}
+
+.muted {
+  font-size: 15px;
+  color: rgb(245 245 247 / 0.66);
+}
+
+/* Mapa de Google en grises oscuros para que combine con la página. */
+.map {
+  flex: 1.3 1 420px;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: 24px;
+  filter: grayscale(1) invert(0.9) contrast(0.9);
+}

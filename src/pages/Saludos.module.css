@@ -1,0 +1,21 @@
+.pantalla {
+  min-height: 100svh;
+  background: #000;
+}
+
+.entrada {
+  width: 1152px;
+  animation: entrar 0.8s ease-out;
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entrada {
+    animation: none;
+  }
+}

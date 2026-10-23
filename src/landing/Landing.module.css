@@ -1,0 +1,94 @@
+/* Base del home institucional: siempre oscuro y con una sola tipografía. */
+.landing {
+  --ink: #f5f5f7;
+  --ink-muted: rgb(245 245 247 / 0.66);
+  --ink-soft: rgb(245 245 247 / 0.5);
+  --line: rgb(255 255 255 / 0.08);
+  --card: rgb(255 255 255 / 0.03);
+  --page: #0a0a0f;
+
+  min-height: 100svh;
+  color: var(--ink);
+  background: var(--page);
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+.landing a {
+  color: inherit;
+}
+
+.container {
+  width: min(100% - 40px, 1120px);
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(56px, 8vw, 104px);
+  scroll-margin-top: 68px;
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  max-width: 36em;
+  margin: 20px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+.card {
+  padding: 24px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 24px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 999px;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+/* Con .landing delante le gana al color heredado de los enlaces. */
+.landing .primary {
+  color: var(--page);
+  background: var(--ink);
+}
+
+.landing .primary:hover {
+  background: #fff;
+}
+
+.secondary {
+  border: 1px solid rgb(255 255 255 / 0.2);
+}
+
+.secondary:hover {
+  border-color: rgb(255 255 255 / 0.45);
+}

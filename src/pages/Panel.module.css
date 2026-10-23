@@ -1,0 +1,13 @@
+/* Los componentes del panel (tarjetas, modal) toman estos colores: los mismos tonos del home. */
+.panel {
+  --text: #f5f5f7;
+  --bg: #0a0a0f;
+  --accent: #f5f5f7;
+  --border: rgb(255 255 255 / 0.1);
+  --surface: rgb(255 255 255 / 0.03);
+  --muted: rgb(245 245 247 / 0.66);
+}
+
+.cards {
+  margin-top: clamp(32px, 4vw, 48px);
+}
