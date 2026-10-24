@@ -23,16 +23,47 @@ export const SCREEN = {
   spot: '15 segundos',
 }
 
-// Verano: la sección se muestra hasta `fin` (AAAA-MM-DD) y después desaparece sola.
-export const VERANO = {
+// Año de la temporada que se ofrece en la portada.
+export const PREVENTA = {
   año: '2027',
-  fin: '2027-03-31',
 }
 
+// Cada punto de la esquina tiene dos fotos: mirando hacia la pantalla y lo que la pantalla tiene enfrente.
+// Las vistas "desde" son capturas de Google Street View.
 export const PORTADA = [
-  { src: '/img/portada/esquina.jpg', alt: 'Una persona cruza la esquina de La Rioja y Belgrano, frente a la pantalla', position: 'center 64%', grow: 1 },
-  { src: '/img/portada/frente.jpg', alt: 'La pantalla LED encendida sobre la vereda del local', position: 'center 40%', grow: 1.6 },
-  { src: '/img/portada/edificio.jpg', alt: 'El edificio con la pantalla visto desde la vereda de enfrente', position: 'center 55%', grow: 1 },
+  {
+    lugar: 'Cruce de La Rioja',
+    // Encuadre de la foto principal: dónde queda la pantalla en altura.
+    posicion: 'center 26%',
+    hacia: '/img/portada/a-hacia.jpg',
+    desde: '/img/portada/a-desde.jpg',
+    altHacia: 'La pantalla vista desde el cruce de La Rioja, con gente caminando',
+    altDesde: 'Frente a la pantalla: el shopping Los Gallegos y el cruce de La Rioja',
+  },
+  {
+    lugar: 'Esquina de Belgrano',
+    posicion: 'center 34%',
+    hacia: '/img/portada/b-hacia.jpg',
+    desde: '/img/portada/b-desde.jpg',
+    altHacia: 'Una familia cruza la senda frente a la pantalla',
+    altDesde: 'Frente a la pantalla: autos sobre Belgrano y el shopping',
+  },
+  {
+    lugar: 'Senda peatonal',
+    posicion: 'center 24%',
+    hacia: '/img/portada/c-hacia.jpg',
+    desde: '/img/portada/c-desde.jpg',
+    altHacia: 'Gente cruzando la senda con la pantalla de fondo',
+    altDesde: 'Frente a la pantalla: la entrada del shopping y la esquina de La Rioja',
+  },
+  {
+    lugar: 'Vereda del local',
+    posicion: 'center 8%',
+    hacia: '/img/portada/d-hacia.jpg',
+    desde: '/img/portada/d-desde.jpg',
+    altHacia: 'La pantalla y la vidriera del local desde la vereda',
+    altDesde: 'Frente a la pantalla: Belgrano con autos esperando el semáforo y el shopping al fondo',
+  },
 ]
 
 export const ADS = [
