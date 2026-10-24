@@ -26,7 +26,6 @@ export const SCREEN = {
 // Verano: la sección se muestra hasta `fin` (AAAA-MM-DD) y después desaparece sola.
 export const VERANO = {
   año: '2027',
-  periodo: 'Diciembre a marzo',
   fin: '2027-03-31',
 }
 

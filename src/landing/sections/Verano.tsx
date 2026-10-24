@@ -1,5 +1,5 @@
 import base from '../Landing.module.css'
-import { SCREEN, VERANO } from '../content.ts'
+import { VERANO } from '../content.ts'
 import { TIME_ZONE } from '../../weather.ts'
 import styles from './Verano.module.css'
 
@@ -7,8 +7,14 @@ import styles from './Verano.module.css'
 const EN_VERANO = new Intl.DateTimeFormat('en-CA', { timeZone: TIME_ZONE }).format(new Date()) <= VERANO.fin
 
 const DATOS = [
-  { valor: VERANO.periodo, detalle: 'Todo el verano' },
-  { valor: SCREEN.hours, detalle: 'Todos los días, con la ciudad llena' },
+  // Dato del dueño de la pantalla.
+  {
+    valor: 'Temporada MDQ',
+    detalle:
+      'Más de 500 mil peatones por semana. Y en el cruce de La Rioja, Belgrano y la Diagonal, los autos esperan el semáforo mirando la pantalla.',
+  },
+  // De 9 a 23 h son 14 horas al aire.
+  { valor: '14 horas', detalle: 'De publicidad continua, todos los días' },
   { valor: 'Tu anuncio', detalle: 'Si no lo tenés, lo diseñamos' },
 ]
 
@@ -20,7 +26,7 @@ function Verano() {
     <section id="verano" className={`${base.section} ${styles.verano}`} aria-labelledby="verano-titulo">
       <div className={base.container}>
         <h2 id="verano-titulo" className={styles.titulo}>
-          Temporada <span className={styles.año}>{VERANO.año}</span>
+          PreVenta <span className={styles.año}>{VERANO.año}</span>
         </h2>
         <p className={styles.bajada}>
           Este verano la ciudad se llena de gente, y la esquina de La Rioja y Belgrano no para.
