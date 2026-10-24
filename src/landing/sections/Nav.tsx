@@ -4,7 +4,7 @@ import { COMPANY } from '../content.ts'
 import styles from './Nav.module.css'
 
 const LINKS = [
-  { href: '#nosotros', label: 'Nosotros' },
+  { href: '#verano', label: 'Temporada 2027' },
   { href: '#pantalla', label: 'La pantalla' },
   { href: '#ubicacion', label: 'Ubicación' },
 ]

@@ -44,7 +44,7 @@ function Footer() {
 
           <div className={styles.column}>
             <h3 className={styles.title}>La pantalla</h3>
-            <span>Encendida {SCREEN.hours}</span>
+            <span>Encendida de {SCREEN.hours}</span>
             <span className={styles.muted}>{SCREEN.size} sobre la vereda</span>
             <span className={styles.muted}>Spots de {SCREEN.spot}</span>
           </div>

@@ -1,8 +1,35 @@
+import { useEffect, useRef } from 'react'
 import base from '../Landing.module.css'
 import { COMPANY, PORTADA } from '../content.ts'
 import styles from './Hero.module.css'
 
+const PASO_MS = 4000
+
+/** En el celular, la tira de fotos pasa sola de una en una. En la computadora se ven todas juntas. */
+function useSliderAutomatico() {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const tira = ref.current
+    const celular = window.matchMedia('(max-width: 720px)')
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (!tira) return
+
+    const id = setInterval(() => {
+      if (!celular.matches || sinMovimiento.matches) return
+      const actual = Math.round(tira.scrollLeft / tira.clientWidth)
+      const siguiente = (actual + 1) % tira.children.length
+      tira.scrollTo({ left: siguiente * tira.clientWidth })
+    }, PASO_MS)
+    return () => clearInterval(id)
+  }, [])
+
+  return ref
+}
+
 function Hero() {
+  const tira = useSliderAutomatico()
+
   return (
     <section id="inicio" className={styles.hero}>
       <div className={base.container}>
@@ -30,7 +57,7 @@ function Hero() {
       </div>
 
       {/* Tira de fotos de borde a borde: muestra el lugar antes que los anuncios. */}
-      <div className={styles.strip}>
+      <div ref={tira} className={styles.strip}>
         {PORTADA.map((photo) => (
           <img
             key={photo.src}

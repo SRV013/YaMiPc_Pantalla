@@ -1,0 +1,45 @@
+/* El único bloque con color del home: el amarillo de la marca, para que llame la atención. */
+.verano {
+  background: radial-gradient(60% 80% at 85% 30%, rgb(255 242 18 / 0.08), transparent 70%);
+}
+
+.titulo {
+  margin: 0;
+  font-size: clamp(52px, 9vw, 128px);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.año {
+  color: #fff212;
+}
+
+.bajada {
+  max-width: 34em;
+  margin: clamp(20px, 3vw, 32px) 0 0;
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.55;
+  color: rgb(245 245 247 / 0.72);
+}
+
+.datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  margin: clamp(40px, 6vw, 72px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.valor {
+  margin: 0;
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.detalle {
+  margin: 6px 0 0;
+  color: rgb(245 245 247 / 0.6);
+}

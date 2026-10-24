@@ -3,6 +3,7 @@ import base from '../Landing.module.css'
 import { ADS, SCREEN } from '../content.ts'
 import styles from './Screen.module.css'
 
+// Pendiente: sumar la frecuencia con la que sale cada anuncio cuando esté definida.
 const SPECS = [
   {
     value: (
@@ -12,15 +13,9 @@ const SPECS = [
     ),
     label: 'de pantalla',
   },
-  { value: '15 s', label: 'por spot' },
-  { value: 'A la calle', label: 'sobre la vereda de La Rioja y Belgrano' },
-]
-
-// Pendiente: sumar la frecuencia con la que sale cada anuncio cuando esté definida.
-const SCHEDULE = [
-  { title: 'Horario', text: `La pantalla está encendida todos los días ${SCREEN.hours}.` },
-  { title: 'Duración', text: `Cada anuncio dura ${SCREEN.spot}.` },
-  { title: 'Formato', text: `Video o imagen de ${SCREEN.fileFormat}. Si no tenés uno, lo diseñamos.` },
+  { value: SCREEN.hours, label: 'encendida todos los días' },
+  { value: '15 s', label: 'por anuncio' },
+  { value: '1152 × 384', label: 'píxeles: el tamaño del archivo' },
 ]
 
 function Screen() {
@@ -43,16 +38,6 @@ function Screen() {
             <li key={spec.label}>
               <p className={styles.value}>{spec.value}</p>
               <p className={styles.label}>{spec.label}</p>
-            </li>
-          ))}
-        </ul>
-
-        <h3 className={styles.subheading}>Cuándo salen los anuncios</h3>
-        <ul className={styles.schedule}>
-          {SCHEDULE.map((item) => (
-            <li key={item.title} className={base.card}>
-              <p className={styles.scheduleTitle}>{item.title}</p>
-              <p className={styles.scheduleText}>{item.text}</p>
             </li>
           ))}
         </ul>

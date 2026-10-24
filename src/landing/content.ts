@@ -19,9 +19,15 @@ export const COMPANY = {
 
 export const SCREEN = {
   size: '8 metros x 4 metros',
-  hours: 'de 9 a 23 h',
+  hours: '9 a 23 h',
   spot: '15 segundos',
-  fileFormat: '1152 × 384 píxeles',
+}
+
+// Verano: la sección se muestra hasta `fin` (AAAA-MM-DD) y después desaparece sola.
+export const VERANO = {
+  año: '2027',
+  periodo: 'Diciembre a marzo',
+  fin: '2027-03-31',
 }
 
 export const PORTADA = [

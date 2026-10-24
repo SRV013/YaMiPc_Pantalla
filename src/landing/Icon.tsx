@@ -1,8 +1,5 @@
 // Íconos de trazo simple en una grilla de 24×24.
 const PATHS = {
-  computer: 'M4 5h16v10H4zM9 19h6M12 15v4',
-  tools: 'M14.5 6.5a4 4 0 0 0 5 5L12 19a2.1 2.1 0 0 1-3-3l7.5-7.5a4 4 0 0 0-2-2zM5 5l4 4M3 7l4-4',
-  screen: 'M3 6h18v9H3zM8 19h8M12 15v4M7 10h4',
   pin: 'M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21zM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z',
   clock: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2',
   whatsapp:

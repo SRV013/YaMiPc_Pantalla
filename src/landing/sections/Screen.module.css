@@ -6,19 +6,13 @@
   margin-top: clamp(40px, 5vw, 64px);
 }
 
-.specs,
-.schedule {
-  display: grid;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 .specs {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px;
-  margin-top: clamp(32px, 4vw, 48px);
-  padding-top: 28px;
+  margin: clamp(32px, 4vw, 48px) 0 0;
+  padding: 28px 0 0;
+  list-style: none;
   border-top: 1px solid rgb(255 255 255 / 0.08);
 }
 
@@ -37,29 +31,4 @@
 .label {
   margin: 4px 0 0;
   color: rgb(245 245 247 / 0.66);
-}
-
-.subheading {
-  margin: clamp(56px, 7vw, 88px) 0 20px;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.schedule {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
-}
-
-.scheduleTitle {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgb(245 245 247 / 0.5);
-}
-
-.scheduleText {
-  margin: 8px 0 0;
-  line-height: 1.55;
 }
