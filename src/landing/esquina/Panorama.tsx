@@ -1,6 +1,7 @@
 import { useEffect, useRef, type CSSProperties } from 'react'
 import type { Momento } from '../content.ts'
 import Foto from './Foto.tsx'
+import { variante } from './variantes.ts'
 import styles from './Panorama.module.css'
 
 // Proporción de la foto panorámica: ancho / alto.
@@ -47,8 +48,18 @@ function Panorama({ src, momento, arrastrable = false, zoom = 1 }: PanoramaProps
   const copia = (clave: string) => (
     <div key={clave} className={src ? styles.copiaFoto : styles.copia} aria-hidden={clave !== 'a'}>
       {src ? (
-        // La foto real conserva su proporción: el ancho sale de su alto.
-        <img className={styles.foto} src={src} alt="Vista 360 de la esquina" draggable={false} />
+        // La miniatura da el ancho y se ve desenfocada; la foto liviana aparece encima al cargar.
+        <div className={styles.capas}>
+          <img className={styles.mini} src={variante(src, 'mini')} alt="" draggable={false} />
+          <img
+            className={styles.foto}
+            src={variante(src, 'vista')}
+            alt={clave === 'a' ? 'Vista 360 de la esquina' : ''}
+            decoding="async"
+            draggable={false}
+            onLoad={(e) => e.currentTarget.classList.add(styles.lista)}
+          />
+        </div>
       ) : (
         TRAMOS[momento].map((color, i) => (
           <Foto

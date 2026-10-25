@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import Icon from '../Icon.tsx'
 import { ESQUINA, PANORAMAS, type Momento } from '../content.ts'
 import Foto from './Foto.tsx'
+import { precargar } from './variantes.ts'
 import VistaDoble from './VistaDoble.tsx'
 import Panorama from './Panorama.tsx'
 import DiaNoche from './DiaNoche.tsx'
@@ -68,6 +69,19 @@ function EsquinaGaleria() {
     return () => clearTimeout(id)
   }, [actual, vista, pausa, ampliada, total])
 
+  // Mientras se mira una foto, se piden por adelantado las que vienen: la vista de enfrente de la
+  // siguiente y la misma foto en el otro momento del día, así los cambios no esperan a la red.
+  useEffect(() => {
+    const siguiente = ESQUINA[(actual + 1) % total]
+    const otro = momento === 'dia' ? 'noche' : 'dia'
+    const id = setTimeout(() => {
+      precargar(siguiente[momento].desde)
+      precargar(ESQUINA[actual][otro].hacia)
+      precargar(ESQUINA[actual][otro].desde)
+    }, 1500)
+    return () => clearTimeout(id)
+  }, [actual, momento, total])
+
   const ir = (indice: number) => {
     // La foto nueva entra bajo el mouse, que ya no está sobre la anterior.
     setPausa(false)
@@ -130,7 +144,8 @@ function EsquinaGaleria() {
                     onInvertir={() => setInvertida((v) => !v)}
                   />
                 ) : (
-                  <Foto {...hacia} />
+                  // Solo se piden las fotos de al lado; las demás muestran su miniatura hasta acercarse.
+                  <Foto {...hacia} cargar={Math.abs(rel) <= 1} />
                 )}
 
                 {esActual ? (
@@ -208,6 +223,7 @@ function EsquinaGaleria() {
               desde={foto(ampliada.indice, 'desde')}
               invertida={invertida}
               onInvertir={() => setInvertida((v) => !v)}
+              calidad="original"
             />
           </div>
         )}
