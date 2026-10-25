@@ -43,29 +43,29 @@ export const ESQUINA = [
   {
     lugar: 'Diagonal Pueyrredón',
     dia: { hacia: '/img/esquina/dia-2-hacia.webp', desde: '/img/esquina/dia-2-desde.webp' },
-    noche: { hacia: '', desde: '' },
+    noche: { hacia: '/img/esquina/noche-2-hacia.jpg', desde: '/img/esquina/noche-2-desde.jpg' },
   },
   {
     lugar: 'Diagonal Pueyrredón',
     dia: { hacia: '/img/esquina/dia-3-hacia.webp', desde: '/img/esquina/dia-3-desde.webp' },
-    noche: { hacia: '', desde: '' },
+    noche: { hacia: '/img/esquina/noche-3-hacia.jpg', desde: '/img/esquina/noche-3-desde.jpg' },
   },
   {
     lugar: 'Desde el interior del shopping Los Gallegos',
     dia: { hacia: '/img/esquina/dia-4-hacia.webp', desde: '/img/esquina/dia-4-desde.webp' },
-    noche: { hacia: '', desde: '' },
+    noche: { hacia: '/img/esquina/noche-4-hacia.jpg', desde: '/img/esquina/noche-4-desde.jpg' },
   },
   {
     lugar: 'Calle Belgrano',
     dia: { hacia: '/img/esquina/dia-5-hacia.webp', desde: '/img/esquina/dia-5-desde.webp' },
-    noche: { hacia: '', desde: '' },
+    noche: { hacia: '/img/esquina/noche-5-hacia.jpg', desde: '/img/esquina/noche-5-desde.jpg' },
   },
 ]
 
 // Vista 360: fotos panorámicas muy apaisadas, desde dos lugares opuestos de la esquina.
 export const PANORAMAS = [
-  { nombre: 'Mirando a la pantalla', dia: '/img/esquina/360-dia-1.webp', noche: '' },
-  { nombre: 'Vista de enfrente', dia: '/img/esquina/360-dia-2.webp', noche: '' },
+  { nombre: 'Mirando a la pantalla', dia: '/img/esquina/360-dia-1.webp', noche: '/img/esquina/360-noche-1.jpg' },
+  { nombre: 'Vista de enfrente', dia: '/img/esquina/360-dia-2.webp', noche: '/img/esquina/360-noche-2.jpg' },
 ]
 
 export const ADS = [

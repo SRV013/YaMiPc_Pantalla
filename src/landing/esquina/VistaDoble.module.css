@@ -61,16 +61,16 @@
   overflow: hidden;
   border-radius: 12px;
   /* Borde animado: una luz amarilla que recorre el contorno del recuadro. */
-  padding: 3px;
+  /* Borde fino con los colores del logo: alterna entre magenta y amarillo mientras gira. */
+  padding: 1.5px;
   background: conic-gradient(
     from var(--giro),
-    #fff212,
-    rgb(255 242 18 / 0.15) 25%,
-    rgb(255 255 255 / 0.8) 50%,
-    rgb(255 242 18 / 0.15) 75%,
-    #fff212
+    #ec268f,
+    #fff212 25%,
+    #ec268f 50%,
+    #fff212 75%,
+    #ec268f
   );
-  box-shadow: 0 16px 40px rgb(0 0 0 / 0.5);
   animation:
     entrar 0.6s ease,
     girar 4s linear infinite;
@@ -91,7 +91,7 @@
 
 /* La foto de adentro acompaña la curva del borde. */
 .secundaria > :first-child {
-  border-radius: 9px;
+  border-radius: 10.5px;
 }
 
 .etiqueta {
