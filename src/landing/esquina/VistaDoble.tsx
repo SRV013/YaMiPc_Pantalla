@@ -32,8 +32,14 @@ function VistaDoble({ hacia, desde, invertida, onInvertir }: VistaDobleProps) {
         <div key={secundaria.etiqueta} className={styles.secundaria}>
           <Foto {...secundaria} />
           <span className={styles.etiqueta}>{nombreSecundaria}</span>
-          <button type="button" className={styles.invertir} onClick={onInvertir} aria-label="Invertir las vistas">
-            <Icon name="expand" size={16} />
+          {/* Todo el recuadro intercambia las vistas. El botón y el mensaje aparecen con el mouse encima. */}
+          <button type="button" className={styles.cambiar} onClick={onInvertir} aria-label="Intercambiar las imágenes">
+            <span className={styles.invertir} aria-hidden="true">
+              <Icon name="expand" size={14} />
+            </span>
+            <span className={styles.mensaje} aria-hidden="true">
+              Click para intercambiar imagen
+            </span>
           </button>
         </div>
       </div>
