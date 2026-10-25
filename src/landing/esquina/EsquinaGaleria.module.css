@@ -1,0 +1,208 @@
+.galeria {
+  --ancho: min(860px, 82vw);
+  --alto: calc(var(--ancho) * 10 / 16);
+  /* Las vecinas se achican al 90%: se descuenta ese margen para que queden a unos 14 px. */
+  --separacion: calc(14px - var(--ancho) * 0.05);
+
+  margin-top: clamp(36px, 5vw, 56px);
+}
+
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: min(100% - 40px, 1120px);
+  margin: 56px auto 0;
+}
+
+.explicacion {
+  width: min(100% - 40px, 34em);
+  margin: 12px auto 0;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  color: rgb(245 245 247 / 0.5);
+}
+
+/* El carrusel ocupa todo el ancho de la página: las vecinas asoman por los costados. */
+.carrusel {
+  position: relative;
+  height: var(--alto);
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+}
+
+.diapositiva {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--ancho);
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0.45;
+  filter: blur(3px) saturate(0.7);
+  transform: translateX(calc(-50% + var(--rel) * (var(--ancho) + var(--separacion)))) scale(0.9);
+  transition:
+    transform 1.4s cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 1.4s ease,
+    filter 1.4s ease;
+}
+
+.actual {
+  z-index: 1;
+  opacity: 1;
+  filter: none;
+  transform: translateX(-50%) scale(1);
+}
+
+.oculta {
+  opacity: 0;
+}
+
+.vecina {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.lugar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f5f5f7;
+  background: rgb(10 10 15 / 0.72);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+.lugar span {
+  margin-right: 6px;
+  color: #fff212;
+}
+
+.ampliar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: #f5f5f7;
+  background: rgb(10 10 15 / 0.72);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.ampliar:hover {
+  background: rgb(10 10 15 / 0.9);
+}
+
+/* Con mouse, el botón aparece solo al pasar sobre la foto (o al llegar con el teclado).
+   En pantallas táctiles, sin mouse, queda siempre a la vista. */
+@media (hover: hover) {
+  .ampliar {
+    opacity: 0;
+    transition:
+      opacity 0.25s ease,
+      background 0.25s ease;
+  }
+
+  .actual:hover .ampliar,
+  .vista360:hover .ampliar,
+  .ampliar:focus-visible {
+    opacity: 1;
+  }
+}
+
+.vista360 {
+  position: relative;
+  width: min(100% - 40px, 1120px);
+  height: var(--alto);
+  margin-inline: auto;
+}
+
+/* Selector del lugar de la vista 360, arriba a la izquierda y sobre la foto. */
+.lugar360 {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  background: rgb(10 10 15 / 0.7);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+}
+
+.ayuda {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  margin: 0;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #f5f5f7;
+  background: rgb(10 10 15 / 0.72);
+  border-radius: 999px;
+}
+
+.fotoAmpliada {
+  width: min(100%, 160svh);
+  aspect-ratio: 16 / 10;
+  max-height: 100%;
+}
+
+.panoramaAmpliada {
+  position: relative;
+  width: 100%;
+  height: min(100%, 70svh);
+}
+
+.zoom {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.zoom button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: #f5f5f7;
+  background: rgb(10 10 15 / 0.8);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* En el celular las fotos son más altas y las vecinas asoman un poco más. */
+@media (max-width: 720px) {
+  .galeria {
+    --ancho: 76vw;
+    --alto: calc(var(--ancho) * 5 / 4);
+    --separacion: calc(8px - var(--ancho) * 0.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diapositiva {
+    transition: none;
+  }
+}

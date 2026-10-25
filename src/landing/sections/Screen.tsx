@@ -5,17 +5,16 @@ import styles from './Screen.module.css'
 
 // Pendiente: sumar la frecuencia con la que sale cada anuncio cuando esté definida.
 const SPECS = [
+  // Tipo de LED informado por el dueño de la pantalla. "P7" es la distancia entre los centros de
+  // dos LED vecinos (pixel pitch): 7 mm, una medida para verse de lejos, típica de la vía pública.
   {
-    value: (
-      <>
-        8 <span className={styles.unit}>metros</span> x 4 <span className={styles.unit}>metros</span>
-      </>
-    ),
-    label: 'de pantalla',
+    title: 'Tamaño',
+    label:
+      'Pantalla LED de alta potencia de 8 × 4 metros. Es P7: sus LED están a 7 mm uno de otro, una medida pensada para verse nítida de lejos, desde la calle.',
   },
-  { value: SCREEN.hours, label: 'encendida todos los días' },
-  { value: '15 s', label: 'por anuncio' },
-  { value: '1152 × 384', label: 'píxeles: el tamaño del archivo' },
+  { title: 'Encendida', label: `De ${SCREEN.hours}, todos los días, con los anuncios en rotación continua.` },
+  { title: 'Duración', label: '15 segundos por anuncio, que se repite a lo largo del día.' },
+  { title: 'Formato', label: 'Imagen o video de 1152 × 384 píxeles, el tamaño del archivo de tu anuncio.' },
 ]
 
 function Screen() {
@@ -35,8 +34,8 @@ function Screen() {
 
         <ul className={styles.specs}>
           {SPECS.map((spec) => (
-            <li key={spec.label}>
-              <p className={styles.value}>{spec.value}</p>
+            <li key={spec.title}>
+              <p className={styles.value}>{spec.title}</p>
               <p className={styles.label}>{spec.label}</p>
             </li>
           ))}

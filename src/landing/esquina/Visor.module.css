@@ -1,0 +1,61 @@
+.visor {
+  width: 100vw;
+  max-width: none;
+  height: 100svh;
+  max-height: none;
+  margin: 0;
+  padding: clamp(16px, 4vw, 56px);
+  box-sizing: border-box;
+  color: #f5f5f7;
+  background: transparent;
+  border: 0;
+}
+
+.visor::backdrop {
+  background: rgb(5 5 8 / 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.visor[open] {
+  display: grid;
+  place-items: center;
+  animation: aparecer 0.35s ease-out;
+}
+
+.contenido {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.cerrar {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: #f5f5f7;
+  background: rgb(255 255 255 / 0.08);
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.cerrar:hover {
+  background: rgb(255 255 255 / 0.16);
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visor[open] {
+    animation: none;
+  }
+}

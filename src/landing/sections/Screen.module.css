@@ -22,13 +22,9 @@
   font-weight: 600;
 }
 
-.unit {
-  font-size: 0.42em;
-  font-weight: 500;
-  color: rgb(245 245 247 / 0.66);
-}
-
 .label {
-  margin: 4px 0 0;
+  max-width: 22em;
+  margin: 8px 0 0;
+  line-height: 1.5;
   color: rgb(245 245 247 / 0.66);
 }

@@ -1,0 +1,53 @@
+.panorama {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.arrastrable {
+  cursor: grab;
+  touch-action: none;
+}
+
+.arrastrable:active {
+  cursor: grabbing;
+}
+
+/* Dos copias seguidas de la panorámica: cuando termina una empieza la otra, sin corte. */
+.pista {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  display: flex;
+  transform: translateY(-50%);
+  will-change: transform;
+}
+
+.copia {
+  display: flex;
+  flex: none;
+  height: 100%;
+  aspect-ratio: var(--proporcion);
+}
+
+.copia > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.copiaFoto {
+  display: flex;
+  flex: none;
+  height: 100%;
+}
+
+.foto {
+  display: block;
+  flex: none;
+  width: auto;
+  height: 100%;
+}

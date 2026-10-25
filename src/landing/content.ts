@@ -28,42 +28,44 @@ export const PREVENTA = {
   año: '2027',
 }
 
-// Cada punto de la esquina tiene dos fotos: mirando hacia la pantalla y lo que la pantalla tiene enfrente.
-// Las vistas "desde" son capturas de Google Street View.
-export const PORTADA = [
+// Fotos de la esquina, de día y de noche. Cada punto tiene la foto que mira hacia la pantalla
+// (`hacia`) y la de lo que la pantalla tiene enfrente (`desde`). Mientras una ruta esté vacía
+// se muestra un bloque de color con su nombre, para reconocerla hasta tener las fotos reales.
+// Nombres: '/img/esquina/<dia|noche>-<punto>-<hacia|desde>.webp'.
+export type Momento = 'dia' | 'noche'
+
+export const ESQUINA = [
   {
     lugar: 'Cruce de La Rioja',
-    // Encuadre de la foto principal: dónde queda la pantalla en altura.
-    posicion: 'center 26%',
-    hacia: '/img/portada/a-hacia.jpg',
-    desde: '/img/portada/a-desde.jpg',
-    altHacia: 'La pantalla vista desde el cruce de La Rioja, con gente caminando',
-    altDesde: 'Frente a la pantalla: el shopping Los Gallegos y el cruce de La Rioja',
+    dia: { hacia: '/img/esquina/dia-1-hacia.webp', desde: '/img/esquina/dia-1-desde.webp' },
+    noche: { hacia: '/img/esquina/noche-1-hacia.jpg', desde: '/img/esquina/noche-1-desde.jpg' },
   },
   {
-    lugar: 'Esquina de Belgrano',
-    posicion: 'center 34%',
-    hacia: '/img/portada/b-hacia.jpg',
-    desde: '/img/portada/b-desde.jpg',
-    altHacia: 'Una familia cruza la senda frente a la pantalla',
-    altDesde: 'Frente a la pantalla: autos sobre Belgrano y el shopping',
+    lugar: 'Diagonal Pueyrredón',
+    dia: { hacia: '/img/esquina/dia-2-hacia.webp', desde: '/img/esquina/dia-2-desde.webp' },
+    noche: { hacia: '', desde: '' },
   },
   {
-    lugar: 'Senda peatonal',
-    posicion: 'center 24%',
-    hacia: '/img/portada/c-hacia.jpg',
-    desde: '/img/portada/c-desde.jpg',
-    altHacia: 'Gente cruzando la senda con la pantalla de fondo',
-    altDesde: 'Frente a la pantalla: la entrada del shopping y la esquina de La Rioja',
+    lugar: 'Diagonal Pueyrredón',
+    dia: { hacia: '/img/esquina/dia-3-hacia.webp', desde: '/img/esquina/dia-3-desde.webp' },
+    noche: { hacia: '', desde: '' },
   },
   {
-    lugar: 'Vereda del local',
-    posicion: 'center 8%',
-    hacia: '/img/portada/d-hacia.jpg',
-    desde: '/img/portada/d-desde.jpg',
-    altHacia: 'La pantalla y la vidriera del local desde la vereda',
-    altDesde: 'Frente a la pantalla: Belgrano con autos esperando el semáforo y el shopping al fondo',
+    lugar: 'Desde el interior del shopping Los Gallegos',
+    dia: { hacia: '/img/esquina/dia-4-hacia.webp', desde: '/img/esquina/dia-4-desde.webp' },
+    noche: { hacia: '', desde: '' },
   },
+  {
+    lugar: 'Calle Belgrano',
+    dia: { hacia: '/img/esquina/dia-5-hacia.webp', desde: '/img/esquina/dia-5-desde.webp' },
+    noche: { hacia: '', desde: '' },
+  },
+]
+
+// Vista 360: fotos panorámicas muy apaisadas, desde dos lugares opuestos de la esquina.
+export const PANORAMAS = [
+  { nombre: 'Mirando a la pantalla', dia: '/img/esquina/360-dia-1.webp', noche: '' },
+  { nombre: 'Vista de enfrente', dia: '/img/esquina/360-dia-2.webp', noche: '' },
 ]
 
 export const ADS = [

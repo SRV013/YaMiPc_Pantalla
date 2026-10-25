@@ -1,6 +1,6 @@
-import PortadaSlider from '../PortadaSlider.tsx'
 import base from '../Landing.module.css'
-import { COMPANY, PORTADA, PREVENTA } from '../content.ts'
+import { COMPANY, PREVENTA } from '../content.ts'
+import EsquinaGaleria from '../esquina/EsquinaGaleria.tsx'
 import styles from './Hero.module.css'
 
 const DATOS = [
@@ -42,7 +42,7 @@ function Hero() {
       <div className={base.container}>
         <p className={base.eyebrow}>Mar del Plata · La Rioja y Belgrano</p>
         <h1 id="preventa-titulo" className={styles.titulo}>
-          PreVenta <span className={styles.año}>{PREVENTA.año}</span>
+          <span className={styles.pre}>Pre</span>Venta <span className={styles.año}>{PREVENTA.año}</span>
         </h1>
 
         <div className={styles.fila}>
@@ -59,9 +59,11 @@ function Hero() {
             </a>
           </div>
         </div>
+      </div>
 
-        <PortadaSlider puntos={PORTADA} />
+      <EsquinaGaleria />
 
+      <div className={base.container}>
         <ul className={styles.datos}>
           {DATOS.map((dato) => (
             <li key={dato.valor}>
