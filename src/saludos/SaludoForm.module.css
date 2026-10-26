@@ -97,3 +97,55 @@
   font-size: 0.9rem;
   color: var(--muted);
 }
+
+.guardados {
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.guardadosTitulo {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.guardados ul {
+  display: grid;
+  gap: 0.35rem;
+  max-height: 12rem;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.guardados li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.35rem 0.35rem 0.35rem 0.75rem;
+  font-size: 0.9rem;
+  background: var(--surface);
+  border-radius: 10px;
+}
+
+.quitar {
+  min-height: 36px;
+  padding: 0 0.75rem;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.quitar:hover {
+  color: var(--text);
+  border-color: rgb(255 255 255 / 0.4);
+}

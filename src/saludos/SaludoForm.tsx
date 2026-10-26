@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import SaludoView from './SaludoView.tsx'
+import { useSaludosGuardados } from './guardados.ts'
 import { LIMITES, TIPOS, linkDeSaludo, type Saludo, type TipoSaludo } from './saludos.ts'
 import styles from './SaludoForm.module.css'
 
@@ -25,6 +26,8 @@ function useEscala() {
 function SaludoForm() {
   const [saludo, setSaludo] = useState(VACIO)
   const [copiado, setCopiado] = useState(false)
+  const [guardado, setGuardado] = useState(false)
+  const { saludos: guardados, guardar, quitar } = useSaludosGuardados()
   const { ref, escala } = useEscala()
   const listo = saludo.para.trim() !== ''
   const link = listo ? linkDeSaludo({ ...saludo, para: saludo.para.trim() }) : ''
@@ -32,6 +35,17 @@ function SaludoForm() {
   function cambiar(campo: keyof Saludo, valor: string) {
     setSaludo((actual) => ({ ...actual, [campo]: valor }))
     setCopiado(false)
+    setGuardado(false)
+  }
+
+  function guardarSaludo() {
+    guardar({
+      tipo: saludo.tipo,
+      para: saludo.para.trim(),
+      mensaje: saludo.mensaje?.trim() || undefined,
+      de: saludo.de?.trim() || undefined,
+    })
+    setGuardado(true)
   }
 
   async function copiar() {
@@ -101,10 +115,32 @@ function SaludoForm() {
         ) : (
           <span className={styles.ayuda}>Escribí para quién es el saludo.</span>
         )}
+        <button type="button" className={styles.secundario} onClick={guardarSaludo} disabled={!listo || guardado}>
+          {guardado ? 'Guardado' : 'Guardar'}
+        </button>
         <button type="button" className={styles.secundario} onClick={copiar} disabled={!listo}>
           {copiado ? 'Link copiado' : 'Copiar link'}
         </button>
       </div>
+
+      {guardados.length > 0 && (
+        <section className={styles.guardados}>
+          <h3 className={styles.guardadosTitulo}>Saludos guardados · salen en /saludos</h3>
+          <ul>
+            {guardados.map((g) => (
+              <li key={g.id}>
+                <span>
+                  <strong>{g.para}</strong> · {TIPOS[g.tipo].nombre}
+                  {g.de && ` · de ${g.de}`}
+                </span>
+                <button type="button" className={styles.quitar} onClick={() => quitar(g.id)} aria-label={`Quitar el saludo para ${g.para}`}>
+                  Quitar
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   )
 }
