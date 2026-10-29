@@ -134,21 +134,12 @@
   margin-inline: auto;
 }
 
-/* Selector del lugar de la vista 360, arriba a la izquierda y sobre la foto. */
-.lugar360 {
+.ayuda {
   position: absolute;
   top: 16px;
   left: 16px;
   z-index: 2;
-  background: rgb(10 10 15 / 0.7);
-  border-radius: 10px;
-  backdrop-filter: blur(8px);
-}
-
-.ayuda {
-  position: absolute;
-  left: 16px;
-  bottom: 16px;
+  pointer-events: none;
   margin: 0;
   padding: 6px 12px;
   font-size: 13px;

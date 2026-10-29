@@ -17,6 +17,11 @@
   cursor: grabbing;
 }
 
+.arrastrable:focus-visible {
+  outline: 2px solid rgb(245 245 247 / 0.7);
+  outline-offset: -2px;
+}
+
 /* Dos copias seguidas de la panorámica: cuando termina una empieza la otra, sin corte. */
 .pista {
   position: absolute;
@@ -69,4 +74,44 @@
 
 .lista {
   opacity: 1;
+}
+
+/* Mapa de la vuelta completa, abajo al centro; el recuadro marca lo que se está viendo. */
+.mapa {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  z-index: 2;
+  width: min(42%, 420px);
+  height: auto;
+  padding: 0;
+  overflow: hidden;
+  background: rgb(10 10 15 / 0.6);
+  border: 1px solid rgb(255 255 255 / 0.25);
+  border-radius: 6px;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.mapa img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.75;
+}
+
+.ventana {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border: 2px solid #fff212;
+  border-radius: 3px;
+  background: rgb(255 242 18 / 0.12);
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .mapa {
+    width: 70%;
+  }
 }

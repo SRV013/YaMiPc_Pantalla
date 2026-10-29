@@ -62,11 +62,12 @@ export const ESQUINA = [
   },
 ]
 
-// Vista 360: fotos panorámicas muy apaisadas, desde dos lugares opuestos de la esquina.
-export const PANORAMAS = [
-  { nombre: 'Mirando a la pantalla', dia: '/img/esquina/360-dia-1.webp', noche: '/img/esquina/360-noche-1.jpg' },
-  { nombre: 'Vista de enfrente', dia: '/img/esquina/360-dia-2.webp', noche: '/img/esquina/360-noche-2.jpg' },
-]
+// Vista 360: una foto de la vuelta completa por momento del día (el borde derecho empalma con el
+// izquierdo). `inicio` es hacia dónde mira al abrir, de 0 a 1 a lo ancho de la foto: la pantalla.
+export const PANORAMA: Record<Momento, { src: string; inicio: number }> = {
+  dia: { src: '/img/esquina/360-dia.jpg', inicio: 0.49 },
+  noche: { src: '/img/esquina/360-noche.jpg', inicio: 0.49 },
+}
 
 export const ADS = [
   { src: '/img/anuncios/pensamos-como-vos.jpg', alt: 'Anuncio de YaMiPc: Pensamos como vos' },

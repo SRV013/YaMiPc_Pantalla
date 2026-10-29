@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import Icon from '../Icon.tsx'
-import { ESQUINA, PANORAMAS, type Momento } from '../content.ts'
+import { ESQUINA, PANORAMA, type Momento } from '../content.ts'
 import Foto from './Foto.tsx'
 import { precargar } from './variantes.ts'
 import VistaDoble from './VistaDoble.tsx'
@@ -43,9 +43,7 @@ function EsquinaGaleria() {
   const [invertida, setInvertida] = useState(false)
   const [ampliada, setAmpliada] = useState<Ampliada>(null)
   const [zoom, setZoom] = useState(1)
-  const [panorama, setPanorama] = useState('0')
-  const fuente360 = PANORAMAS[Number(panorama)][momento]
-  const opciones360 = PANORAMAS.map((p, i) => ({ valor: String(i), texto: p.nombre }))
+  const vuelta = PANORAMA[momento]
   const total = ESQUINA.length
   const arrastre = useRef<{ x: number; movio: boolean } | null>(null)
 
@@ -180,10 +178,7 @@ function EsquinaGaleria() {
       ) : (
         <div className={styles.vista360}>
           {/* La key recarga la vista al cambiar de foto, así arranca desde el principio. */}
-          <Panorama key={fuente360} src={fuente360} momento={momento} arrastrable />
-          <div className={styles.lugar360}>
-            <Pestanas etiqueta="Lugar de la vista 360" valor={panorama} onCambiar={setPanorama} opciones={opciones360} />
-          </div>
+          <Panorama key={vuelta.src} src={vuelta.src} inicio={vuelta.inicio} momento={momento} arrastrable />
           <button
             type="button"
             className={styles.ampliar}
@@ -232,10 +227,7 @@ function EsquinaGaleria() {
             className={styles.panoramaAmpliada}
             onWheel={(e) => setZoom((z) => Math.min(ZOOM_MAX, Math.max(1, z - e.deltaY * 0.002)))}
           >
-            <Panorama key={fuente360} src={fuente360} momento={momento} arrastrable zoom={zoom} />
-            <div className={styles.lugar360}>
-              <Pestanas etiqueta="Lugar de la vista 360" valor={panorama} onCambiar={setPanorama} opciones={opciones360} />
-            </div>
+            <Panorama key={vuelta.src} src={vuelta.src} inicio={vuelta.inicio} momento={momento} arrastrable zoom={zoom} />
             <div className={styles.zoom}>
               <button type="button" aria-label="Alejar" onClick={() => setZoom((z) => Math.max(1, z - 0.25))}>
                 <Icon name="minus" size={18} />
