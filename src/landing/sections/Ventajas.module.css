@@ -1,0 +1,38 @@
+.bloque {
+  margin-top: clamp(56px, 8vw, 96px);
+}
+
+.metricas {
+  background: rgb(255 255 255 / 0.015);
+}
+
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  margin: clamp(32px, 4vw, 48px) 0 0;
+  padding: 28px 0 0;
+  list-style: none;
+  border-top: 1px solid rgb(255 255 255 / 0.08);
+}
+
+.valor {
+  margin: 0;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #fff212;
+  font-variant-numeric: tabular-nums;
+}
+
+.unidad {
+  margin: 10px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.detalle {
+  margin: 2px 0 0;
+  color: rgb(245 245 247 / 0.6);
+}

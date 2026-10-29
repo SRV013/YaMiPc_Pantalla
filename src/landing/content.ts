@@ -24,9 +24,35 @@ export const SCREEN = {
 }
 
 // Año de la temporada que se ofrece en la portada.
-export const PREVENTA = {
-  año: '2027',
-}
+// Temporada que se ofrece a los anunciantes (Pascua 2027: 28 de marzo).
+export const TEMPORADA = 'Propuesta temporada · 15/11/2026 a Pascua 2027'
+
+// Textos del pedido de marketing. Las cifras de alcance las informó el dueño de la pantalla.
+export const ATRACCION = [
+  { icono: 'bolsa', titulo: 'Frente al Shopping Los Gallegos', texto: 'Capturá la atención de miles de personas con mentalidad de compra activa.' },
+  { icono: 'personas', titulo: "A metros de McDonald's", texto: 'Tránsito garantizado de público joven y familias durante todo el día.' },
+  { icono: 'semaforo', titulo: 'Zona de semáforos', texto: 'Exposición prolongada frente a las luces de mayor detención de la zona.' },
+] as const
+
+export const VENTAJAS = [
+  { icono: 'cruce', titulo: 'Intersección de 6 esquinas', texto: 'Visibilidad multiangular desde múltiples calles de acceso.' },
+  { icono: 'ojo', titulo: 'Semáforos de mayor tránsito', texto: 'Tiempo de visualización (dwell time) ultra elevado.' },
+  { icono: 'objetivo', titulo: 'Audiencia cualificada', texto: 'Entorno puramente comercial, ideal para posicionamiento.' },
+] as const
+
+export const METRICAS = [
+  { valor: '+500.000', unidad: 'peatones', detalle: 'por semana' },
+  { valor: '+10.000', unidad: 'vehículos', detalle: 'por día' },
+  { valor: '14 h', unidad: 'de transmisión continua', detalle: 'de 09:00 a 23:00 hs' },
+]
+
+// Pendiente: el pedido decía "hasta un 400% más de atención"; sin una fuente que lo respalde se
+// publica sin la cifra. Si se consigue la fuente, se puede volver a poner.
+export const POR_QUE = [
+  { icono: 'chispa', titulo: 'Impacto emocional', texto: 'El brillo y el dinamismo atraen mucha más atención que la cartelería estática tradicional.' },
+  { icono: 'refrescar', titulo: 'Flexibilidad total e inmediata', texto: 'Actualizá tus diseños o videos al instante, sin costos de impresión ni demoras logísticas.' },
+  { icono: 'clock', titulo: 'Segmentación horaria inteligente', texto: 'Maximizá tu inversión mostrando anuncios específicos en las horas pico de tu público objetivo.' },
+] as const
 
 // Fotos de la esquina, de día y de noche. Cada punto tiene la foto que mira hacia la pantalla
 // (`hacia`) y la de lo que la pantalla tiene enfrente (`desde`). Mientras una ruta esté vacía

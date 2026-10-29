@@ -1,23 +1,19 @@
-/* El único bloque con color del home: el amarillo de la marca, para que llame la atención. */
+/* El resplandor se apaga antes de los bordes de la sección, así no se ve dónde empieza. */
 .hero {
-  padding-block: clamp(56px, 7vw, 88px) clamp(56px, 8vw, 104px);
-  /* El resplandor se apaga antes de los bordes de la sección, así no se ve dónde empieza. */
-  background: radial-gradient(36% 22% at 52% 14%, rgb(255 242 18 / 0.07), transparent 70%);
+  padding-block: clamp(56px, 7vw, 88px) clamp(40px, 6vw, 72px);
+  background: radial-gradient(36% 22% at 52% 14%, rgb(255 242 18 / 0.06), transparent 70%);
 }
 
 .titulo {
+  max-width: 17em;
   margin: 0;
-  font-size: clamp(44px, 6vw, 84px);
+  font-size: clamp(34px, 4.6vw, 60px);
   font-weight: 600;
-  line-height: 0.95;
-  letter-spacing: -0.04em;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 
-.pre {
-  color: rgb(245 245 247 / 0.45);
-}
-
-.año {
+.acento {
   color: #fff212;
 }
 
@@ -30,65 +26,33 @@
   margin-top: clamp(20px, 3vw, 32px);
 }
 
-.bajada {
+.texto {
   flex: 1 1 480px;
-  max-width: 34em;
+  max-width: 36em;
+}
+
+.bajada {
   margin: 0;
-  font-size: clamp(17px, 1.6vw, 20px);
+  font-size: clamp(16px, 1.5vw, 19px);
   line-height: 1.55;
   color: rgb(245 245 247 / 0.72);
+}
+
+.temporada {
+  display: inline-block;
+  margin: 16px 0 0;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff212;
+  border: 1px solid rgb(255 242 18 / 0.4);
+  border-radius: 999px;
 }
 
 .acciones {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-}
-
-.datos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 32px;
-  margin: clamp(40px, 5vw, 64px) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.valor {
-  margin: 0;
-  font-size: clamp(22px, 2.4vw, 30px);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.detalle {
-  margin: 6px 0 0;
-  color: rgb(245 245 247 / 0.6);
-}
-
-.puntos {
-  display: grid;
-  gap: 8px;
-  margin: 16px 0 0;
-  padding: 16px 0 0;
-  list-style: none;
-  font-size: 15px;
-  line-height: 1.45;
-  color: rgb(245 245 247 / 0.72);
-  border-top: 1px solid rgb(255 255 255 / 0.08);
-}
-
-.puntos li {
-  display: flex;
-  gap: 10px;
-}
-
-.puntos li::before {
-  content: '';
-  flex: none;
-  width: 5px;
-  height: 5px;
-  margin-top: 0.55em;
-  background: #fff212;
-  border-radius: 50%;
 }

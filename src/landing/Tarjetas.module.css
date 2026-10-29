@@ -1,0 +1,30 @@
+.grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin: clamp(32px, 4vw, 48px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.icono {
+  color: #fff212;
+}
+
+.titulo {
+  margin: 6px 0 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.texto {
+  margin: 0;
+  line-height: 1.55;
+  color: rgb(245 245 247 / 0.66);
+}
