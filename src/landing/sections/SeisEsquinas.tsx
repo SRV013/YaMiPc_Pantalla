@@ -68,11 +68,14 @@ function SeisEsquinas() {
               </g>
             ))}
 
-            {/* Lo que hay en cada esquina: el shopping (el punto más fuerte) y McDonald's. */}
-            <g className={styles.lugarDestacado}>
-              <rect x={ESQUINAS[2].x - 92} y={ESQUINAS[2].y + 26} width="184" height="30" rx="15" />
-              <text x={ESQUINAS[2].x} y={ESQUINAS[2].y + 45} textAnchor="middle">
-                SHOPPING LOS GALLEGOS
+            {/* Lo que hay en cada esquina: el shopping y McDonald's, con el mismo cartel. */}
+            <g className={styles.lugar}>
+              <rect x={ESQUINAS[2].x - 52} y={ESQUINAS[2].y + 26} width="104" height="42" rx="14" />
+              <text x={ESQUINAS[2].x} y={ESQUINAS[2].y + 43} textAnchor="middle">
+                SHOPPING
+                <tspan x={ESQUINAS[2].x} dy="15">
+                  LOS GALLEGOS
+                </tspan>
               </text>
             </g>
             <g className={styles.lugar}>
