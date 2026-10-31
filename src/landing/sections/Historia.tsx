@@ -5,40 +5,50 @@ import { useProgreso } from '../efectos.ts'
 import styles from './Historia.module.css'
 
 /**
- * Puntos de atracción, contados con scroll: la sección queda fija y, a medida que se baja, se
- * ilumina el siguiente punto y la foto nueva sube tapando a la anterior, siguiendo el scroll.
+ * Puntos de atracción en un carrusel que sigue el scroll, como las galerías de Apple: un punto
+ * grande en el centro, los otros asomando a los costados, y al bajar se corre al siguiente.
  */
+// Para que nunca quede un costado vacío, la fila suma una copia del último punto antes del primero
+// y una del primero después del último.
+const FILA = [
+  { punto: ATRACCION[ATRACCION.length - 1], i: -1, copia: true },
+  ...ATRACCION.map((punto, i) => ({ punto, i, copia: false })),
+  { punto: ATRACCION[0], i: ATRACCION.length, copia: true },
+]
+
 function Historia() {
   const { ref, paso } = useProgreso<HTMLElement>(ATRACCION.length)
 
   return (
     <section id="esquina" ref={ref} className={styles.historia} style={{ height: `${ATRACCION.length * 90 + 40}svh` }}>
       <div className={styles.fija}>
-        <div className={`${base.container} ${styles.grilla}`}>
-          <div className={styles.lista}>
-            <p className={base.eyebrow}>Puntos de atracción inmediata</p>
-            <ol>
-              {ATRACCION.map((punto, i) => (
-                <li key={punto.titulo} className={i === paso ? styles.activo : undefined} aria-current={i === paso}>
-                  <h2 className={styles.titulo}>{punto.titulo}</h2>
-                  <p className={styles.texto}>{punto.texto}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
+        <div className={`${base.container} ${styles.encabezado}`}>
+          <p className={base.eyebrow}>Puntos de atracción inmediata</p>
+        </div>
 
-          <div className={styles.media}>
-            <div className={styles.fotos}>
-              {ATRACCION.map((punto, i) => (
-                <img
-                  key={punto.foto}
-                  src={punto.foto}
-                  alt={i === paso ? punto.titulo : ''}
-                  style={{ '--i': i } as CSSProperties}
-                />
-              ))}
-            </div>
-          </div>
+        <div className={styles.carrusel}>
+          {FILA.map(({ punto, i, copia }) => (
+            <figure
+              key={i}
+              className={styles.lamina}
+              style={{ '--i': i } as CSSProperties}
+              aria-hidden={copia || i !== paso}
+            >
+              <img src={punto.foto} alt={copia ? '' : punto.titulo} />
+              {/* El texto va dentro de la foto, abajo a la izquierda, como en día y noche. */}
+              <figcaption className={styles.leyenda}>
+                <h2 className={styles.titulo}>{punto.titulo}</h2>
+                <p className={styles.texto}>{punto.texto}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        {/* Avance: en qué punto de los tres está. */}
+        <div className={styles.puntos} aria-hidden="true">
+          {ATRACCION.map((punto, i) => (
+            <span key={punto.titulo} className={i === paso ? styles.puntoActivo : undefined} />
+          ))}
         </div>
       </div>
     </section>
