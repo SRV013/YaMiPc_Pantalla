@@ -57,7 +57,7 @@
 }
 
 .dia svg {
-  color: #fff212;
+  color: #ffb38a;
 }
 
 .noche {
@@ -95,7 +95,7 @@
   bottom: 20px;
   width: min(60%, 360px);
   height: 3px;
-  background: linear-gradient(90deg, #fff212, #b9bce6);
+  background: linear-gradient(90deg, #ffb38a, var(--acento), var(--acento-2));
   border-radius: 3px;
   opacity: 0.85;
   transform: translateX(-50%) scaleX(calc(0.15 + 0.85 * var(--p)));

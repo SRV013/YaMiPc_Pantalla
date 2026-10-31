@@ -6,6 +6,10 @@
   --line: rgb(255 255 255 / 0.08);
   --card: rgb(255 255 255 / 0.03);
   --page: #0a0a0f;
+  /* Colores de acento: el magenta y el violeta del brillo de la pantalla LED. */
+  --acento: #ff4fa3;
+  --acento-2: #9b7bff;
+  --neon: linear-gradient(90deg, var(--acento), var(--acento-2));
 
   min-height: 100svh;
   color: var(--ink);
@@ -13,6 +17,74 @@
   font-family: 'Instrument Sans', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
+}
+
+.contenido {
+  position: relative;
+  z-index: 1;
+}
+
+/* Luces de neón desenfocadas que se desplazan muy despacio por detrás de todo. */
+.fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.fondo span {
+  position: absolute;
+  width: 70vmax;
+  height: 70vmax;
+  border-radius: 50%;
+  opacity: 0.22;
+  animation: flotar 38s ease-in-out infinite alternate;
+}
+
+.fondo span:nth-child(1) {
+  top: -30vmax;
+  left: -20vmax;
+  background: radial-gradient(circle, var(--acento), transparent 62%);
+}
+
+.fondo span:nth-child(2) {
+  right: -25vmax;
+  bottom: -30vmax;
+  background: radial-gradient(circle, var(--acento-2), transparent 62%);
+  animation-duration: 46s;
+  animation-direction: alternate-reverse;
+}
+
+.fondo span:nth-child(3) {
+  top: 30%;
+  left: 40%;
+  width: 45vmax;
+  height: 45vmax;
+  background: radial-gradient(circle, #3b6bff, transparent 62%);
+  opacity: 0.12;
+  animation-duration: 54s;
+}
+
+/* Grilla de puntos muy tenue encima de las luces: recuerda los LED de una pantalla. */
+.fondo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1.5px) 0 0 / 6px 6px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 85%);
+}
+
+@keyframes flotar {
+  to {
+    transform: translate(18vmax, 12vmax) scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fondo span {
+    animation: none;
+  }
 }
 
 .landing a {

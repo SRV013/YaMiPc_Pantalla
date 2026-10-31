@@ -100,7 +100,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: #fff212;
+  background: var(--neon);
   transform: scaleX(var(--p));
   transform-origin: left;
 }

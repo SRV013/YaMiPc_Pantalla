@@ -1,38 +1,38 @@
-/* Base apenas marcada; la pestaña elegida se aclara un poco, sin colores fuertes. */
+/* Opciones dentro de la barra del slider: la elegida se aclara, sin bordes ni fondo propio. */
 .pestanas {
   display: inline-flex;
   gap: 2px;
-  padding: 3px;
-  background: rgb(255 255 255 / 0.04);
-  border: 1px solid rgb(255 255 255 / 0.08);
-  border-radius: 10px;
 }
 
 .pestanas button {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  min-height: 32px;
-  padding: 0 12px;
+  gap: 7px;
+  min-height: 36px;
+  padding: 0 14px;
   font: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  color: rgb(245 245 247 / 0.5);
+  color: rgb(245 245 247 / 0.55);
   background: transparent;
   border: 0;
-  border-radius: 7px;
+  border-radius: 999px;
   cursor: pointer;
   transition:
-    background 0.25s ease,
-    color 0.25s ease;
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
 .pestanas button:hover {
-  color: rgb(245 245 247 / 0.85);
+  color: #f5f5f7;
 }
 
 .pestanas [aria-pressed='true'],
 .pestanas [aria-pressed='true']:hover {
   color: #f5f5f7;
-  background: rgb(255 255 255 / 0.1);
+  background: rgb(255 255 255 / 0.14);
+}
+
+.pestanas [aria-pressed='true'] svg {
+  color: var(--acento, #ff4fa3);
 }

@@ -52,7 +52,7 @@ function Panel() {
 
   return (
     <div className={`${base.landing} ${styles.panel}`}>
-      <Nav admin />
+      <Nav />
       <main className={`${base.container} ${base.section}`}>
         <p className={base.eyebrow}>Administración</p>
         <h1 className={base.heading}>Panel YaMiPc</h1>

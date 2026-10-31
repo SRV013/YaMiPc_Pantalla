@@ -31,8 +31,8 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #fff212;
-  border: 1px solid rgb(255 242 18 / 0.4);
+  color: #ff8fc4;
+  border: 1px solid rgb(255 79 163 / 0.45);
   border-radius: 999px;
 }
 
@@ -115,7 +115,9 @@
 }
 
 .remate span {
-  color: #fff212;
+  color: transparent;
+  background: var(--neon);
+  background-clip: text;
 }
 
 @media (prefers-reduced-motion: reduce) {

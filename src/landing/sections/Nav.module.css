@@ -41,22 +41,6 @@
   height: auto;
 }
 
-.links {
-  display: flex;
-  gap: 28px;
-  font-size: 14px;
-}
-
-.links a {
-  text-decoration: none;
-  color: rgb(245 245 247 / 0.72);
-  transition: color 0.2s;
-}
-
-.links a:hover {
-  color: #fff;
-}
-
 .cta {
   display: inline-flex;
   align-items: center;
@@ -73,10 +57,4 @@
 
 .cta:hover {
   border-color: rgb(255 255 255 / 0.45);
-}
-
-@media (max-width: 720px) {
-  .links {
-    display: none;
-  }
 }

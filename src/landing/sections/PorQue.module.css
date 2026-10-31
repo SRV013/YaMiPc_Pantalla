@@ -42,11 +42,11 @@
 }
 
 .tarjeta[data-tono='1'] {
-  background: radial-gradient(120% 90% at 0% 0%, rgb(255 242 18 / 0.22), #15151b 60%);
+  background: radial-gradient(120% 90% at 0% 0%, rgb(155 123 255 / 0.35), #15151b 60%);
 }
 
 .tarjeta[data-tono='2'] {
-  background: radial-gradient(120% 90% at 0% 0%, rgb(125 160 255 / 0.3), #15151b 60%);
+  background: radial-gradient(120% 90% at 0% 0%, rgb(80 170 255 / 0.3), #15151b 60%);
 }
 
 .icono {

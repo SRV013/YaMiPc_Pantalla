@@ -28,7 +28,7 @@
   letter-spacing: -0.04em;
   font-variant-numeric: tabular-nums;
   color: transparent;
-  background: linear-gradient(180deg, #fff 30%, #fff212);
+  background: linear-gradient(180deg, #fff 25%, #ff7ab8 70%, var(--acento-2));
   background-clip: text;
 }
 

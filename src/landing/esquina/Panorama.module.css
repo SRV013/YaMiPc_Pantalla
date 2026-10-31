@@ -104,9 +104,9 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  border: 2px solid #fff212;
+  border: 2px solid var(--acento);
   border-radius: 3px;
-  background: rgb(255 242 18 / 0.12);
+  background: rgb(255 79 163 / 0.14);
   pointer-events: none;
 }
 

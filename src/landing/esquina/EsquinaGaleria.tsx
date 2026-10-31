@@ -4,7 +4,6 @@ import { ESQUINA, PANORAMA, type Momento } from '../content.ts'
 import Foto from './Foto.tsx'
 import { precargar } from './variantes.ts'
 import Panorama from './Panorama.tsx'
-import DiaNoche from './DiaNoche.tsx'
 import Pestanas from './Pestanas.tsx'
 import Visor from './Visor.tsx'
 import styles from './EsquinaGaleria.module.css'
@@ -190,32 +189,6 @@ function EsquinaGaleria() {
         </div>
       )}
 
-      {vista === 'fotos' && (
-        <div className={styles.navegacion}>
-          <div className={styles.puntos}>
-            {ESQUINA.map((punto, i) => (
-              <button
-                key={i}
-                type="button"
-                aria-label={`Foto ${i + 1}: ${punto.lugar}`}
-                aria-current={i === actual}
-                onClick={() => ir(i)}
-              >
-                <span />
-              </button>
-            ))}
-          </div>
-          <button
-            type="button"
-            className={styles.reproducir}
-            aria-label={detenido ? 'Reproducir' : 'Pausar'}
-            onClick={() => setDetenido((d) => !d)}
-          >
-            <Icon name={detenido ? 'play' : 'pause'} size={16} />
-          </button>
-        </div>
-      )}
-
       {vista === '360' && (
         <div className={styles.vista360}>
           {/* La key recarga la vista al cambiar de foto, así arranca desde el principio. */}
@@ -232,23 +205,58 @@ function EsquinaGaleria() {
         </div>
       )}
 
-      {/* Debajo de las fotos, centrados: el tipo de vista y el interruptor de día o noche. */}
-      <div className={styles.controles}>
+      {/* Una sola barra integrada: avance del slider, tipo de vista y momento del día. */}
+      <div className={styles.dock}>
+        {vista === 'fotos' && (
+          <>
+            <div className={styles.grupo}>
+              <div className={styles.puntos}>
+                {ESQUINA.map((punto, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Foto ${i + 1}: ${punto.lugar}`}
+                    aria-current={i === actual}
+                    onClick={() => ir(i)}
+                  >
+                    <span />
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                className={styles.reproducir}
+                aria-label={detenido ? 'Reproducir' : 'Pausar'}
+                onClick={() => setDetenido((d) => !d)}
+              >
+                <Icon name={detenido ? 'play' : 'pause'} size={14} />
+              </button>
+            </div>
+            <span className={styles.divisor} aria-hidden="true" />
+          </>
+        )}
         <Pestanas
           etiqueta="Tipo de vista"
           valor={vista}
           onCambiar={setVista}
           opciones={[
             { valor: 'fotos', texto: 'Imágenes', icono: 'photos' },
-            { valor: '360', texto: 'Vista 360', icono: 'orbit' },
+            { valor: '360', texto: '360°', icono: 'orbit' },
           ]}
         />
-        <DiaNoche momento={momento} onCambiar={setMomento} />
+        <span className={styles.divisor} aria-hidden="true" />
+        <Pestanas
+          etiqueta="Momento del día"
+          valor={momento}
+          onCambiar={setMomento}
+          opciones={[
+            { valor: 'dia', texto: 'Día', icono: 'sun' },
+            { valor: 'noche', texto: 'Noche', icono: 'moon' },
+          ]}
+        />
       </div>
       <p className={styles.explicacion}>
-        {vista === 'fotos'
-          ? 'Elegí entre fotos o vista 360, y mirá la esquina de día o de noche. Arrastrá o tocá las fotos de los costados para pasar.'
-          : 'Elegí entre fotos o vista 360, y mirá la esquina de día o de noche. Arrastrá la vista para girarla.'}
+        {vista === 'fotos' ? 'Arrastrá o tocá las fotos de los costados para pasar.' : 'Arrastrá la vista para girar en el lugar.'}
       </p>
 
       <Visor abierto={ampliada !== null} titulo="Vista ampliada" onCerrar={cerrarVisor}>
