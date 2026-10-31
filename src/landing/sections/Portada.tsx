@@ -38,7 +38,7 @@ function Portada() {
       <div className={`${base.container} ${styles.texto}`}>
         <Aparece>
           <p className={base.eyebrow}>Publicidad digital de alto impacto · Diagonal Pueyrredón y La Rioja</p>
-          <h1 className={styles.titulo}>Conectá tu marca con el corazón de Mar del Plata.</h1>
+          <h1 className={styles.titulo}>Conectá tu marca con el corazón de Mar del Plata en seis esquinas.</h1>
         </Aparece>
         <Aparece retraso={150}>
           <p className={styles.bajada}>
@@ -50,7 +50,7 @@ function Portada() {
             <a className={`${base.button} ${base.primary}`} href={COMPANY.whatsapp} target="_blank" rel="noreferrer">
               Anunciá en la pantalla
             </a>
-            <a className={`${base.button} ${base.secondary}`} href="#esquina">
+            <a className={`${base.button} ${base.secondary}`} href="#seis-esquinas">
               Conocé la esquina
             </a>
           </div>
@@ -60,7 +60,7 @@ function Portada() {
       <div ref={ref} className={styles.escena}>
         <div className={styles.fija}>
           <div className={styles.marco}>
-            <img src={FOTOS.portada} alt="La pantalla de YaMiPc en la esquina de La Rioja y Belgrano" />
+            <img src={FOTOS.portada} alt="La pantalla LED en la esquina de La Rioja y Belgrano" />
             <p className={styles.remate}>
               Seis esquinas.
               <br />

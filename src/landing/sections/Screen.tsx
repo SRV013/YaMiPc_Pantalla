@@ -19,8 +19,8 @@ function Screen() {
         <p className={base.eyebrow}>Especificaciones técnicas</p>
         <h2 className={base.heading}>Así se ve tu anuncio.</h2>
         <p className={base.lead}>
-          La pantalla LED está en el frente de nuestro local, en La Rioja 1902, a la vista de todos los que
-          caminan o pasan en auto por la esquina con Belgrano.
+          Así se ven los anuncios en la pantalla, a la vista de todos los que caminan o pasan en auto o
+          colectivo por el cruce.
         </p>
 
         <div className={styles.carousel}>

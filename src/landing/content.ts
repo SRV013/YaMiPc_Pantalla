@@ -25,6 +25,13 @@ export const SCREEN = {
 
 // Temporada que se ofrece a los anunciantes (Pascua 2027: 28 de marzo).
 export const TEMPORADA = 'Propuesta temporada · 15/11/2026 a Pascua 2027'
+export const TEMPORADA_DESDE = '15 de noviembre de 2026'
+export const TEMPORADA_HASTA = 'Pascua 2027'
+
+// Dónde está la pantalla, contado para el anunciante (la home no lleva nombre de marca).
+export const PANTALLA = {
+  ubicacion: 'Diagonal Pueyrredón y La Rioja, frente al Shopping Los Gallegos',
+}
 
 // Textos del pedido de marketing. Las cifras de alcance las informó el dueño de la pantalla.
 // Las fotos son las versiones livianas de public/img/esquina (ver scripts/optimizar-esquina.sh).
@@ -57,10 +64,10 @@ export const ATRACCION = [
   },
 ]
 
-export const VENTAJAS = [
-  { titulo: 'Intersección de 6 esquinas', texto: 'Visibilidad multiangular desde múltiples calles de acceso.', foto: FOTO('dia-3-desde') },
-  { titulo: 'Semáforos de mayor tránsito', texto: 'Tiempo de visualización (dwell time) ultra elevado.', foto: FOTO('noche-2-hacia') },
-  { titulo: 'Audiencia cualificada', texto: 'Entorno puramente comercial, ideal para posicionamiento.', foto: FOTO('noche-1-desde') },
+export const VENTAJAS_PUNTO = [
+  { titulo: 'Intersección de 6 esquinas', texto: 'Visibilidad multiangular desde múltiples calles de acceso.' },
+  { titulo: 'Semáforos de mayor tránsito', texto: 'Tiempo de exposición muy elevado: los autos y colectivos se detienen frente a la pantalla.' },
+  { titulo: 'Audiencia calificada', texto: 'Entorno puramente comercial, ideal para posicionar tu marca.' },
 ]
 
 export const METRICAS = [
