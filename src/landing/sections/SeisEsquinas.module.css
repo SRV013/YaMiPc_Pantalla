@@ -69,6 +69,36 @@
   fill: var(--ink);
 }
 
+/* Shopping Los Gallegos: el lugar más importante del cruce, en el color de la pantalla. */
+.lugarDestacado rect {
+  fill: var(--acento-2);
+  filter: drop-shadow(0 0 12px rgb(155 123 255 / 0.6));
+}
+
+.lugarDestacado text {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  fill: #fff;
+}
+
+/* La esquina del 3 también se resalta: su círculo, relleno. */
+.esquinaDestacada circle {
+  fill: var(--acento-2);
+}
+
+.lugar rect {
+  fill: rgb(255 255 255 / 0.1);
+  stroke: rgb(255 255 255 / 0.25);
+}
+
+.lugar text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  fill: var(--ink);
+}
+
 .pantalla rect {
   fill: var(--acento);
 }

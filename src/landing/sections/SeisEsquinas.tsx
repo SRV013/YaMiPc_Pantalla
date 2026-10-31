@@ -39,9 +39,14 @@ function SeisEsquinas() {
               <rect x="176" y="-90" width="48" height="580" transform="rotate(45 200 200)" />
             </g>
             <g className={styles.nombres}>
-              <text x="200" y="22" textAnchor="middle">LA RIOJA</text>
-              <text x="388" y="194" textAnchor="end">BELGRANO</text>
-              <text x="96" y="308" textAnchor="middle" transform="rotate(-45 96 304)">
+              {/* Cada nombre va a lo largo de su calle. */}
+              <text x="200" y="48" textAnchor="middle" transform="rotate(-90 200 44)">
+                LA RIOJA
+              </text>
+              <text x="388" y="204" textAnchor="end">
+                BELGRANO
+              </text>
+              <text x="306" y="98" textAnchor="middle" transform="rotate(-45 306 94)">
                 DIAGONAL PUEYRREDÓN
               </text>
             </g>
@@ -55,13 +60,27 @@ function SeisEsquinas() {
 
             {/* Esquinas */}
             {ESQUINAS.slice(0, 5).map((e) => (
-              <g key={e.n} className={styles.esquina}>
+              <g key={e.n} className={`${styles.esquina} ${e.n === 3 ? styles.esquinaDestacada : ''}`}>
                 <circle cx={e.x} cy={e.y} r="17" />
                 <text x={e.x} y={e.y + 5} textAnchor="middle">
                   {e.n}
                 </text>
               </g>
             ))}
+
+            {/* Lo que hay en cada esquina: el shopping (el punto más fuerte) y McDonald's. */}
+            <g className={styles.lugarDestacado}>
+              <rect x={ESQUINAS[2].x - 92} y={ESQUINAS[2].y + 26} width="184" height="30" rx="15" />
+              <text x={ESQUINAS[2].x} y={ESQUINAS[2].y + 45} textAnchor="middle">
+                SHOPPING LOS GALLEGOS
+              </text>
+            </g>
+            <g className={styles.lugar}>
+              <rect x={ESQUINAS[4].x - 52} y={ESQUINAS[4].y + 26} width="104" height="26" rx="13" />
+              <text x={ESQUINAS[4].x} y={ESQUINAS[4].y + 43} textAnchor="middle">
+                McDONALD&apos;S
+              </text>
+            </g>
 
             {/* Pantalla */}
             <g className={styles.pantalla}>
@@ -80,8 +99,8 @@ function SeisEsquinas() {
             <p className={base.eyebrow}>Intersección de 6 esquinas</p>
             <h2 className={styles.titulo}>Tres calles se cruzan. Todas miran a tu marca.</h2>
             <p className={base.lead}>
-              La Rioja, Belgrano y Diagonal Pueyrredón se encuentran en un mismo punto: seis esquinas y muchas
-              calles de acceso con la pantalla de frente.
+              La Rioja, Belgrano y Diagonal Pueyrredón se encuentran en un mismo punto: seis esquinas y muchas calles de acceso
+              con la pantalla de frente.
             </p>
           </Aparece>
           <ol className={styles.ventajas}>
