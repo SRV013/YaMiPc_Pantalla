@@ -65,3 +65,19 @@ export function useVisible<T extends HTMLElement>(umbral = 0.2) {
 
   return { ref, visible }
 }
+
+/** true en pantallas de celular (hasta 760 px de ancho), y se actualiza si cambia. */
+export function useEsCelular() {
+  const consulta = '(max-width: 760px)'
+  const [celular, setCelular] = useState(() => typeof window !== 'undefined' && window.matchMedia(consulta).matches)
+
+  useEffect(() => {
+    const mq = window.matchMedia(consulta)
+    const cambiar = () => setCelular(mq.matches)
+    cambiar()
+    mq.addEventListener('change', cambiar)
+    return () => mq.removeEventListener('change', cambiar)
+  }, [])
+
+  return celular
+}

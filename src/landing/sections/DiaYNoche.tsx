@@ -1,8 +1,9 @@
 import type { CSSProperties } from 'react'
 import Icon from '../Icon.tsx'
+import CarruselTactil from '../CarruselTactil.tsx'
 import base from '../Landing.module.css'
 import { FOTOS } from '../content.ts'
-import { useProgreso } from '../efectos.ts'
+import { useEsCelular, useProgreso } from '../efectos.ts'
 import styles from './DiaYNoche.module.css'
 
 /**
@@ -18,7 +19,7 @@ const FILA = [
   { foto: FOTOS.dia, alt: '' },
 ]
 
-function DiaYNoche() {
+function DiaYNocheScroll() {
   const { ref } = useProgreso<HTMLElement>()
 
   return (
@@ -65,6 +66,55 @@ function DiaYNoche() {
       </div>
     </section>
   )
+}
+
+/** En el celular: día y noche como dos fotos que se deslizan con el dedo, sin depender del scroll. */
+function DiaYNocheCelular() {
+  const laminas = [
+    {
+      foto: FOTOS.dia,
+      alt: 'La esquina de día, con el colectivo y la pantalla',
+      icono: 'sun' as const,
+      titulo: 'de día.',
+      texto: 'En pleno cruce y frente al shopping, a la vista de quienes pasan caminando, en auto o en colectivo.',
+    },
+    {
+      foto: FOTOS.noche,
+      alt: 'La misma esquina de noche, con la pantalla encendida',
+      icono: 'moon' as const,
+      titulo: 'de noche.',
+      texto: 'Cuando cae el sol, es la luz que más se ve en la esquina: tu marca sigue al aire hasta las 23 hs.',
+    },
+  ]
+
+  return (
+    <section id="dia-noche" className={base.section} aria-label="De día y de noche">
+      <div className={`${base.container} ${styles.encabezado}`}>
+        <p className={base.eyebrow}>14 horas al aire, de 09:00 a 23:00</p>
+      </div>
+      <CarruselTactil
+        laminas={laminas.map((l) => ({
+          foto: l.foto,
+          alt: l.alt,
+          contenido: (
+            <>
+              <h3 className={styles.celTitulo}>
+                <span className={styles.icono}>
+                  <Icon name={l.icono} size={22} />
+                </span>
+                {l.titulo}
+              </h3>
+              <p className={styles.celTexto}>{l.texto}</p>
+            </>
+          ),
+        }))}
+      />
+    </section>
+  )
+}
+
+function DiaYNoche() {
+  return useEsCelular() ? <DiaYNocheCelular /> : <DiaYNocheScroll />
 }
 
 export default DiaYNoche

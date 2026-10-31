@@ -192,3 +192,22 @@
   stroke-width: 2.2;
   filter: drop-shadow(0 2px 16px rgb(0 0 0 / 0.45));
 }
+
+/* Versión celular: título con su icono y la explicación debajo, sobre la foto. */
+.celTitulo {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  margin: 0;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.celTexto {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: rgb(245 245 247 / 0.85);
+}

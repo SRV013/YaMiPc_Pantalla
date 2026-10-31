@@ -1,7 +1,8 @@
 import type { CSSProperties } from 'react'
+import CarruselTactil from '../CarruselTactil.tsx'
 import base from '../Landing.module.css'
 import { ATRACCION } from '../content.ts'
-import { useProgreso } from '../efectos.ts'
+import { useEsCelular, useProgreso } from '../efectos.ts'
 import styles from './Historia.module.css'
 
 /**
@@ -16,7 +17,7 @@ const FILA = [
   { punto: ATRACCION[0], i: ATRACCION.length, copia: true },
 ]
 
-function Historia() {
+function HistoriaScroll() {
   const { ref, paso } = useProgreso<HTMLElement>(ATRACCION.length)
 
   return (
@@ -53,6 +54,33 @@ function Historia() {
       </div>
     </section>
   )
+}
+
+/** En el celular: las mismas fotos en un carrusel que se desliza con el dedo, sin depender del scroll. */
+function HistoriaCelular() {
+  return (
+    <section id="esquina" className={base.section}>
+      <div className={`${base.container} ${styles.encabezado}`}>
+        <p className={base.eyebrow}>Puntos de atracción inmediata</p>
+      </div>
+      <CarruselTactil
+        laminas={ATRACCION.map((punto) => ({
+          foto: punto.foto,
+          alt: punto.titulo,
+          contenido: (
+            <>
+              <h2 className={styles.titulo}>{punto.titulo}</h2>
+              <p className={styles.texto}>{punto.texto}</p>
+            </>
+          ),
+        }))}
+      />
+    </section>
+  )
+}
+
+function Historia() {
+  return useEsCelular() ? <HistoriaCelular /> : <HistoriaScroll />
 }
 
 export default Historia
