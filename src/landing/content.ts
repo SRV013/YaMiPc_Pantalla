@@ -24,7 +24,7 @@ export const SCREEN = {
 }
 
 // Temporada que se ofrece a los anunciantes (Pascua 2027: 28 de marzo).
-export const TEMPORADA = 'Propuesta temporada · Diciembre 2026 a Pascua 2027'
+export const TEMPORADA = 'Temporada diciembre 2026 a Pascua 2027'
 export const TEMPORADA_DESDE = 'Diciembre 2026'
 export const TEMPORADA_HASTA = 'Pascua 2027'
 

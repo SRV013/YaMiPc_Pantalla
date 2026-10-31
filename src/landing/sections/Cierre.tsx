@@ -1,7 +1,7 @@
 import Aparece from '../Aparece.tsx'
 import Icon from '../Icon.tsx'
 import base from '../Landing.module.css'
-import { COMPANY, PANTALLA, SCREEN, TEMPORADA_DESDE, TEMPORADA_HASTA } from '../content.ts'
+import { COMPANY, PANTALLA, SCREEN, TEMPORADA, TEMPORADA_DESDE, TEMPORADA_HASTA } from '../content.ts'
 import styles from './Cierre.module.css'
 
 /** Cierre: la propuesta de temporada, el contacto por WhatsApp y dónde está la pantalla. */
@@ -10,7 +10,7 @@ function Cierre() {
     <section id="temporada" className={base.section}>
       <div className={base.container}>
         <Aparece className={styles.propuesta}>
-          <p className={base.eyebrow}>Propuesta temporada 2026 / 2027</p>
+          <p className={base.eyebrow}>{TEMPORADA}</p>
           <h2 className={styles.titulo}>Tu marca, toda la temporada en el centro de la ciudad.</h2>
           <div className={styles.fechas}>
             <div>
