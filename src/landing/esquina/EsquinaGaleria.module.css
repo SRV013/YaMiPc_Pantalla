@@ -359,3 +359,57 @@
 .modoJunto {
   margin-top: 10px;
 }
+
+/* Computadora: velo oscuro abajo de la foto actual, para leer el texto sobre cualquier foto. */
+.velo {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.72), rgb(0 0 0 / 0.25) 40%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Abajo a la izquierda: título, bajada y, debajo, los botones de qué vista mostrar. */
+.textoFoto {
+  position: absolute;
+  left: clamp(20px, 4%, 48px);
+  right: clamp(20px, 4%, 48px);
+  bottom: clamp(20px, 5%, 44px);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.leyendaFoto {
+  text-shadow: 0 2px 24px rgb(0 0 0 / 0.55);
+  animation: leyenda 0.7s ease;
+}
+
+.tituloFoto {
+  margin: 0;
+  font-size: clamp(28px, 3.6vw, 48px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.bajadaFoto {
+  max-width: 30em;
+  margin: 10px 0 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: rgb(245 245 247 / 0.85);
+}
+
+/* Con fotos, debajo del carrusel solo quedan los puntos y la pausa, al centro. */
+.pieFotos {
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leyendaFoto {
+    animation: none;
+  }
+}

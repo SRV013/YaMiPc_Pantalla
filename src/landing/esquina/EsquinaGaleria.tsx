@@ -228,7 +228,16 @@ function EsquinaGaleria() {
                       <Foto {...desde} />
                     </div>
                     {/* Abajo a la derecha, sobre la foto: hacia dónde se mira. */}
-                    <div className={`${styles.sobreFoto} ${styles.vidrio}`}>{selectorLado}</div>
+                    {/* Sobre la foto, abajo a la izquierda: el lugar, qué se ve y, debajo, hacia dónde se mira. */}
+                    <div className={styles.velo} aria-hidden="true" />
+                    <div className={styles.textoFoto}>
+                      {/* La key reinicia el fundido del texto al cambiar de vista o de momento del día. */}
+                      <div key={`${lado}-${momento}`} className={styles.leyendaFoto}>
+                        <h3 className={styles.tituloFoto}>{punto.lugar}</h3>
+                        <p className={styles.bajadaFoto}>{descripcion(lado)}</p>
+                      </div>
+                      <div className={styles.vidrio}>{selectorLado}</div>
+                    </div>
                     <button
                       type="button"
                       className={styles.ampliar}
@@ -267,19 +276,13 @@ function EsquinaGaleria() {
       {/* El pie está en las dos vistas, así la sección mantiene la misma altura y no salta.
           En el celular, con fotos, el texto va sobre cada foto y el carrusel trae sus puntos. */}
       {!(celular && vista === 'fotos') && (
-        <div className={styles.pie}>
-          {/* La key reinicia el fundido del texto al cambiar de foto o de vista. */}
-          <p key={`${vista}-${actual}-${lado}-${momento}`} className={styles.leyenda}>
-            {vista === 'google' ? (
-              <>
-                <strong>Street View de Google.</strong> Arrastrá para mirar alrededor y tocá la calle para avanzar.
-              </>
-            ) : (
-              <>
-                <strong>{ESQUINA[actual].lugar}.</strong> {descripcion(lado)}
-              </>
-            )}
-          </p>
+        <div className={`${styles.pie} ${vista === 'fotos' ? styles.pieFotos : ''}`}>
+          {/* Con fotos, el texto va dentro de cada foto; en Street View, acá abajo. */}
+          {vista === 'google' && (
+            <p className={styles.leyenda}>
+              <strong>Street View de Google.</strong> Arrastrá para mirar alrededor y tocá la calle para avanzar.
+            </p>
+          )}
 
           {/* Avance del slider, como en las galerías de Apple. En Street View queda oculto pero ocupa su lugar. */}
           <div className={`${styles.avance} ${vista !== 'fotos' ? styles.invisible : ''}`} aria-hidden={vista !== 'fotos'}>
