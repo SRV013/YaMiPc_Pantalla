@@ -115,6 +115,12 @@ export const PANORAMA: Record<Momento, { src: string; inicio: number }> = {
   noche: { src: '/img/esquina/360-noche.jpg', inicio: 0.49 },
 }
 
+// Street View de Google: la cámara se ubica en la foto más cercana a `camara` y gira hacia `pantalla`.
+export const STREET_VIEW = {
+  camara: { lat: -37.99905, lng: -57.55245 },
+  pantalla: { lat: -37.999178, lng: -57.552167 },
+}
+
 export const ADS = [
   { src: '/img/anuncios/pensamos-como-vos.jpg', alt: 'Anuncio de YaMiPc: Pensamos como vos' },
   { src: '/img/anuncios/pc-ryzen.jpg', alt: 'Anuncio de PC de escritorio AMD Ryzen 3 en 12 cuotas' },

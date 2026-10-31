@@ -5,6 +5,7 @@ import Foto from './Foto.tsx'
 import { precargar } from './variantes.ts'
 import Panorama from './Panorama.tsx'
 import Pestanas from './Pestanas.tsx'
+import StreetView, { CLAVE_MAPS } from './StreetView.tsx'
 import Visor from './Visor.tsx'
 import styles from './EsquinaGaleria.module.css'
 
@@ -36,7 +37,7 @@ function posicion(indice: number, actual: number, total: number) {
  */
 function EsquinaGaleria() {
   const [momento, setMomento] = useState<Momento>('dia')
-  const [vista, setVista] = useState<'fotos' | '360'>('fotos')
+  const [vista, setVista] = useState<'fotos' | '360' | 'google'>('fotos')
   const [actual, setActual] = useState(0)
   const [pausa, setPausa] = useState(false)
   // Pausa elegida con el botón de reproducir/pausar, aparte de la que pone el mouse encima.
@@ -205,36 +206,41 @@ function EsquinaGaleria() {
         </div>
       )}
 
+      {vista === 'google' && (
+        <div className={styles.vista360}>
+          <StreetView />
+        </div>
+      )}
+
       {/* Una sola barra integrada: avance del slider, tipo de vista y momento del día. */}
+      {/* Los grupos están siempre; los que no aplican a la vista elegida quedan deshabilitados,
+          así la barra no cambia de tamaño al pasar de una vista a otra. */}
       <div className={styles.dock}>
-        {vista === 'fotos' && (
-          <>
-            <div className={styles.grupo}>
-              <div className={styles.puntos}>
-                {ESQUINA.map((punto, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    aria-label={`Foto ${i + 1}: ${punto.lugar}`}
-                    aria-current={i === actual}
-                    onClick={() => ir(i)}
-                  >
-                    <span />
-                  </button>
-                ))}
-              </div>
+        <fieldset className={styles.grupo} disabled={vista !== 'fotos'}>
+          <legend className={styles.oculto}>Fotos</legend>
+          <div className={styles.puntos}>
+            {ESQUINA.map((punto, i) => (
               <button
+                key={i}
                 type="button"
-                className={styles.reproducir}
-                aria-label={detenido ? 'Reproducir' : 'Pausar'}
-                onClick={() => setDetenido((d) => !d)}
+                aria-label={`Foto ${i + 1}: ${punto.lugar}`}
+                aria-current={i === actual}
+                onClick={() => ir(i)}
               >
-                <Icon name={detenido ? 'play' : 'pause'} size={14} />
+                <span />
               </button>
-            </div>
-            <span className={styles.divisor} aria-hidden="true" />
-          </>
-        )}
+            ))}
+          </div>
+          <button
+            type="button"
+            className={styles.reproducir}
+            aria-label={detenido ? 'Reproducir' : 'Pausar'}
+            onClick={() => setDetenido((d) => !d)}
+          >
+            <Icon name={detenido ? 'play' : 'pause'} size={14} />
+          </button>
+        </fieldset>
+        <span className={styles.divisor} aria-hidden="true" />
         <Pestanas
           etiqueta="Tipo de vista"
           valor={vista}
@@ -242,13 +248,17 @@ function EsquinaGaleria() {
           opciones={[
             { valor: 'fotos', texto: 'Imágenes', icono: 'photos' },
             { valor: '360', texto: '360°', icono: 'orbit' },
+            // Street View solo aparece si hay una clave de Google cargada.
+            ...(CLAVE_MAPS ? [{ valor: 'google' as const, texto: 'Street View', icono: 'globe' as const }] : []),
           ]}
         />
         <span className={styles.divisor} aria-hidden="true" />
+        {/* Street View tiene una sola toma de Google: no hay día y noche para elegir. */}
         <Pestanas
           etiqueta="Momento del día"
           valor={momento}
           onCambiar={setMomento}
+          deshabilitado={vista === 'google'}
           opciones={[
             { valor: 'dia', texto: 'Día', icono: 'sun' },
             { valor: 'noche', texto: 'Noche', icono: 'moon' },
@@ -256,7 +266,11 @@ function EsquinaGaleria() {
         />
       </div>
       <p className={styles.explicacion}>
-        {vista === 'fotos' ? 'Arrastrá o tocá las fotos de los costados para pasar.' : 'Arrastrá la vista para girar en el lugar.'}
+        {vista === 'fotos'
+          ? 'Arrastrá o tocá las fotos de los costados para pasar.'
+          : vista === '360'
+            ? 'Arrastrá la vista para girar en el lugar.'
+            : 'Arrastrá para mirar alrededor y tocá la calle para avanzar.'}
       </p>
 
       <Visor abierto={ampliada !== null} titulo="Vista ampliada" onCerrar={cerrarVisor}>

@@ -8,10 +8,12 @@ type PestanasProps<T extends string> = {
   opciones: Opcion<T>[]
   valor: T
   onCambiar: (valor: T) => void
+  /** Muestra las opciones pero no deja elegirlas, cuando no aplican. */
+  deshabilitado?: boolean
 }
 
 /** Pestañas sobre una base oscura: la elegida se rellena en claro. */
-function Pestanas<T extends string>({ etiqueta, opciones, valor, onCambiar }: PestanasProps<T>) {
+function Pestanas<T extends string>({ etiqueta, opciones, valor, onCambiar, deshabilitado = false }: PestanasProps<T>) {
   return (
     <div className={styles.pestanas} role="group" aria-label={etiqueta}>
       {opciones.map((opcion) => (
@@ -19,6 +21,7 @@ function Pestanas<T extends string>({ etiqueta, opciones, valor, onCambiar }: Pe
           key={opcion.valor}
           type="button"
           aria-pressed={opcion.valor === valor}
+          disabled={deshabilitado}
           onClick={() => onCambiar(opcion.valor)}
         >
           {opcion.icono && <Icon name={opcion.icono} size={14} />}

@@ -49,7 +49,7 @@
   --p: 0;
 
   height: 190svh;
-  margin-top: clamp(40px, 6vw, 72px);
+  margin-top: clamp(72px, 9vw, 120px);
 }
 
 .fija {
@@ -67,6 +67,8 @@
   height: 100%;
   overflow: hidden;
   transform: scale(calc(0.7 + 0.3 * var(--p)));
+  /* Crece desde arriba, así no queda un hueco entre el texto y la foto. */
+  transform-origin: center top;
   will-change: transform;
   /* Bordes de arriba y abajo fundidos con el fondo; el fundido se achica con el scroll hasta
      desaparecer, y la foto termina viéndose entera. */
@@ -75,7 +77,7 @@
   mask-image: linear-gradient(
     to bottom,
     transparent,
-    #000 var(--fundido),
+    #000 calc(var(--fundido) * 0.4),
     #000 calc(100% - var(--fundido)),
     transparent
   );
