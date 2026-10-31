@@ -30,8 +30,11 @@ export const TEMPORADA = 'Propuesta temporada · 15/11/2026 a Pascua 2027'
 // Las fotos son las versiones livianas de public/img/esquina (ver scripts/optimizar-esquina.sh).
 const FOTO = (nombre: string) => `/img/esquina/vista/${nombre}.jpg`
 
+// Fotos nuevas: se usan tal cual vienen, sin convertir, desde public/img/fotos.
+const NUEVA = (archivo: string) => `/img/fotos/${archivo}`
+
 export const FOTOS = {
-  portada: FOTO('dia-1-hacia'),
+  portada: NUEVA('portada.webp'),
   dia: FOTO('dia-4-hacia'),
   noche: FOTO('noche-4-hacia'),
 }
@@ -40,7 +43,7 @@ export const ATRACCION = [
   {
     titulo: 'Frente al Shopping Los Gallegos',
     texto: 'Capturá la atención de miles de personas con mentalidad de compra activa.',
-    foto: FOTO('dia-4-desde'),
+    foto: NUEVA('atraccion-shopping.webp'),
   },
   {
     titulo: "A metros de McDonald's",

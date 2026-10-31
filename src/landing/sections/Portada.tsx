@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Aparece from '../Aparece.tsx'
 import base from '../Landing.module.css'
 import { COMPANY, FOTOS, TEMPORADA } from '../content.ts'
@@ -9,8 +10,28 @@ import styles from './Portada.module.css'
  * pantalla mientras se scrollea, con el remate del título apareciendo encima.
  */
 function Portada() {
-  // El efecto arranca apenas la foto asoma, sin esperar a que llegue arriba.
-  const { ref } = useProgreso<HTMLDivElement>(0, true)
+  // El zoom avanza desde que la foto queda fija en el centro de la pantalla.
+  const { ref } = useProgreso<HTMLDivElement>()
+
+  // El color llega con el primer scroll de la página: a los 250 px ya está a todo color.
+  useEffect(() => {
+    const escena = ref.current
+    if (!escena) return
+    let id = 0
+    const medir = () => {
+      id = 0
+      escena.style.setProperty('--color', Math.min(1, window.scrollY / 250).toFixed(3))
+    }
+    const pedir = () => {
+      if (!id) id = requestAnimationFrame(medir)
+    }
+    medir()
+    window.addEventListener('scroll', pedir, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', pedir)
+      cancelAnimationFrame(id)
+    }
+  }, [ref])
 
   return (
     <section id="inicio" className={styles.portada}>

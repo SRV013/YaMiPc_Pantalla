@@ -61,21 +61,14 @@
 /* Las fotos están apiladas y pasan de una a otra con un fundido que sigue el scroll. */
 .media {
   --tramos: 3;
-  --relleno: clamp(12px, 1.6vw, 22px);
   /* Alto ideal de la foto; si la columna es angosta, manda el ancho y la foto se achica. */
   --alto-foto: min(68svh, 640px);
-  --proporcion: 4 / 5;
+  /* Las fotos nuevas de esta sección son casi cuadradas (1920 × 1754). */
+  --proporcion: 1920 / 1754;
 
-  /* El marco toma el ancho de la foto sin pasarse nunca de su columna, y queda centrado. */
+  /* Sin marco ni bordes redondeados: la foto sola, centrada y sin pasarse de su columna. */
   justify-self: center;
-  width: min(100%, calc(var(--alto-foto) * var(--proporcion) + 2 * var(--relleno) + 2px));
-
-  /* Marco: borde fino y relleno amplio alrededor de la foto, como un dispositivo. */
-  padding: var(--relleno);
-  background: rgb(255 255 255 / 0.025);
-  border: 1px solid rgb(255 255 255 / 0.12);
-  border-radius: clamp(22px, 2.4vw, 34px);
-  box-sizing: border-box;
+  width: min(100%, calc(var(--alto-foto) * var(--proporcion)));
 }
 
 .fotos {
@@ -83,7 +76,6 @@
   width: 100%;
   aspect-ratio: var(--proporcion);
   overflow: hidden;
-  border-radius: clamp(12px, 1.2vw, 16px);
 }
 
 .fotos img {

@@ -44,12 +44,23 @@
   margin-top: 28px;
 }
 
-/* La escena es más alta que la pantalla: mientras se scrollea, la foto queda fija y crece. */
+/* La escena es más alta que la pantalla: mientras se scrollea, la foto queda fija en el centro y
+   crece de alto hasta llenar la pantalla. */
 .escena {
+  /* --color: 0 en gris, 1 a todo color; llega apenas se empieza a scrollear la página.
+     --p: avance desde que la foto queda fija hasta que termina la escena. */
+  --color: 0;
   --p: 0;
+  /* La foto de portada es apaisada (1920 × 1006): arranca a todo el ancho con su propio alto. */
+  --alto: min(100svh, calc(100vw * 1006 / 1920));
+  /* Cuánto creció: 0 con el alto de la foto, 1 llenando la pantalla. */
+  --zoom: clamp(0, calc(var(--p) * 1.7), 1);
 
-  height: 190svh;
-  margin-top: clamp(72px, 9vw, 120px);
+  height: 220svh;
+  /* La parte fija ocupa toda la pantalla con la foto centrada: se sube la escena para que la foto
+     quede justo debajo de los botones. No tapa los clics del texto. */
+  margin-top: calc((var(--alto) - 100svh) / 2 + clamp(48px, 7vw, 96px));
+  pointer-events: none;
 }
 
 .fija {
@@ -64,20 +75,16 @@
 .marco {
   position: relative;
   width: 100%;
-  height: 100%;
+  /* Del alto de la foto al alto de la pantalla; al ser "cover", la foto se agranda con él. */
+  height: calc(var(--alto) + (100svh - var(--alto)) * var(--zoom));
   overflow: hidden;
-  transform: scale(calc(0.72 + 0.28 * min(1, var(--p) * 1.5)));
-  /* Crece desde arriba, así no queda un hueco entre el texto y la foto. */
-  transform-origin: center top;
-  will-change: transform;
-  /* Bordes de arriba y abajo fundidos con el fondo; el fundido se achica con el scroll hasta
-     desaparecer, y la foto termina viéndose entera. */
-  --fundido: calc((1 - min(1, var(--p) * 2)) * 30%);
+  /* Bordes de arriba y abajo fundidos con el fondo mientras está en gris; se van con el color. */
+  --fundido: calc((1 - var(--color)) * 22%);
 
   mask-image: linear-gradient(
     to bottom,
     transparent,
-    #000 calc(var(--fundido) * 0.4),
+    #000 var(--fundido),
     #000 calc(100% - var(--fundido)),
     transparent
   );
@@ -96,26 +103,24 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(calc(1.15 - 0.15 * var(--p)));
-  /* Arranca oscura y en blanco y negro; con el scroll se aclara y toma su color mientras crece. */
-  /* El color y la luz llegan rápido: apenas la foto asoma ya empieza a cambiar. */
-  filter: grayscale(calc(1 - min(1, var(--p) * 2.6))) brightness(calc(0.45 + 0.55 * min(1, var(--p) * 2.2)));
+  /* En gris y apagada al principio; toma color y luz con el primer scroll. */
+  filter: grayscale(calc(1 - var(--color))) brightness(calc(0.5 + 0.5 * var(--color)));
 }
 
-/* El remate aparece en la segunda mitad del recorrido, sobre un velo oscuro. */
+/* El remate aparece cuando la foto ya llenó la pantalla, sobre un velo oscuro. */
 .marco::after {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgb(0 0 0 / 0.7), transparent 60%);
-  opacity: clamp(0, calc((var(--p) - 0.4) * 2.5), 1);
+  opacity: clamp(0, calc((var(--p) - 0.45) * 3), 1);
 }
 
 .remate {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: clamp(32px, 8vh, 96px);
+  bottom: 10%;
   z-index: 1;
   margin: 0;
   padding: 0 20px;
@@ -136,17 +141,20 @@
 
 @media (prefers-reduced-motion: reduce) {
   .marco {
+    height: var(--alto);
     animation: none;
   }
 
   .escena {
+    --color: 1 !important;
     --p: 1 !important;
 
     height: auto;
+    margin-top: clamp(48px, 7vw, 96px);
   }
 
   .fija {
     position: static;
-    height: 70svh;
+    height: auto;
   }
 }
