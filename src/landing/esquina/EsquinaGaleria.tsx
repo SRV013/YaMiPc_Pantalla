@@ -87,31 +87,6 @@ function EsquinaGaleria() {
 
   return (
     <div className={styles.galeria}>
-      {/* Arriba, al centro: qué se mira y en qué momento del día. */}
-      <div className={styles.modo}>
-        <Pestanas
-          etiqueta="Qué mirar"
-          valor={vista}
-          onCambiar={setVista}
-          opciones={[
-            { valor: 'fotos', texto: 'Fotos', icono: 'photos' },
-            // Street View solo aparece si hay una clave de Google cargada.
-            ...(CLAVE_MAPS ? [{ valor: 'google' as const, texto: 'Street View', icono: 'globe' as const }] : []),
-          ]}
-        />
-        {/* En Street View no hay día ni noche: queda deshabilitado, sin desaparecer, así nada salta. */}
-        <Pestanas
-          etiqueta="Momento del día"
-          valor={momento}
-          onCambiar={setMomento}
-          deshabilitado={vista !== 'fotos'}
-          opciones={[
-            { valor: 'dia', texto: 'Día', icono: 'sun' },
-            { valor: 'noche', texto: 'Noche', icono: 'moon' },
-          ]}
-        />
-      </div>
-
       {vista === 'fotos' && (
         <div
           className={styles.carrusel}
@@ -169,8 +144,8 @@ function EsquinaGaleria() {
                         valor={lado}
                         onCambiar={setLado}
                         opciones={[
-                          { valor: 'hacia', texto: 'Hacia la pantalla' },
-                          { valor: 'desde', texto: 'Lo que ve la pantalla' },
+                          { valor: 'hacia', texto: 'Mirando la pantalla' },
+                          { valor: 'desde', texto: 'Desde la pantalla' },
                         ]}
                       />
                     </div>
@@ -249,6 +224,31 @@ function EsquinaGaleria() {
             <Icon name={detenido ? 'play' : 'pause'} size={14} />
           </button>
         </div>
+      </div>
+
+      {/* Al final, debajo de la leyenda y el avance, al centro: qué se mira y en qué momento del día. */}
+      <div className={styles.modo}>
+        <Pestanas
+          etiqueta="Qué mirar"
+          valor={vista}
+          onCambiar={setVista}
+          opciones={[
+            { valor: 'fotos', texto: 'Fotos', icono: 'photos' },
+            // Street View solo aparece si hay una clave de Google cargada.
+            ...(CLAVE_MAPS ? [{ valor: 'google' as const, texto: 'Street View', icono: 'globe' as const }] : []),
+          ]}
+        />
+        {/* En Street View no hay día ni noche: queda deshabilitado, sin desaparecer, así nada salta. */}
+        <Pestanas
+          etiqueta="Momento del día"
+          valor={momento}
+          onCambiar={setMomento}
+          deshabilitado={vista !== 'fotos'}
+          opciones={[
+            { valor: 'dia', texto: 'Día', icono: 'sun' },
+            { valor: 'noche', texto: 'Noche', icono: 'moon' },
+          ]}
+        />
       </div>
 
       <Visor abierto={ampliada !== null} titulo="Vista ampliada" onCerrar={cerrarVisor}>

@@ -16,20 +16,6 @@ function DiaYNoche() {
       <div className={styles.fija}>
         <div className={`${base.container} ${styles.encabezado}`}>
           <p className={base.eyebrow}>14 horas al aire, de 09:00 a 23:00</p>
-          <h2 id="dia-noche-titulo" className={styles.titulo}>
-            <span className={styles.dia}>
-              <span className={styles.icono}>
-                <Icon name="sun" size={22} />
-              </span>
-              De día.
-            </span>
-            <span className={styles.noche}>
-              <span className={styles.icono}>
-                <Icon name="moon" size={22} />
-              </span>
-              Y de noche.
-            </span>
-          </h2>
         </div>
 
         <div className={styles.marco}>
@@ -37,6 +23,24 @@ function DiaYNoche() {
             <img src={FOTOS.dia} alt="La esquina de día, con el colectivo y la pantalla" />
             <img className={styles.fotoNoche} src={FOTOS.noche} alt="La misma esquina de noche, con la pantalla encendida" />
             <span className={styles.hora} aria-hidden="true" />
+
+            {/* Sobre la foto: de día o de noche, cambiando con el scroll. */}
+            <h2 id="dia-noche-titulo" className={styles.titulo}>
+              <span className={styles.dia}>
+                <span className={styles.icono}>
+                  <Icon name="sun" size={22} />
+                </span>
+                <span className={styles.previo}>En pleno cruce y frente al shopping, a la vista de quienes pasan caminando, en auto o en colectivo.</span>
+                <span className={styles.linea}>de día.</span>
+              </span>
+              <span className={styles.noche}>
+                <span className={styles.icono}>
+                  <Icon name="moon" size={22} />
+                </span>
+                <span className={styles.previo}>Cuando cae el sol, es la luz que más se ve en la esquina: tu marca sigue al aire hasta las 23 hs.</span>
+                <span className={styles.linea}>de noche.</span>
+              </span>
+            </h2>
           </div>
         </div>
       </div>

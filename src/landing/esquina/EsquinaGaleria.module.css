@@ -49,14 +49,14 @@
   clip-path: inset(0 0 0 0);
 }
 
-/* Arriba del slider, al centro: qué mirar y día o noche. */
+/* Al final, debajo de la leyenda y el avance: qué mirar y día o noche. */
 .modo {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
   width: var(--ancho);
-  margin: 0 auto 16px;
+  margin: 28px auto 0;
 }
 
 .modo > * {
@@ -74,12 +74,19 @@
   z-index: 3;
 }
 
+/* Más chico y más transparente, para no tapar la foto. */
 .vidrio {
-  padding: 3px;
-  background: rgb(10 10 15 / 0.62);
-  border: 1px solid rgb(255 255 255 / 0.14);
+  padding: 2px;
+  background: rgb(10 10 15 / 0.32);
+  border: 1px solid rgb(255 255 255 / 0.1);
   border-radius: 999px;
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(10px);
+}
+
+.galeria .vidrio button {
+  min-height: 28px;
+  padding: 0 11px;
+  font-size: 12px;
 }
 
 /* Pie de foto: la leyenda a la izquierda y el avance del slider a la derecha. */
@@ -271,8 +278,7 @@
     gap: 6px;
   }
 
-  .galeria .modo button,
-  .galeria .sobreFoto button {
+  .galeria .modo button {
     gap: 5px;
     min-height: 32px;
     padding: 0 9px;
