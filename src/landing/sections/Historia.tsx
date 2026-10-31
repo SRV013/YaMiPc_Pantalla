@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import base from '../Landing.module.css'
 import { ATRACCION } from '../content.ts'
 import { useProgreso } from '../efectos.ts'
@@ -5,7 +6,7 @@ import styles from './Historia.module.css'
 
 /**
  * Puntos de atracción, contados con scroll: la sección queda fija y, a medida que se baja, se
- * ilumina el siguiente punto y cambia la foto (shopping, McDonald's, semáforos).
+ * ilumina el siguiente punto y la foto nueva sube tapando a la anterior, siguiendo el scroll.
  */
 function Historia() {
   const { ref, paso } = useProgreso<HTMLElement>(ATRACCION.length)
@@ -26,17 +27,17 @@ function Historia() {
             </ol>
           </div>
 
-          <div className={styles.fotos}>
-            {ATRACCION.map((punto, i) => (
-              <img
-                key={punto.foto}
-                src={punto.foto}
-                alt={punto.titulo}
-                className={i === paso ? styles.visible : undefined}
-                loading={i === 0 ? 'eager' : 'lazy'}
-              />
-            ))}
-            <span className={styles.avance} aria-hidden="true" />
+          <div className={styles.media}>
+            <div className={styles.fotos}>
+              {ATRACCION.map((punto, i) => (
+                <img
+                  key={punto.foto}
+                  src={punto.foto}
+                  alt={i === paso ? punto.titulo : ''}
+                  style={{ '--i': i } as CSSProperties}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

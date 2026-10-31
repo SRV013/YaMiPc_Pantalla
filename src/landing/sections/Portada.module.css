@@ -68,6 +68,17 @@
   overflow: hidden;
   transform: scale(calc(0.7 + 0.3 * var(--p)));
   will-change: transform;
+  /* Bordes de arriba y abajo fundidos con el fondo; el fundido se achica con el scroll hasta
+     desaparecer, y la foto termina viéndose entera. */
+  --fundido: calc((1 - min(1, var(--p) * 1.4)) * 30%);
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 var(--fundido),
+    #000 calc(100% - var(--fundido)),
+    transparent
+  );
   animation: entrar 1.6s ease-out both;
 }
 
@@ -84,8 +95,8 @@
   height: 100%;
   object-fit: cover;
   transform: scale(calc(1.15 - 0.15 * var(--p)));
-  /* Arranca apagada y se va iluminando a medida que crece. */
-  filter: brightness(calc(0.45 + 0.4 * var(--p))) saturate(calc(0.6 + 0.4 * var(--p)));
+  /* Arranca oscura y en blanco y negro; con el scroll se aclara y toma su color mientras crece. */
+  filter: grayscale(calc(1 - min(1, var(--p) * 1.6))) brightness(calc(0.35 + 0.65 * min(1, var(--p) * 1.4)));
 }
 
 /* El remate aparece en la segunda mitad del recorrido, sobre un velo oscuro. */
