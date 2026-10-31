@@ -11,7 +11,6 @@ for foto in *.webp *.jpg *.jpeg *.png; do
   [ -f "$foto" ] || continue
   nombre="${foto%.*}"
   case "$nombre" in
-    360-*) tamano="scale=-2:'min(1200,ih)'" ;;   # Panorámicas: por alto, para que el zoom tenga detalle.
     *-desde) tamano="scale='min(1000,iw)':-2" ;; # Se muestra chica, en el recuadro.
     *) tamano="scale='min(1600,iw)':-2" ;;
   esac

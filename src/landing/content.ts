@@ -108,13 +108,6 @@ export const ESQUINA = [
   },
 ]
 
-// Vista 360: una foto de la vuelta completa por momento del día (el borde derecho empalma con el
-// izquierdo). `inicio` es hacia dónde mira al abrir, de 0 a 1 a lo ancho de la foto: la pantalla.
-export const PANORAMA: Record<Momento, { src: string; inicio: number }> = {
-  dia: { src: '/img/esquina/360-dia.jpg', inicio: 0.49 },
-  noche: { src: '/img/esquina/360-noche.jpg', inicio: 0.49 },
-}
-
 // Street View de Google: la cámara se ubica en la foto más cercana a `camara` y gira hacia `pantalla`.
 export const STREET_VIEW = {
   camara: { lat: -37.99905, lng: -57.55245 },

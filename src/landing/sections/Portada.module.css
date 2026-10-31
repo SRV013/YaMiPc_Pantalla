@@ -66,13 +66,13 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  transform: scale(calc(0.7 + 0.3 * var(--p)));
+  transform: scale(calc(0.72 + 0.28 * min(1, var(--p) * 1.5)));
   /* Crece desde arriba, así no queda un hueco entre el texto y la foto. */
   transform-origin: center top;
   will-change: transform;
   /* Bordes de arriba y abajo fundidos con el fondo; el fundido se achica con el scroll hasta
      desaparecer, y la foto termina viéndose entera. */
-  --fundido: calc((1 - min(1, var(--p) * 1.4)) * 30%);
+  --fundido: calc((1 - min(1, var(--p) * 2)) * 30%);
 
   mask-image: linear-gradient(
     to bottom,
@@ -98,7 +98,8 @@
   object-fit: cover;
   transform: scale(calc(1.15 - 0.15 * var(--p)));
   /* Arranca oscura y en blanco y negro; con el scroll se aclara y toma su color mientras crece. */
-  filter: grayscale(calc(1 - min(1, var(--p) * 1.6))) brightness(calc(0.35 + 0.65 * min(1, var(--p) * 1.4)));
+  /* El color y la luz llegan rápido: apenas la foto asoma ya empieza a cambiar. */
+  filter: grayscale(calc(1 - min(1, var(--p) * 2.6))) brightness(calc(0.45 + 0.55 * min(1, var(--p) * 2.2)));
 }
 
 /* El remate aparece en la segunda mitad del recorrido, sobre un velo oscuro. */

@@ -9,7 +9,8 @@ import styles from './Portada.module.css'
  * pantalla mientras se scrollea, con el remate del título apareciendo encima.
  */
 function Portada() {
-  const { ref } = useProgreso<HTMLDivElement>()
+  // El efecto arranca apenas la foto asoma, sin esperar a que llegue arriba.
+  const { ref } = useProgreso<HTMLDivElement>(0, true)
 
   return (
     <section id="inicio" className={styles.portada}>

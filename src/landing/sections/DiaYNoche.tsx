@@ -18,18 +18,26 @@ function DiaYNoche() {
           <p className={base.eyebrow}>14 horas al aire, de 09:00 a 23:00</p>
           <h2 id="dia-noche-titulo" className={styles.titulo}>
             <span className={styles.dia}>
-              <Icon name="sun" size={40} /> De día.
+              <span className={styles.icono}>
+                <Icon name="sun" size={22} />
+              </span>
+              De día.
             </span>
             <span className={styles.noche}>
-              <Icon name="moon" size={40} /> Y de noche.
+              <span className={styles.icono}>
+                <Icon name="moon" size={22} />
+              </span>
+              Y de noche.
             </span>
           </h2>
         </div>
 
-        <div className={styles.fotos}>
-          <img src={FOTOS.dia} alt="La esquina de día, con el colectivo y la pantalla" />
-          <img className={styles.fotoNoche} src={FOTOS.noche} alt="La misma esquina de noche, con la pantalla encendida" />
-          <span className={styles.hora} aria-hidden="true" />
+        <div className={styles.marco}>
+          <div className={styles.fotos}>
+            <img src={FOTOS.dia} alt="La esquina de día, con el colectivo y la pantalla" />
+            <img className={styles.fotoNoche} src={FOTOS.noche} alt="La misma esquina de noche, con la pantalla encendida" />
+            <span className={styles.hora} aria-hidden="true" />
+          </div>
         </div>
       </div>
     </section>
