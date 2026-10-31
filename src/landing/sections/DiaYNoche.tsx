@@ -20,7 +20,8 @@ const FILA = [
 ]
 
 function DiaYNocheScroll() {
-  const { ref } = useProgreso<HTMLElement>()
+  // Dos tramos: día y noche, para marcar en qué foto está con los puntos de abajo.
+  const { ref, paso } = useProgreso<HTMLElement>(2)
 
   return (
     <section id="dia-noche" ref={ref} className={styles.seccion} aria-labelledby="dia-noche-titulo">
@@ -42,7 +43,6 @@ function DiaYNocheScroll() {
 
           {/* El texto va sobre la foto del centro. */}
           <div className={styles.fotos}>
-            <span className={styles.hora} aria-hidden="true" />
 
             {/* Sobre la foto: de día o de noche, cambiando con el scroll. */}
             <h2 id="dia-noche-titulo" className={styles.titulo}>
@@ -62,6 +62,12 @@ function DiaYNocheScroll() {
               </span>
             </h2>
           </div>
+        </div>
+
+        {/* Avance: día o noche, con los mismos puntos que el resto de los carruseles. */}
+        <div className={styles.puntos} aria-hidden="true">
+          <span className={paso === 0 ? styles.puntoActivo : undefined} />
+          <span className={paso === 1 ? styles.puntoActivo : undefined} />
         </div>
       </div>
     </section>

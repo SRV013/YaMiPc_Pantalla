@@ -20,8 +20,8 @@
   position: sticky;
   top: 0;
   display: grid;
-  grid-template-rows: auto 1fr;
-  gap: clamp(32px, 6vh, 64px);
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(24px, 4vh, 48px);
   height: 100svh;
   padding: clamp(56px, 9vh, 96px) 0 clamp(24px, 5vh, 56px);
   box-sizing: border-box;
@@ -32,12 +32,12 @@
   text-align: center;
 }
 
-/* Sobre la foto, abajo a la izquierda y en dos líneas. */
+/* Sobre la foto, abajo a la izquierda, en el mismo lugar que el texto de los otros carruseles. */
 .titulo {
   position: absolute;
-  left: 8%;
-  right: 20px;
-  bottom: calc(20% - 50px);
+  left: 6%;
+  right: 6%;
+  bottom: 8%;
   z-index: 1;
   display: grid;
   margin: 0;
@@ -56,18 +56,18 @@
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  column-gap: 0.35em;
+  column-gap: 0.3em;
   row-gap: 4px;
-  font-size: clamp(34px, 4.6vw, 64px);
+  font-size: clamp(28px, 3.8vw, 52px);
 }
 
 /* Debajo, en letra chica: la explicación, empezando donde empieza el icono. */
 .previo {
   grid-row: 2;
   grid-column: 1 / -1;
-  max-width: 24em;
-  margin-top: 8px;
-  font-size: clamp(15px, 1.4vw, 19px);
+  max-width: 26em;
+  margin-top: 6px;
+  font-size: 17px;
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: 0;
@@ -150,17 +150,34 @@
   pointer-events: none;
 }
 
-/* Una línea que va del sol a la luna, como un reloj del día. */
-.hora {
+/* Velo oscuro abajo, como en los otros carruseles, para leer el texto sobre la foto. */
+.fotos::before {
+  content: '';
   position: absolute;
-  left: 50%;
-  bottom: 20px;
-  width: min(60%, 360px);
-  height: 3px;
-  background: linear-gradient(90deg, #ffb38a, var(--acento), var(--acento-2));
-  border-radius: 3px;
-  opacity: 0.85;
-  transform: translateX(-50%) scaleX(calc(0.15 + 0.85 * var(--p)));
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.6), transparent 50%);
+}
+
+/* Puntos de avance, iguales a los de los otros carruseles. */
+.puntos {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.puntos span {
+  width: 8px;
+  height: 8px;
+  background: rgb(245 245 247 / 0.35);
+  border-radius: 999px;
+  transition:
+    width 0.4s ease,
+    background 0.4s ease;
+}
+
+.puntos .puntoActivo {
+  width: 26px;
+  background: var(--neon, #f5f5f7);
 }
 
 /* En el celular arranca desde el margen y se achica un poco. */

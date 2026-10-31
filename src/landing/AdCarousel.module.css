@@ -21,6 +21,9 @@
   overflow: hidden;
   background: #000;
   box-shadow: 0 0 0 3px #111;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
 }
 
 /* Grilla de puntos muy suave que imita los LED. */
@@ -51,14 +54,14 @@
   display: flex;
   justify-content: center;
   gap: 4px;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 .dots button {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 24px;
+  height: 24px;
   padding: 0;
   background: none;
   border: 0;
@@ -68,16 +71,16 @@
 .dots span {
   width: 8px;
   height: 8px;
-  background: rgb(245 245 247 / 0.3);
+  background: rgb(245 245 247 / 0.35);
   border-radius: 999px;
   transition:
     width 0.3s ease,
     background 0.3s ease;
 }
 
-.dots [aria-pressed='true'] span {
-  width: 20px;
-  background: #f5f5f7;
+.dots [aria-current='true'] span {
+  width: 22px;
+  background: var(--neon, #f5f5f7);
 }
 
 @media (prefers-reduced-motion: reduce) {
