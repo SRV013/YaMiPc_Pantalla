@@ -246,6 +246,47 @@
   height: var(--alto);
 }
 
+/* Compartir el Street View: arriba a la derecha, en vidrio. */
+.compartir {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #f5f5f7;
+  background: rgb(10 10 15 / 0.62);
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+
+.compartir:hover {
+  background: rgb(10 10 15 / 0.85);
+}
+
+/* Con mouse aparece al pasar sobre el Street View; en pantallas táctiles queda siempre a la vista. */
+@media (hover: hover) {
+  .compartir {
+    opacity: 0;
+    transition:
+      opacity 0.25s ease,
+      background 0.25s ease;
+  }
+
+  .streetView:hover .compartir,
+  .compartir:focus-visible {
+    opacity: 1;
+  }
+}
+
 .fotoAmpliada {
   width: min(100%, 160svh);
   aspect-ratio: 16 / 10;

@@ -35,7 +35,11 @@ function posicion(indice: number, actual: number, total: number) {
  */
 function EsquinaGaleria() {
   const [momento, setMomento] = useState<Momento>('dia')
-  const [vista, setVista] = useState<'fotos' | 'google'>('fotos')
+  // Con ?vista=street en la dirección (el link de compartir), la galería abre directo en Street View.
+  const [vista, setVista] = useState<'fotos' | 'google'>(() =>
+    CLAVE_MAPS && new URLSearchParams(window.location.search).get('vista') === 'street' ? 'google' : 'fotos',
+  )
+  const [copiado, setCopiado] = useState(false)
   const [actual, setActual] = useState(0)
   const [pausa, setPausa] = useState(false)
   // Pausa elegida con el botón de reproducir/pausar, aparte de la que pone el mouse encima.
@@ -84,6 +88,30 @@ function EsquinaGaleria() {
   }
 
   const cerrarVisor = () => setAmpliada(null)
+
+  // Si se entró por el link de compartir, baja hasta la galería.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('vista') !== 'street') return
+    const id = setTimeout(() => document.getElementById('explorar')?.scrollIntoView(), 300)
+    return () => clearTimeout(id)
+  }, [])
+
+  // Comparte el link que abre la página directo en este Street View. En el celular abre el menú de
+  // compartir del teléfono; en la compu copia el link.
+  const compartir = async () => {
+    const url = `${window.location.origin}/?vista=street#explorar`
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Pantalla Seis Esquinas', text: 'Mirá la esquina de la pantalla en Street View', url })
+      } catch {
+        // Si la persona cierra el menú de compartir no hay nada que hacer.
+      }
+      return
+    }
+    await navigator.clipboard.writeText(url)
+    setCopiado(true)
+    setTimeout(() => setCopiado(false), 2000)
+  }
 
   return (
     <div className={styles.galeria}>
@@ -177,6 +205,10 @@ function EsquinaGaleria() {
       {vista === 'google' && (
         <div className={styles.streetView}>
           <StreetView />
+          <button type="button" className={styles.compartir} onClick={compartir}>
+            <Icon name={copiado ? 'check' : 'share'} size={16} />
+            {copiado ? 'Link copiado' : 'Compartir'}
+          </button>
         </div>
       )}
 

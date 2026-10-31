@@ -18,6 +18,8 @@ const PATHS = {
   play: 'M7 4.5v15l12-7.5z',
   pause: 'M8 5v14M16 5v14',
   arrow: 'M5 12h14M13 6l6 6-6 6',
+  share: 'M12 15V3M8 7l4-4 4 4M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7',
+  check: 'M5 12.5l4.5 4.5L19 7.5',
 }
 
 export type IconName = keyof typeof PATHS
