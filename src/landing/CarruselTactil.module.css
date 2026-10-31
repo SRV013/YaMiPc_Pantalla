@@ -8,13 +8,13 @@
   margin-top: 24px;
 }
 
+/* En la computadora, grandes como antes: casi todo el ancho y el alto de la ventana, sin redondear. */
 @media (min-width: 761px) {
   .carrusel {
-    --ancho: min(1000px, 100vw - 200px, (100svh - 260px) * 16 / 9);
-    --proporcion: 16 / 9;
-    --separacion: 24px;
+    --ancho: min(1120px, 100vw - 160px);
+    --separacion: 20px;
 
-    margin-top: clamp(28px, 4vw, 44px);
+    margin-top: clamp(24px, 3vw, 36px);
   }
 }
 
@@ -180,5 +180,14 @@
 @media (prefers-reduced-motion: reduce) {
   .puntos button::before {
     transition: none;
+  }
+}
+
+/* Al final, para ganarle al estilo base: en la computadora, altas y con esquinas rectas. */
+@media (min-width: 761px) {
+  .lamina {
+    aspect-ratio: auto;
+    height: clamp(420px, 100svh - 190px, 720px);
+    border-radius: 0;
   }
 }
