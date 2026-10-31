@@ -1,205 +1,25 @@
-.seccion {
-  --p: 0;
-  /* La noche llega en el tramo central del recorrido. */
-  --noche: clamp(0, calc((var(--p) - 0.25) * 2.2), 1);
-
-  position: relative;
-  height: 260svh;
-}
-
-/* El fondo pasa del gris oscuro de la página a un azul de noche. */
-.seccion::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(#0a0a0f, #060a1c 30%, #060a1c 70%, #0a0a0f);
-  opacity: var(--noche);
-}
-
-.fija {
-  position: sticky;
-  top: 0;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: clamp(24px, 4vh, 48px);
-  height: 100svh;
-  padding: clamp(56px, 9vh, 96px) 0 clamp(24px, 5vh, 56px);
-  box-sizing: border-box;
-}
-
 .encabezado {
-  position: relative;
   text-align: center;
 }
 
-/* Sobre la foto, abajo a la izquierda, en el mismo lugar que el texto de los otros carruseles. */
+/* Sobre la foto: el icono junto al título y la explicación debajo. */
 .titulo {
-  position: absolute;
-  left: 6%;
-  right: 6%;
-  bottom: 8%;
-  z-index: 1;
-  display: grid;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
   margin: 0;
-  text-shadow: 0 2px 24px rgb(0 0 0 / 0.6);
-  font-size: clamp(30px, 4vw, 52px);
+  font-size: clamp(30px, 3.8vw, 52px);
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.03em;
 }
 
-/* Arriba, el icono junto al título; abajo, "Así se ve" alineado con el final del título. */
-.dia,
-.noche {
-  grid-area: 1 / 1;
-  justify-self: start;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  column-gap: 0.3em;
-  row-gap: 4px;
-  font-size: clamp(28px, 3.8vw, 52px);
-}
-
-/* Debajo, en letra chica: la explicación, empezando donde empieza el icono. */
-.previo {
-  grid-row: 2;
-  grid-column: 1 / -1;
-  max-width: 26em;
-  margin-top: 6px;
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0;
-  color: rgb(245 245 247 / 0.85);
-}
-
-/* El título, grande. */
-.linea {
-  grid-row: 1;
-  grid-column: 2;
-}
-
-/* Icono lleno y sin marco, como los símbolos de Apple; crece con la letra de la línea grande. */
+/* Icono lleno y sin marco; crece con la letra del título. */
 .icono {
   display: grid;
   place-items: center;
-  grid-row: 1;
   width: 1em;
   height: 1em;
-}
-
-/* Los títulos no se cruzan: uno termina de irse antes de que llegue el otro. */
-.dia {
-  opacity: clamp(0, calc(1 - var(--noche) * 2), 1);
-  transform: translateY(calc(var(--noche) * -24px));
-}
-
-.dia svg {
-  color: #f5f5f7;
-}
-
-.noche {
-  opacity: clamp(0, calc(var(--noche) * 2 - 1), 1);
-  transform: translateY(calc((1 - var(--noche)) * 24px));
-}
-
-.noche svg {
-  color: #f5f5f7;
-}
-
-/* Carrusel a todo el ancho: la foto del centro entera y las vecinas asomando a los costados. */
-.marco {
-  /* En cqw (ancho del carrusel) y no en %, que dentro del desplazamiento se mediría sobre la foto. */
-  --ancho: min(100cqw - 160px, 1120px);
-  --separacion: 20px;
-  /* Qué foto está en el centro: 1 la de día, 2 la de noche; en el medio, deslizándose. */
-  --pos: calc(1 + var(--noche));
-
-  position: relative;
-  min-height: 0;
-  overflow: hidden;
-  container-type: inline-size;
-}
-
-.lamina {
-  /* Distancia a la del centro, sin signo, para apagar las de los costados. */
-  --dist: max(var(--i) - var(--pos), var(--pos) - var(--i));
-
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: var(--ancho);
-  height: 100%;
-  object-fit: cover;
-  /* Con la foto más baja que alta, se prioriza la parte de arriba, donde está la pantalla. */
-  object-position: center 30%;
-  opacity: calc(1 - 0.65 * min(1, var(--dist)));
-  transform: translateX(calc(-50% + (var(--i) - var(--pos)) * (var(--ancho) + var(--separacion))));
-}
-
-/* Caja del tamaño de la foto del centro, para ubicar el texto y la línea encima. */
-.fotos {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  z-index: 1;
-  width: var(--ancho);
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
-/* Velo oscuro abajo, como en los otros carruseles, para leer el texto sobre la foto. */
-.fotos::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgb(0 0 0 / 0.6), transparent 50%);
-}
-
-/* Puntos de avance, iguales a los de los otros carruseles. */
-.puntos {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-}
-
-.puntos span {
-  width: 8px;
-  height: 8px;
-  background: rgb(245 245 247 / 0.35);
-  border-radius: 999px;
-  transition:
-    width 0.4s ease,
-    background 0.4s ease;
-}
-
-.puntos .puntoActivo {
-  width: 26px;
-  background: var(--neon, #f5f5f7);
-}
-
-/* En el celular arranca desde el margen y se achica un poco. */
-@media (max-width: 760px) {
-  .marco {
-    --ancho: 84vw;
-    --separacion: 10px;
-  }
-
-  .titulo {
-    left: 20px;
-  }
-
-  .dia,
-  .noche {
-    font-size: 34px;
-  }
-
-  .previo {
-    font-size: 15px;
-  }
-
 }
 
 .icono svg {
@@ -210,21 +30,16 @@
   filter: drop-shadow(0 2px 16px rgb(0 0 0 / 0.45));
 }
 
-/* Versión celular: título con su icono y la explicación debajo, sobre la foto. */
-.celTitulo {
-  display: flex;
-  align-items: center;
-  gap: 0.3em;
-  margin: 0;
-  font-size: 34px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.celTexto {
+.texto {
+  max-width: 26em;
   margin: 10px 0 0;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.45;
   color: rgb(245 245 247 / 0.85);
+}
+
+@media (max-width: 760px) {
+  .texto {
+    font-size: 15px;
+  }
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useRuedaLateral } from './efectos.ts'
 import styles from './AdCarousel.module.css'
 
 const ROTATION_MS = 5000
@@ -12,6 +13,8 @@ function AdCarousel({ ads }: { ads: Ad[] }) {
   const [current, setCurrent] = useState(0)
   const drag = useRef<number | null>(null)
   const go = (i: number) => setCurrent((i + ads.length) % ads.length)
+  // Con el mouse encima, el gesto de costado del touchpad pasa de anuncio.
+  const screen = useRuedaLateral<HTMLDivElement>((dir) => go(current + dir))
 
   useEffect(() => {
     // Se reinicia al elegir uno a mano, así no cambia enseguida.
@@ -24,6 +27,7 @@ function AdCarousel({ ads }: { ads: Ad[] }) {
       <div className={styles.frame}>
         {/* Se pasa de anuncio arrastrando de costado, con el dedo o el mouse, como en los otros carruseles. */}
         <div
+          ref={screen}
           className={styles.screen}
           onPointerDown={(e) => (drag.current = e.clientX)}
           onPointerUp={(e) => {

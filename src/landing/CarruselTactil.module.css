@@ -1,18 +1,33 @@
 .carrusel {
+  /* Ancho de cada foto: casi toda la pantalla en el celular; en la computadora, grande pero con
+     las vecinas asomando y sin pasarse del alto de la ventana. */
+  --ancho: 84vw;
+  --proporcion: 4 / 5;
+  --separacion: 12px;
+
   margin-top: 24px;
 }
 
-/* Fila que se desliza con el dedo; cada foto se frena centrada y la siguiente asoma al costado. */
+@media (min-width: 761px) {
+  .carrusel {
+    --ancho: min(1000px, 100vw - 200px, (100svh - 260px) * 16 / 9);
+    --proporcion: 16 / 9;
+    --separacion: 24px;
+
+    margin-top: clamp(28px, 4vw, 44px);
+  }
+}
+
+/* Fila que se desliza de costado; cada foto se frena centrada y la siguiente asoma al costado. */
 .fila {
   display: flex;
-  gap: 12px;
+  gap: var(--separacion);
   margin: 0;
-  padding: 0 8vw;
+  padding: 0 calc((100% - var(--ancho)) / 2);
   list-style: none;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: 8vw;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
@@ -21,17 +36,23 @@
   display: none;
 }
 
+/* Mientras se arrastra con el mouse, sin selección de texto ni frenos a mitad de camino. */
+.arrastrando {
+  cursor: grabbing;
+  user-select: none;
+}
+
 .lamina {
   position: relative;
-  flex: 0 0 84vw;
-  aspect-ratio: 4 / 5;
+  flex: 0 0 var(--ancho);
+  aspect-ratio: var(--proporcion);
   overflow: hidden;
   border-radius: 20px;
   scroll-snap-align: center;
   scroll-snap-stop: always;
 }
 
-.lamina img {
+.lamina > img {
   display: block;
   width: 100%;
   height: 100%;
@@ -56,11 +77,25 @@
   text-shadow: 0 2px 20px rgb(0 0 0 / 0.55);
 }
 
+@media (min-width: 761px) {
+  .leyenda {
+    left: 6%;
+    right: 6%;
+    bottom: 8%;
+  }
+}
+
+.controles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
 .puntos {
   display: flex;
-  justify-content: center;
   gap: 4px;
-  margin-top: 16px;
 }
 
 /* Botones de 24 px para el dedo, con el punto visible adentro. */
@@ -91,9 +126,59 @@
   background: var(--neon, #f5f5f7);
 }
 
+/* Flechas: solo en la computadora, donde no hay dedo para deslizar. */
+.flecha {
+  display: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: #f5f5f7;
+  background: rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.flecha:hover:not(:disabled) {
+  background: rgb(255 255 255 / 0.14);
+}
+
+.flecha:disabled {
+  cursor: default;
+  opacity: 0.3;
+}
+
+.atras {
+  transform: scaleX(-1);
+}
+
 .ayuda {
   margin: 6px 0 0;
   font-size: 13px;
   text-align: center;
   color: var(--ink-soft);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fila {
+    cursor: grab;
+  }
+
+  .flecha {
+    display: grid;
+  }
+
+  .ayuda {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .puntos button::before {
+    transition: none;
+  }
 }

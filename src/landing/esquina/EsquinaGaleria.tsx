@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import CarruselTactil from '../CarruselTactil.tsx'
 import Icon from '../Icon.tsx'
-import { useEsCelular } from '../efectos.ts'
+import { useEsCelular, useRuedaLateral } from '../efectos.ts'
 import { ESQUINA, type Momento } from '../content.ts'
 import Foto from './Foto.tsx'
 import { precargar } from './variantes.ts'
@@ -113,6 +113,8 @@ function EsquinaGaleria() {
     setPausa(false)
     setActual((indice + total) % total)
   }
+  // Con el mouse encima, el gesto de costado del touchpad pasa de foto (el scroll vertical no se toca).
+  const carrusel = useRuedaLateral<HTMLDivElement>((sentido) => ir(actual + sentido))
 
   const cerrarVisor = () => setAmpliada(null)
 
@@ -176,6 +178,7 @@ function EsquinaGaleria() {
 
       {vista === 'fotos' && !celular && (
         <div
+          ref={carrusel}
           className={styles.carrusel}
           aria-roledescription="carrusel"
           aria-label="Fotos de la esquina"

@@ -81,3 +81,42 @@ export function useEsCelular() {
 
   return celular
 }
+
+/**
+ * Pasa de foto con el gesto de costado del touchpad (o Shift + rueda) mientras el mouse está
+ * encima. Un gesto = una foto. El gesto vertical no se toca: la página sigue bajando normal.
+ */
+export function useRuedaLateral<T extends HTMLElement>(onPaso: (sentido: 1 | -1, elemento: T) => void) {
+  const ref = useRef<T>(null)
+  const pasoRef = useRef(onPaso)
+  useEffect(() => {
+    pasoRef.current = onPaso
+  })
+
+  useEffect(() => {
+    const elemento = ref.current
+    if (!elemento) return
+    let bloqueado = false
+    let id = 0
+    const rueda = (e: WheelEvent) => {
+      // Shift + rueda del mouse llega como vertical en algunos navegadores.
+      const dx = e.shiftKey && !e.deltaX ? e.deltaY : e.deltaX
+      if (Math.abs(dx) <= Math.abs(e.shiftKey ? 0 : e.deltaY)) return
+      // Evita que el gesto de costado vuelva a la página anterior del navegador.
+      e.preventDefault()
+      if (bloqueado || Math.abs(dx) < 4) return
+      bloqueado = true
+      pasoRef.current(dx > 0 ? 1 : -1, elemento)
+      // El touchpad sigue mandando eventos un rato después del gesto: se esperan antes de otro paso.
+      clearTimeout(id)
+      id = window.setTimeout(() => (bloqueado = false), 700)
+    }
+    elemento.addEventListener('wheel', rueda, { passive: false })
+    return () => {
+      elemento.removeEventListener('wheel', rueda)
+      clearTimeout(id)
+    }
+  }, [])
+
+  return ref
+}

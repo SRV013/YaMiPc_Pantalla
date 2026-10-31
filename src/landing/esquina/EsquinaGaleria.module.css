@@ -342,7 +342,7 @@
 /* Celular: el texto de cada foto, igual que en los otros carruseles de la página. */
 .celTitulo {
   margin: 0;
-  font-size: 26px;
+  font-size: clamp(26px, 3.8vw, 52px);
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.02em;
