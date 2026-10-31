@@ -60,7 +60,7 @@ function SeisEsquinas() {
 
             {/* Esquinas */}
             {ESQUINAS.slice(0, 5).map((e) => (
-              <g key={e.n} className={`${styles.esquina} ${e.n === 3 ? styles.esquinaDestacada : ''}`}>
+              <g key={e.n} className={styles.esquina}>
                 <circle cx={e.x} cy={e.y} r="17" />
                 <text x={e.x} y={e.y + 5} textAnchor="middle">
                   {e.n}

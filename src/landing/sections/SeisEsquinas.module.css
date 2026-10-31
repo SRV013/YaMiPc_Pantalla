@@ -69,11 +69,6 @@
   fill: var(--ink);
 }
 
-/* La esquina del shopping se resalta: su círculo, relleno. */
-.esquinaDestacada circle {
-  fill: var(--acento-2);
-}
-
 .lugar rect {
   fill: rgb(255 255 255 / 0.1);
   stroke: rgb(255 255 255 / 0.25);
