@@ -1,0 +1,44 @@
+.alcance {
+  text-align: center;
+}
+
+.titulo {
+  max-width: 14em;
+  margin: 0 auto;
+  font-size: clamp(34px, 5vw, 64px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(32px, 5vw, 56px);
+  margin: clamp(48px, 7vw, 88px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.valor {
+  margin: 0;
+  font-size: clamp(44px, 5.2vw, 72px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: transparent;
+  background: linear-gradient(180deg, #fff 30%, #fff212);
+  background-clip: text;
+}
+
+.unidad {
+  margin: 14px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.detalle {
+  margin: 4px 0 0;
+  color: rgb(245 245 247 / 0.6);
+}

@@ -3,7 +3,6 @@ import Icon from '../Icon.tsx'
 import { ESQUINA, PANORAMA, type Momento } from '../content.ts'
 import Foto from './Foto.tsx'
 import { precargar } from './variantes.ts'
-import VistaDoble from './VistaDoble.tsx'
 import Panorama from './Panorama.tsx'
 import DiaNoche from './DiaNoche.tsx'
 import Pestanas from './Pestanas.tsx'
@@ -24,6 +23,7 @@ const COLORES = {
 const NOMBRE = { dia: 'Día', noche: 'Noche' }
 
 type Ampliada = { tipo: 'foto'; indice: number } | { tipo: 'panorama' } | null
+type Lado = 'hacia' | 'desde'
 
 /** Posición de cada foto respecto de la actual, dando la vuelta: -1 la anterior, 1 la siguiente. */
 function posicion(indice: number, actual: number, total: number) {
@@ -40,7 +40,9 @@ function EsquinaGaleria() {
   const [vista, setVista] = useState<'fotos' | '360'>('fotos')
   const [actual, setActual] = useState(0)
   const [pausa, setPausa] = useState(false)
-  const [invertida, setInvertida] = useState(false)
+  // Pausa elegida con el botón de reproducir/pausar, aparte de la que pone el mouse encima.
+  const [detenido, setDetenido] = useState(false)
+  const [lado, setLado] = useState<Lado>('hacia')
   const [ampliada, setAmpliada] = useState<Ampliada>(null)
   const [zoom, setZoom] = useState(1)
   const vuelta = PANORAMA[momento]
@@ -58,14 +60,14 @@ function EsquinaGaleria() {
   })
 
   useEffect(() => {
-    if (vista !== 'fotos' || pausa || ampliada) return
+    if (vista !== 'fotos' || pausa || detenido || ampliada) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const id = setTimeout(() => {
       setActual((i) => (i + 1) % total)
-      setInvertida(false)
+      setLado('hacia')
     }, PASO_MS)
     return () => clearTimeout(id)
-  }, [actual, vista, pausa, ampliada, total])
+  }, [actual, vista, pausa, detenido, ampliada, total])
 
   // Mientras se mira una foto, se piden por adelantado las que vienen: la vista de enfrente de la
   // siguiente y la misma foto en el otro momento del día, así los cambios no esperan a la red.
@@ -84,7 +86,7 @@ function EsquinaGaleria() {
     // La foto nueva entra bajo el mouse, que ya no está sobre la anterior.
     setPausa(false)
     setActual((indice + total) % total)
-    setInvertida(false)
+    setLado('hacia')
   }
 
   const cerrarVisor = () => {
@@ -94,7 +96,7 @@ function EsquinaGaleria() {
 
   return (
     <div className={styles.galeria}>
-      {vista === 'fotos' ? (
+      {vista === 'fotos' && (
         <div
           className={styles.carrusel}
           aria-roledescription="carrusel"
@@ -134,24 +136,15 @@ function EsquinaGaleria() {
                 onMouseEnter={esActual ? () => setPausa(true) : undefined}
                 onMouseLeave={esActual ? () => setPausa(false) : undefined}
               >
-                {esActual ? (
-                  <VistaDoble
-                    hacia={hacia}
-                    desde={desde}
-                    invertida={invertida}
-                    onInvertir={() => setInvertida((v) => !v)}
-                  />
-                ) : (
-                  // Solo se piden las fotos de al lado; las demás muestran su miniatura hasta acercarse.
-                  <Foto {...hacia} cargar={Math.abs(rel) <= 1} />
-                )}
+                {/* Solo se piden las fotos de al lado; las demás muestran su miniatura hasta acercarse. */}
+                <Foto {...hacia} cargar={Math.abs(rel) <= 1} />
 
                 {esActual ? (
                   <>
-                    <figcaption className={styles.lugar}>
-                      <span>{String(i + 1).padStart(2, '0')}</span> {punto.lugar}
-                    </figcaption>
-
+                    {/* La vista de enfrente entra por encima con un barrido de costado. */}
+                    <div className={`${styles.enfrente} ${lado === 'desde' ? styles.enfrenteVisible : ''}`} aria-hidden={lado !== 'desde'}>
+                      <Foto {...desde} />
+                    </div>
                     <button
                       type="button"
                       className={styles.ampliar}
@@ -175,7 +168,55 @@ function EsquinaGaleria() {
             )
           })}
         </div>
-      ) : (
+      )}
+
+      {vista === 'fotos' && (
+        <div className={styles.pie}>
+          {/* La key reinicia el fundido del texto al cambiar de foto o de vista. */}
+          <p key={`${actual}-${lado}`} className={styles.leyenda}>
+            <strong>{ESQUINA[actual].lugar}.</strong>{' '}
+            {lado === 'hacia'
+              ? `Así se ve la pantalla desde este punto, de ${NOMBRE[momento].toLowerCase()}.`
+              : 'Esto es lo que la pantalla tiene enfrente: todas esas miradas apuntan a tu anuncio.'}
+          </p>
+          <div className={styles.lados} role="group" aria-label="Qué vista mostrar">
+            <button type="button" aria-pressed={lado === 'hacia'} onClick={() => setLado('hacia')}>
+              Hacia la pantalla
+            </button>
+            <button type="button" aria-pressed={lado === 'desde'} onClick={() => setLado('desde')}>
+              Lo que ve la pantalla
+            </button>
+          </div>
+        </div>
+      )}
+
+      {vista === 'fotos' && (
+        <div className={styles.navegacion}>
+          <div className={styles.puntos}>
+            {ESQUINA.map((punto, i) => (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Foto ${i + 1}: ${punto.lugar}`}
+                aria-current={i === actual}
+                onClick={() => ir(i)}
+              >
+                <span />
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            className={styles.reproducir}
+            aria-label={detenido ? 'Reproducir' : 'Pausar'}
+            onClick={() => setDetenido((d) => !d)}
+          >
+            <Icon name={detenido ? 'play' : 'pause'} size={16} />
+          </button>
+        </div>
+      )}
+
+      {vista === '360' && (
         <div className={styles.vista360}>
           {/* La key recarga la vista al cambiar de foto, así arranca desde el principio. */}
           <Panorama key={vuelta.src} src={vuelta.src} inicio={vuelta.inicio} momento={momento} arrastrable />
@@ -213,13 +254,7 @@ function EsquinaGaleria() {
       <Visor abierto={ampliada !== null} titulo="Vista ampliada" onCerrar={cerrarVisor}>
         {ampliada?.tipo === 'foto' && (
           <div className={styles.fotoAmpliada}>
-            <VistaDoble
-              hacia={foto(ampliada.indice, 'hacia')}
-              desde={foto(ampliada.indice, 'desde')}
-              invertida={invertida}
-              onInvertir={() => setInvertida((v) => !v)}
-              calidad="original"
-            />
+            <Foto {...foto(ampliada.indice, lado)} calidad="original" />
           </div>
         )}
         {ampliada?.tipo === 'panorama' && (

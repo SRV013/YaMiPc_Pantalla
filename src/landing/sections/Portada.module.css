@@ -1,0 +1,136 @@
+.portada {
+  padding-top: clamp(64px, 10vw, 128px);
+}
+
+.texto {
+  text-align: center;
+}
+
+.titulo {
+  max-width: 14em;
+  margin: 0 auto;
+  font-size: clamp(40px, 7vw, 92px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.bajada {
+  max-width: 34em;
+  margin: 24px auto 0;
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.5;
+  color: rgb(245 245 247 / 0.72);
+}
+
+.temporada {
+  display: inline-block;
+  margin: 20px 0 0;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff212;
+  border: 1px solid rgb(255 242 18 / 0.4);
+  border-radius: 999px;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+/* La escena es más alta que la pantalla: mientras se scrollea, la foto queda fija y crece. */
+.escena {
+  --p: 0;
+
+  height: 190svh;
+  margin-top: clamp(40px, 6vw, 72px);
+}
+
+.fija {
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.marco {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transform: scale(calc(0.7 + 0.3 * var(--p)));
+  will-change: transform;
+  animation: entrar 1.6s ease-out both;
+}
+
+/* Al cargar, la foto aparece desde negro. */
+@keyframes entrar {
+  from {
+    opacity: 0;
+  }
+}
+
+.marco img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(calc(1.15 - 0.15 * var(--p)));
+  /* Arranca apagada y se va iluminando a medida que crece. */
+  filter: brightness(calc(0.45 + 0.4 * var(--p))) saturate(calc(0.6 + 0.4 * var(--p)));
+}
+
+/* El remate aparece en la segunda mitad del recorrido, sobre un velo oscuro. */
+.marco::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.7), transparent 60%);
+  opacity: clamp(0, calc((var(--p) - 0.4) * 2.5), 1);
+}
+
+.remate {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(32px, 8vh, 96px);
+  z-index: 1;
+  margin: 0;
+  padding: 0 20px;
+  font-size: clamp(36px, 6vw, 80px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-align: center;
+  opacity: clamp(0, calc((var(--p) - 0.55) * 3), 1);
+  transform: translateY(calc((1 - var(--p)) * 60px));
+}
+
+.remate span {
+  color: #fff212;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marco {
+    animation: none;
+  }
+
+  .escena {
+    --p: 1 !important;
+
+    height: auto;
+  }
+
+  .fija {
+    position: static;
+    height: 70svh;
+  }
+}

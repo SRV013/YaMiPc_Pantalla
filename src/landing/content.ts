@@ -23,27 +23,47 @@ export const SCREEN = {
   spot: '15 segundos',
 }
 
-// Año de la temporada que se ofrece en la portada.
 // Temporada que se ofrece a los anunciantes (Pascua 2027: 28 de marzo).
 export const TEMPORADA = 'Propuesta temporada · 15/11/2026 a Pascua 2027'
 
 // Textos del pedido de marketing. Las cifras de alcance las informó el dueño de la pantalla.
+// Las fotos son las versiones livianas de public/img/esquina (ver scripts/optimizar-esquina.sh).
+const FOTO = (nombre: string) => `/img/esquina/vista/${nombre}.jpg`
+
+export const FOTOS = {
+  portada: FOTO('dia-1-hacia'),
+  dia: FOTO('dia-4-hacia'),
+  noche: FOTO('noche-4-hacia'),
+}
+
 export const ATRACCION = [
-  { icono: 'bolsa', titulo: 'Frente al Shopping Los Gallegos', texto: 'Capturá la atención de miles de personas con mentalidad de compra activa.' },
-  { icono: 'personas', titulo: "A metros de McDonald's", texto: 'Tránsito garantizado de público joven y familias durante todo el día.' },
-  { icono: 'semaforo', titulo: 'Zona de semáforos', texto: 'Exposición prolongada frente a las luces de mayor detención de la zona.' },
-] as const
+  {
+    titulo: 'Frente al Shopping Los Gallegos',
+    texto: 'Capturá la atención de miles de personas con mentalidad de compra activa.',
+    foto: FOTO('dia-4-desde'),
+  },
+  {
+    titulo: "A metros de McDonald's",
+    texto: 'Tránsito garantizado de público joven y familias durante todo el día.',
+    foto: FOTO('dia-2-hacia'),
+  },
+  {
+    titulo: 'Zona de semáforos',
+    texto: 'Exposición prolongada frente a las luces de mayor detención de la zona.',
+    foto: FOTO('dia-4-hacia'),
+  },
+]
 
 export const VENTAJAS = [
-  { icono: 'cruce', titulo: 'Intersección de 6 esquinas', texto: 'Visibilidad multiangular desde múltiples calles de acceso.' },
-  { icono: 'ojo', titulo: 'Semáforos de mayor tránsito', texto: 'Tiempo de visualización (dwell time) ultra elevado.' },
-  { icono: 'objetivo', titulo: 'Audiencia cualificada', texto: 'Entorno puramente comercial, ideal para posicionamiento.' },
-] as const
+  { titulo: 'Intersección de 6 esquinas', texto: 'Visibilidad multiangular desde múltiples calles de acceso.', foto: FOTO('dia-3-desde') },
+  { titulo: 'Semáforos de mayor tránsito', texto: 'Tiempo de visualización (dwell time) ultra elevado.', foto: FOTO('noche-2-hacia') },
+  { titulo: 'Audiencia cualificada', texto: 'Entorno puramente comercial, ideal para posicionamiento.', foto: FOTO('noche-1-desde') },
+]
 
 export const METRICAS = [
-  { valor: '+500.000', unidad: 'peatones', detalle: 'por semana' },
-  { valor: '+10.000', unidad: 'vehículos', detalle: 'por día' },
-  { valor: '14 h', unidad: 'de transmisión continua', detalle: 'de 09:00 a 23:00 hs' },
+  { prefijo: '+', numero: 500000, sufijo: '', unidad: 'peatones', detalle: 'por semana' },
+  { prefijo: '+', numero: 10000, sufijo: '', unidad: 'vehículos', detalle: 'por día' },
+  { prefijo: '', numero: 14, sufijo: ' h', unidad: 'de transmisión continua', detalle: 'de 09:00 a 23:00 hs' },
 ]
 
 // Pendiente: el pedido decía "hasta un 400% más de atención"; sin una fuente que lo respalde se

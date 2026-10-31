@@ -4,8 +4,8 @@ import { COMPANY } from '../content.ts'
 import styles from './Nav.module.css'
 
 const LINKS = [
-  { href: '#ventajas', label: 'Ventajas' },
-  { href: '#metricas', label: 'Alcance' },
+  { href: '#esquina', label: 'La esquina' },
+  { href: '#alcance', label: 'Alcance' },
   { href: '#pantalla', label: 'La pantalla' },
   { href: '#ubicacion', label: 'Ubicación' },
 ]

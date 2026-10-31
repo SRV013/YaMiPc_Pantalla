@@ -1,0 +1,143 @@
+.historia {
+  --p: 0;
+
+  position: relative;
+  scroll-margin-top: 0;
+}
+
+.fija {
+  position: sticky;
+  top: 0;
+  display: grid;
+  align-items: center;
+  height: 100svh;
+}
+
+.grilla {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 80px);
+}
+
+.lista ol {
+  display: grid;
+  gap: clamp(20px, 3vh, 36px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Los puntos que no están activos quedan apagados; el activo se enciende. */
+.lista li {
+  opacity: 0.28;
+  transform: translateX(0);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.lista .activo {
+  opacity: 1;
+  transform: translateX(8px);
+}
+
+.titulo {
+  margin: 0;
+  font-size: clamp(26px, 3.4vw, 44px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.texto {
+  max-width: 26em;
+  margin: 8px 0 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: rgb(245 245 247 / 0.72);
+}
+
+.fotos {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: 78svh;
+  overflow: hidden;
+  background: #15151b;
+}
+
+.fotos img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  transition:
+    opacity 0.9s ease,
+    transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.fotos .visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Barra de avance de la historia, abajo de la foto. */
+.avance {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  height: 3px;
+  background: rgb(255 255 255 / 0.25);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.avance::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #fff212;
+  transform: scaleX(var(--p));
+  transform-origin: left;
+}
+
+/* En el celular la foto va arriba y debajo solo se lee el punto activo. */
+@media (max-width: 760px) {
+  .grilla {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+  }
+
+  .fotos {
+    order: -1;
+    aspect-ratio: 4 / 3;
+    max-height: 46svh;
+  }
+
+  .lista ol {
+    display: grid;
+  }
+
+  .lista li {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .lista .activo {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lista li,
+  .fotos img {
+    transition: none;
+  }
+}
