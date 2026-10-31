@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import Icon from '../Icon.tsx'
 import base from '../Landing.module.css'
 import { FOTOS } from '../content.ts'
@@ -8,6 +9,15 @@ import styles from './DiaYNoche.module.css'
  * De día a noche con el scroll: la misma esquina, desde el mismo lugar, se va oscureciendo
  * hasta que la pantalla queda encendida en la noche. El fondo de la sección acompaña.
  */
+// Fotos en fila, alternando: arranca centrada la de día (con la noche a los dos costados) y el
+// scroll la desliza hasta centrar la de noche (con el día a los costados).
+const FILA = [
+  { foto: FOTOS.noche, alt: '' },
+  { foto: FOTOS.dia, alt: 'La esquina de día, con el colectivo y la pantalla' },
+  { foto: FOTOS.noche, alt: 'La misma esquina de noche, con la pantalla encendida' },
+  { foto: FOTOS.dia, alt: '' },
+]
+
 function DiaYNoche() {
   const { ref } = useProgreso<HTMLElement>()
 
@@ -19,9 +29,18 @@ function DiaYNoche() {
         </div>
 
         <div className={styles.marco}>
+          {FILA.map((lamina, i) => (
+            <img
+              key={i}
+              className={styles.lamina}
+              src={lamina.foto}
+              alt={lamina.alt}
+              style={{ '--i': i } as CSSProperties}
+            />
+          ))}
+
+          {/* El texto va sobre la foto del centro. */}
           <div className={styles.fotos}>
-            <img src={FOTOS.dia} alt="La esquina de día, con el colectivo y la pantalla" />
-            <img className={styles.fotoNoche} src={FOTOS.noche} alt="La misma esquina de noche, con la pantalla encendida" />
             <span className={styles.hora} aria-hidden="true" />
 
             {/* Sobre la foto: de día o de noche, cambiando con el scroll. */}
