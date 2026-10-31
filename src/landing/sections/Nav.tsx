@@ -9,7 +9,7 @@ function Nav() {
     <header className={styles.nav}>
       <div className={`${base.container} ${styles.inner}`}>
         <div className={styles.brand}>
-          <a href="/panel" aria-label="Panel">
+          <a href="/admin" aria-label="Admin">
             <img src="/yamipc-dark.svg" alt={COMPANY.name} width={96} />
           </a>
           <span className={styles.badge}>Admin</span>

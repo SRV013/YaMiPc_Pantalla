@@ -18,7 +18,8 @@ function App() {
   if (path === '/dolar') return <Dolar />
   if (path === '/yamipc') return <YaMiPc />
   if (path === '/saludos') return <Saludos />
-  if (path === '/panel') return <Panel />
+  // Menú de administración: /admin es la entrada principal; /panel queda por compatibilidad.
+  if (path === '/admin' || path === '/admin/' || path === '/panel') return <Panel />
   return <Landing />
 }
 
