@@ -1,7 +1,14 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import styles from './CarruselTactil.module.css'
 
-export type Lamina = { foto: string; alt: string; contenido: ReactNode }
+export type Lamina = {
+  /** Ruta de la foto, o un elemento ya armado (por ejemplo, una foto con carga progresiva). */
+  foto: string | ReactNode
+  alt: string
+  contenido: ReactNode
+  /** Algo más sobre la foto, como un botón para ampliarla. */
+  encima?: ReactNode
+}
 
 /**
  * Carrusel para el celular: las fotos se deslizan con el dedo hacia los costados y se frenan
@@ -34,7 +41,11 @@ function CarruselTactil({ laminas }: { laminas: Lamina[] }) {
 
   const ir = (i: number) => {
     const destino = fila.current?.children[i] as HTMLElement | undefined
-    destino?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+    destino?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    })
   }
 
   return (
@@ -42,8 +53,9 @@ function CarruselTactil({ laminas }: { laminas: Lamina[] }) {
       <ul ref={fila} className={styles.fila}>
         {laminas.map((l, i) => (
           <li key={i} className={styles.lamina} aria-roledescription="diapositiva" aria-label={`${i + 1} de ${laminas.length}`}>
-            <img src={l.foto} alt={l.alt} loading={i === 0 ? 'eager' : 'lazy'} />
+            {typeof l.foto === 'string' ? <img src={l.foto} alt={l.alt} loading={i === 0 ? 'eager' : 'lazy'} /> : l.foto}
             <div className={styles.leyenda}>{l.contenido}</div>
+            {l.encima}
           </li>
         ))}
       </ul>
@@ -67,4 +79,3 @@ function CarruselTactil({ laminas }: { laminas: Lamina[] }) {
 }
 
 export default CarruselTactil
-

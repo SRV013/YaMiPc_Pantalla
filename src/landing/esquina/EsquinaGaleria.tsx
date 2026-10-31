@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import CarruselTactil from '../CarruselTactil.tsx'
 import Icon from '../Icon.tsx'
+import { useEsCelular } from '../efectos.ts'
 import { ESQUINA, type Momento } from '../content.ts'
 import Foto from './Foto.tsx'
 import { precargar } from './variantes.ts'
@@ -14,8 +16,14 @@ const ARRASTRE_PX = 50
 
 // Colores de los marcadores mientras no están las fotos: uno por punto, más oscuros de noche.
 const COLORES = {
-  dia: { hacia: ['#4f7fd6', '#3f9d77', '#d29a3a', '#c25d8c', '#5a9ec9'], desde: ['#6b6fd6', '#3c9aa8', '#c97b4a', '#8a6bc2', '#7aa35a'] },
-  noche: { hacia: ['#1d2550', '#123a30', '#4a3113', '#3b1832', '#152f45'], desde: ['#272a5c', '#11363d', '#4a2a17', '#2e1f4a', '#22341a'] },
+  dia: {
+    hacia: ['#4f7fd6', '#3f9d77', '#d29a3a', '#c25d8c', '#5a9ec9'],
+    desde: ['#6b6fd6', '#3c9aa8', '#c97b4a', '#8a6bc2', '#7aa35a'],
+  },
+  noche: {
+    hacia: ['#1d2550', '#123a30', '#4a3113', '#3b1832', '#152f45'],
+    desde: ['#272a5c', '#11363d', '#4a2a17', '#2e1f4a', '#22341a'],
+  },
 }
 
 const NOMBRE = { dia: 'Día', noche: 'Noche' }
@@ -47,6 +55,8 @@ function EsquinaGaleria() {
   const [lado, setLado] = useState<Lado>('hacia')
   const [ampliada, setAmpliada] = useState<Ampliada>(null)
   const total = ESQUINA.length
+  // En el celular las fotos se deslizan con el dedo, como el resto de los carruseles de la página.
+  const celular = useEsCelular()
   const arrastre = useRef<{ x: number; movio: boolean } | null>(null)
 
   const foto = (indice: number, lado: 'hacia' | 'desde') => ({
@@ -60,13 +70,13 @@ function EsquinaGaleria() {
   })
 
   useEffect(() => {
-    if (vista !== 'fotos' || pausa || detenido || ampliada) return
+    if (celular || vista !== 'fotos' || pausa || detenido || ampliada) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const id = setTimeout(() => {
       setActual((i) => (i + 1) % total)
     }, PASO_MS)
     return () => clearTimeout(id)
-  }, [actual, vista, pausa, detenido, ampliada, total])
+  }, [actual, vista, pausa, detenido, ampliada, total, celular])
 
   // Mientras se mira una foto, se piden por adelantado las que vienen: la otra vista de la siguiente
   // y la misma foto en el otro momento del día, así los cambios no esperan a la red.
@@ -80,6 +90,23 @@ function EsquinaGaleria() {
     }, 1500)
     return () => clearTimeout(id)
   }, [actual, momento, lado, total])
+
+  const descripcion = (lado: Lado) =>
+    lado === 'hacia'
+      ? `Así se ve la pantalla desde este punto, de ${NOMBRE[momento].toLowerCase()}.`
+      : 'Esto es lo que la pantalla tiene enfrente: todas esas miradas apuntan a tu anuncio.'
+
+  const selectorLado = (
+    <Pestanas
+      etiqueta="Qué vista mostrar"
+      valor={lado}
+      onCambiar={setLado}
+      opciones={[
+        { valor: 'hacia', texto: 'Mirando la pantalla' },
+        { valor: 'desde', texto: 'Desde la pantalla' },
+      ]}
+    />
+  )
 
   const ir = (indice: number) => {
     // La foto nueva entra bajo el mouse, que ya no está sobre la anterior.
@@ -102,7 +129,11 @@ function EsquinaGaleria() {
     const url = `${window.location.origin}/?vista=street#explorar`
     if (navigator.share) {
       try {
-        await navigator.share({ title: 'Pantalla Seis Esquinas', text: 'Mirá la esquina de la pantalla en Street View', url })
+        await navigator.share({
+          title: 'Pantalla Seis Esquinas',
+          text: 'Mirá la esquina de la pantalla en Street View',
+          url,
+        })
       } catch {
         // Si la persona cierra el menú de compartir no hay nada que hacer.
       }
@@ -115,7 +146,35 @@ function EsquinaGaleria() {
 
   return (
     <div className={styles.galeria}>
-      {vista === 'fotos' && (
+      {vista === 'fotos' && celular && (
+        <CarruselTactil
+          laminas={ESQUINA.map((punto, i) => {
+            const f = foto(i, lado)
+            return {
+              foto: <Foto {...f} />,
+              alt: f.alt,
+              contenido: (
+                <>
+                  <h3 className={styles.celTitulo}>{punto.lugar}</h3>
+                  <p className={styles.celTexto}>{descripcion(lado)}</p>
+                </>
+              ),
+              encima: (
+                <button
+                  type="button"
+                  className={styles.ampliar}
+                  aria-label="Ampliar foto"
+                  onClick={() => setAmpliada({ tipo: 'foto', indice: i })}
+                >
+                  <Icon name="expand" size={18} />
+                </button>
+              ),
+            }
+          })}
+        />
+      )}
+
+      {vista === 'fotos' && !celular && (
         <div
           className={styles.carrusel}
           aria-roledescription="carrusel"
@@ -162,21 +221,14 @@ function EsquinaGaleria() {
                 {esActual ? (
                   <>
                     {/* La vista de enfrente entra por encima con un barrido de costado. */}
-                    <div className={`${styles.enfrente} ${lado === 'desde' ? styles.enfrenteVisible : ''}`} aria-hidden={lado !== 'desde'}>
+                    <div
+                      className={`${styles.enfrente} ${lado === 'desde' ? styles.enfrenteVisible : ''}`}
+                      aria-hidden={lado !== 'desde'}
+                    >
                       <Foto {...desde} />
                     </div>
                     {/* Abajo a la derecha, sobre la foto: hacia dónde se mira. */}
-                    <div className={`${styles.sobreFoto} ${styles.vidrio}`}>
-                      <Pestanas
-                        etiqueta="Qué vista mostrar"
-                        valor={lado}
-                        onCambiar={setLado}
-                        opciones={[
-                          { valor: 'hacia', texto: 'Mirando la pantalla' },
-                          { valor: 'desde', texto: 'Desde la pantalla' },
-                        ]}
-                      />
-                    </div>
+                    <div className={`${styles.sobreFoto} ${styles.vidrio}`}>{selectorLado}</div>
                     <button
                       type="button"
                       className={styles.ampliar}
@@ -212,54 +264,57 @@ function EsquinaGaleria() {
         </div>
       )}
 
-      {/* El pie está en las dos vistas, así la sección mantiene la misma altura y no salta. */}
-      <div className={styles.pie}>
-        {/* La key reinicia el fundido del texto al cambiar de foto o de vista. */}
-        <p key={`${vista}-${actual}-${lado}-${momento}`} className={styles.leyenda}>
-          {vista === 'google' ? (
-            <>
-              <strong>Street View de Google.</strong> Arrastrá para mirar alrededor y tocá la calle para avanzar.
-            </>
-          ) : (
-            <>
-              <strong>{ESQUINA[actual].lugar}.</strong>{' '}
-              {lado === 'hacia'
-                ? `Así se ve la pantalla desde este punto, de ${NOMBRE[momento].toLowerCase()}.`
-                : 'Esto es lo que la pantalla tiene enfrente: todas esas miradas apuntan a tu anuncio.'}
-            </>
-          )}
-        </p>
+      {/* El pie está en las dos vistas, así la sección mantiene la misma altura y no salta.
+          En el celular, con fotos, el texto va sobre cada foto y el carrusel trae sus puntos. */}
+      {!(celular && vista === 'fotos') && (
+        <div className={styles.pie}>
+          {/* La key reinicia el fundido del texto al cambiar de foto o de vista. */}
+          <p key={`${vista}-${actual}-${lado}-${momento}`} className={styles.leyenda}>
+            {vista === 'google' ? (
+              <>
+                <strong>Street View de Google.</strong> Arrastrá para mirar alrededor y tocá la calle para avanzar.
+              </>
+            ) : (
+              <>
+                <strong>{ESQUINA[actual].lugar}.</strong> {descripcion(lado)}
+              </>
+            )}
+          </p>
 
-        {/* Avance del slider, como en las galerías de Apple. En Street View queda oculto pero ocupa su lugar. */}
-        <div className={`${styles.avance} ${vista !== 'fotos' ? styles.invisible : ''}`} aria-hidden={vista !== 'fotos'}>
-          <div className={styles.puntos}>
-            {ESQUINA.map((punto, i) => (
-              <button
-                key={i}
-                type="button"
-                aria-label={`Foto ${i + 1}: ${punto.lugar}`}
-                aria-current={i === actual}
-                tabIndex={vista === 'fotos' ? 0 : -1}
-                onClick={() => ir(i)}
-              >
-                <span />
-              </button>
-            ))}
+          {/* Avance del slider, como en las galerías de Apple. En Street View queda oculto pero ocupa su lugar. */}
+          <div className={`${styles.avance} ${vista !== 'fotos' ? styles.invisible : ''}`} aria-hidden={vista !== 'fotos'}>
+            <div className={styles.puntos}>
+              {ESQUINA.map((punto, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  aria-label={`Foto ${i + 1}: ${punto.lugar}`}
+                  aria-current={i === actual}
+                  tabIndex={vista === 'fotos' ? 0 : -1}
+                  onClick={() => ir(i)}
+                >
+                  <span />
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              className={styles.reproducir}
+              aria-label={detenido ? 'Reproducir' : 'Pausar'}
+              tabIndex={vista === 'fotos' ? 0 : -1}
+              onClick={() => setDetenido((d) => !d)}
+            >
+              <Icon name={detenido ? 'play' : 'pause'} size={14} />
+            </button>
           </div>
-          <button
-            type="button"
-            className={styles.reproducir}
-            aria-label={detenido ? 'Reproducir' : 'Pausar'}
-            tabIndex={vista === 'fotos' ? 0 : -1}
-            onClick={() => setDetenido((d) => !d)}
-          >
-            <Icon name={detenido ? 'play' : 'pause'} size={14} />
-          </button>
         </div>
-      </div>
+      )}
+
+      {/* En el celular, hacia dónde se mira va debajo de las fotos, no encima. */}
+      {celular && vista === 'fotos' && <div className={styles.modo}>{selectorLado}</div>}
 
       {/* Al final, debajo de la leyenda y el avance, al centro: qué se mira y en qué momento del día. */}
-      <div className={styles.modo}>
+      <div className={`${styles.modo} ${celular && vista === 'fotos' ? styles.modoJunto : ''}`}>
         <Pestanas
           etiqueta="Qué mirar"
           valor={vista}
@@ -267,7 +322,15 @@ function EsquinaGaleria() {
           opciones={[
             { valor: 'fotos', texto: 'Fotos', icono: 'photos' },
             // Street View solo aparece si hay una clave de Google cargada.
-            ...(CLAVE_MAPS ? [{ valor: 'google' as const, texto: 'Street View', icono: 'globe' as const }] : []),
+            ...(CLAVE_MAPS
+              ? [
+                  {
+                    valor: 'google' as const,
+                    texto: 'Street View',
+                    icono: 'globe' as const,
+                  },
+                ]
+              : []),
           ]}
         />
         {/* En Street View no hay día ni noche: queda deshabilitado, sin desaparecer, así nada salta. */}

@@ -338,3 +338,24 @@
     animation: none;
   }
 }
+
+/* Celular: el texto de cada foto, igual que en los otros carruseles de la página. */
+.celTitulo {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.celTexto {
+  margin: 8px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: rgb(245 245 247 / 0.85);
+}
+
+/* Las dos filas de selectores quedan juntas debajo del carrusel. */
+.modoJunto {
+  margin-top: 10px;
+}
